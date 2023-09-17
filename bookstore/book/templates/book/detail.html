@@ -6,9 +6,9 @@
 <div class="book">
     <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
 </div>
-<div class="book">{{ book.title }}</div>
-<div class="book">{{ book.author }}</div>
-<div class="book">{{ book.price }}</div>
-<div class="book">{{ book.description | linebreaks }}</div>
+<div class="book">Title: {{ book.title }}</div>
+<div class="book">Author: {{ book.author }}</div>
+<div class="book">Price: &#36;{{ book.price }}</div>
+<div class="book">Description: <br>{{ book.description | linebreaks }}</div>
 
 {% endblock %}

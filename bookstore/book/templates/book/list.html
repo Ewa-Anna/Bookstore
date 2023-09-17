@@ -6,10 +6,10 @@
 <h1> Bookstore </h1>
 {% for book in books %}
 <div class="bookcontainer">
-<div class="book">
-    <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
+<div class="book">  
     <div class="bookdetails">
     <a class="booklink" href="{% url 'book:book_detail' book.bookid %}">
+        <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
         {{ book.title }}
     </a>
     {{ book.author }}
