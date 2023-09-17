@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'img/site.webmanifest' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap">
+</head>
+<body>
+    <nav>
+        <ul class="nav-bar">
+            <li><a href="">Home</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Logout</a></li>
+            {% else %}
+            <li><a href="#">Login</li>
+            <li><a href="#">Register</a></li>
+            {% endif%}
+        </ul>
+    </nav>
+    
+    <div id="content">
+        {% block content %} {% endblock %}
+    </div>
+
+    <footer>
+        <div class="social-media">
+            <a href="https://www.facebook.com/" class="icon-link">
+                <i class="fab fa-facebook-f"></i> 
+            </a>
+            <a href="https://twitter.com/" class="icon-link">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com/" class="icon-link">
+                <i class="fab fa-instagram"></i>
+            </a>
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

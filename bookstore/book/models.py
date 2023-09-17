@@ -19,4 +19,4 @@ class Book(models.Model):
         ordering = ('-title',)
 
     def __str__(self):
-        return self.title, self.author
+        return f"{self.title} by {self.author}"

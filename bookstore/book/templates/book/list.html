@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Bookstore{% endblock %}
+
+{% block content %}
+
+<h1> Bookstore </h1>
+{% for book in books %}
+<div class="bookcontainer">
+<div class="book">
+    <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
+    <div class="bookdetails">
+    <a class="booklink" href="{% url 'book:book_detail' book.bookid %}">
+        {{ book.title }}
+    </a>
+    {{ book.author }}
+    {{ book.price }}
+    </div>
+</div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

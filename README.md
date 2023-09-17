@@ -25,5 +25,7 @@ Project will run on http://127.0.0.1:8000/
 ## Project overview
 
 ## Technologies and frameworks
+- Django
+- jinja2
 
 ## Tests
