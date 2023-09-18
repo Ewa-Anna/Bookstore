@@ -1,0 +1,51 @@
+.bookcontainer {
+    display: grid;
+    flex-wrap: wrap;
+    gap: 20px;
+    text-decoration: none;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (min-width: 1600px) {
+    .bookcontainer {
+        grid-template-columns: repeat(6, 1fr); 
+    }
+}
+
+@media (max-width: 700px) {
+    .bookcontainer {
+        grid-template-columns: repeat(1, 1fr); 
+    }
+}
+
+.book {
+    flex: 0 1 calc(33.33% - 20px);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.bookdetails {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.bookimage {
+    max-width: 250px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    text-decoration: none;
+}
+
+.booklink {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.booklink:hover {
+    color: #023368;
+}

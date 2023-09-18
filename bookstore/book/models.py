@@ -6,6 +6,10 @@ class Category(models.Model):
     cat_name = models.CharField(max_length=250)
     created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.cat_name}"
+
+
 class Book(models.Model):
     bookid = models.AutoField(primary_key=True)
     title = models.CharField(max_length=250)

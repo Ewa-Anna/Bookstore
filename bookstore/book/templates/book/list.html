@@ -4,20 +4,25 @@
 {% block content %}
 
 <h1> Bookstore </h1>
-{% for book in books %}
 <div class="bookcontainer">
+{% for book in books %}
+
 <div class="book">  
     <div class="bookdetails">
     <a class="booklink" href="{% url 'book:book_detail' book.bookid %}">
         <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
         {{ book.title }}
     </a>
+    <br>
     {{ book.author }}
-    {{ book.price }}
+    <br>
+    &#36;{{ book.price }}
     </div>
 </div>
-</div>
+
 
 {% endfor %}
+</div>
+{% include "pagination.html" with page=books %}
 
 {% endblock %}

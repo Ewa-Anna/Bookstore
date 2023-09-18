@@ -1,3 +1,5 @@
+@import url("book.css");
+
 *,
 *::before,
 *::after {
@@ -18,11 +20,26 @@ body {
     text-decoration: none;
 }
 
+h1 {
+    font-size: 30px;
+    color: #333;
+    margin: 10px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin: 0 auto;
+    text-align: center;
+}
 
 nav {
     background-color: #333;
     color: #fff;
-    padding: 10px 0;
+    padding: 30px 0;
 }
 
 .nav-bar {
@@ -78,52 +95,4 @@ footer {
 p {
     line-height: 1.6;
     margin-bottom: 15px;
-}
-
-.bookcontainer {
-    display: grid;
-    flex-wrap: wrap;
-    gap: 20px;
-    text-decoration: none;
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.book {
-    flex: 0 1 calc(33.33% - 20px);
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    padding: 10px;
-    text-decoration: none;
-}
-
-.bookdetails {
-    flex-grow: 1;
-    text-align: center;
-}
-
-.bookimage {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    text-decoration: none;
-}
-
-.booklink {
-    text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
-}
-
-.booklink:hover {
-    color: #023368;
-}
-
-h1 {
-    font-size: 30px;
-    color: #333;
-    margin: 10px 0;
-    text-align: center;
-    font-weight: bold;
 }
