@@ -9,7 +9,7 @@
 
 <div class="book">  
     <div class="bookdetails">
-    <a class="booklink" href="{% url 'book:book_detail' book.bookid %}">
+    <a class="booklink" href="{% url 'book:book_detail' book.slug %}">
         <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
         {{ book.title }}
     </a>
@@ -19,7 +19,6 @@
     &#36;{{ book.price }}
     </div>
 </div>
-
 
 {% endfor %}
 </div>

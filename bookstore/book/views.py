@@ -18,8 +18,8 @@ def book_list(request):
                   'book/list.html',
                   {'books': books})
 
-def book_detail(request, bookid):
-    book = get_object_or_404(Book, bookid=bookid)
+def book_detail(request, slug):
+    book = get_object_or_404(Book, slug=slug)
     return render(request,
                   'book/detail.html',
                   {'book': book})

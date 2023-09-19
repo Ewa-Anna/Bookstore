@@ -17,10 +17,11 @@ class Book(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     img_url = models.URLField()
+    slug = models.SlugField(default="", null=False)
     catid = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ('-title',)
+        ordering = ['-title',]
 
     def __str__(self):
         return f"{self.title} by {self.author}"
