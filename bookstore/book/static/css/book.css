@@ -27,9 +27,16 @@
     text-decoration: none;
 }
 
+.booklist{
+    justify-content: center;
+}
+
 .bookdetails {
     flex-grow: 1;
     text-align: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .bookimage {

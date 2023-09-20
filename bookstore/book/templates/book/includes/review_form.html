@@ -1,0 +1,23 @@
+<h2>Add new review</h2>
+<form action="{% url 'book:post_review' book.bookid %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.name.label }}
+        <br>
+        {{ form.name }}
+    </div>
+    
+    <div class="form-group">
+        {{ form.email.label }}
+        <br>
+        {{ form.email }}
+    </div>
+    
+    <div class="form-group">
+        {{ form.body.label }}
+        <br>
+        {{ form.body }}
+    </div>   
+
+    <input type="submit" class="btn btn-primary" value="Add review">
+</form>

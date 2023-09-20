@@ -1,14 +1,40 @@
 {% extends "base.html" %}
-{% block title %}{{ book.title }} By {{ book.author }}{% endblock %}
+{% block title %}{{ book.title }} by {{ book.author }}{% endblock %}
 
 {% block content %}
-<h1> {{ book.title }} By {{ book.author }} </h1>
-<div class="book">
+<h1> {{ book.title }} by {{ book.author }} </h1>
+<div>
     <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
 </div>
-<div class="book">Title: {{ book.title }}</div>
-<div class="book">Author: {{ book.author }}</div>
-<div class="book">Price: &#36;{{ book.price }}</div>
-<div class="book">Description: <br>{{ book.description | linebreaks }}</div>
+<div class="bookdetails">
+    <b>Title:</b> {{ book.title }}
+    <br>
+    <b>Author:</b> {{ book.author }}
+    <br>
+    <b>Price:</b> &#36;{{ book.price }}
+    <br>
+    <b>Description:</b> 
+    <br>
+    {{ book.description | linebreaks }}
+</div>
 
+{% with reviews.count as total_reviews %}
+<h2>
+    {{ total_reviews }} reviews
+</h2>
+{% endwith %}
+
+{% for review in reviews reversed %}
+<div class="review">
+    <p class="info">
+        Review {{ forloop.counter }} added by {{ review.name }}
+        {{ review.created }}
+    </p>
+    {{ review.body|linebreaks }}
+</div>
+{% empty %}
+<p>There are no reviews yet.</p>
+{% endfor %}
+
+{% include "book/includes/review_form.html" %}
 {% endblock %}

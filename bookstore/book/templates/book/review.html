@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Add review{% endblock %}
+
+{% block content %}
+    {% if review %}
+        <h2>Your review has been added.</h2>
+        <p><a href="{{ book.get_absolute_url }}">Back to book</a></p>
+    {% else %}
+        {% include "book/includes/review_form.html" %}
+    {% endif %}
+{% endblock %}
