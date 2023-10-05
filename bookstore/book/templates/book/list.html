@@ -4,24 +4,49 @@
 {% block content %}
 
 <h1> Bookstore </h1>
+
+{% if tag %}
+<h4>Books with tag: "{{ tag.name }}"</h4>
+{% endif %}
+
 <div class="bookcontainer">
-{% for book in books %}
 
-<div class="book">  
-    <div class="bookdetails">
-    <a class="booklink" href="{% url 'book:book_detail' book.slug %}">
-        <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
-        {{ book.title }}
-    </a>
-    <br>
-    {{ book.author }}
-    <br>
-    &#36;{{ book.price }}
+    {% for book in books %}
+
+    <div class="book">
+        <div class="bookdetails">
+            
+            <div class="icon-container">
+                <a class="wishlist-icon" href="">
+                    <i class="fa-regular fa-heart"></i>
+                </a>
+                <a class="cart-icon" href="">
+                    <i class="fa-solid fa-basket-shopping"></i>
+                </a>
+            </div>
+            
+            <a class="booklink" href="{% url 'book:book_detail' book.slug %}">
+                <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
+
+                {{ book.title }}
+            </a>
+            <br>
+            {{ book.author }}
+            <br>
+            &#36;{{ book.price }}
+            <p class="tags">Tags:
+                {% for tag in book.tags.all %}
+                <a href="{% url 'book:book_list_by_tag' tag.slug %}">
+                    {{ tag.name }}
+                </a>
+                {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+        </div>
     </div>
-</div>
 
-{% endfor %}
+    {% endfor %}
 </div>
-{% include "pagination.html" with page=page_obj %}
+{% include "pagination.html" with page=books %}
 
 {% endblock %}

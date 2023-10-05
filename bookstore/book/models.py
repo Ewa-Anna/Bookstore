@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+from taggit.managers import TaggableManager
+
 
 class Category(models.Model):
     catid = models.AutoField(primary_key=True)
@@ -20,6 +22,7 @@ class Book(models.Model):
     img_url = models.URLField()
     slug = models.SlugField(default="", null=False)
     catid = models.ForeignKey(Category, on_delete=models.CASCADE)
+    tags = TaggableManager()
 
     class Meta:
         ordering = ['title']

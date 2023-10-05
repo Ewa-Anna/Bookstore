@@ -56,3 +56,14 @@
 .booklink:hover {
     color: #023368;
 }
+
+.wishlist-icon {
+    position: relative;
+    display: inline-block;
+}
+
+
+.icon-container {
+    display: inline-block; 
+    margin-right: 10px;
+}

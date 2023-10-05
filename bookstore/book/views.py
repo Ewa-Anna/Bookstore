@@ -1,17 +1,34 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views.decorators.http import require_POST
+
+from taggit.models import Tag
 
 from .models import Book
 from .forms import ReviewForm
 
 
-class BookListView(ListView):
-    queryset = Book.objects.all()
-    context_object_name = 'books'
-    paginate_by = 6
-    template_name = 'book/list.html'
-
+def book_list(request, tag_slug=None):
+    book_list = Book.objects.all()
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        book_list = book_list.filter(tags__in=[tag])
+    
+    paginator = Paginator(book_list, 6)
+    page_number = request.GET.get('page', 1)
+    try:
+        books = paginator.page(page_number)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    
+    return render(request,
+                  'book/list.html',
+                  {'books': books,
+                   'tag': tag})
+        
 
 def book_detail(request, slug):
     book = get_object_or_404(Book, slug=slug)
