@@ -5,46 +5,57 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('book', '0002_alter_book_options_book_slug'),
+        ("book", "0002_alter_book_options_book_slug"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Review',
+            name="Review",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=80)),
-                ('email', models.EmailField(max_length=254)),
-                ('body', models.TextField()),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
-                ('active', models.BooleanField(default=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=80)),
+                ("email", models.EmailField(max_length=254)),
+                ("body", models.TextField()),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                ("active", models.BooleanField(default=True)),
             ],
             options={
-                'ordering': ['-created'],
+                "ordering": ["-created"],
             },
         ),
         migrations.AlterModelOptions(
-            name='book',
-            options={'ordering': ['title']},
+            name="book",
+            options={"ordering": ["title"]},
         ),
         migrations.AddIndex(
-            model_name='book',
-            index=models.Index(fields=['title'], name='book_book_title_b5b75a_idx'),
+            model_name="book",
+            index=models.Index(fields=["title"], name="book_book_title_b5b75a_idx"),
         ),
         migrations.AddField(
-            model_name='review',
-            name='book',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='review', to='book.book'),
+            model_name="review",
+            name="book",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="review",
+                to="book.book",
+            ),
         ),
         migrations.AddIndex(
-            model_name='review',
-            index=models.Index(fields=['book'], name='book_review_book_id_1799a0_idx'),
+            model_name="review",
+            index=models.Index(fields=["book"], name="book_review_book_id_1799a0_idx"),
         ),
         migrations.AddIndex(
-            model_name='review',
-            index=models.Index(fields=['name'], name='book_review_name_969e5b_idx'),
+            model_name="review",
+            index=models.Index(fields=["name"], name="book_review_name_969e5b_idx"),
         ),
     ]

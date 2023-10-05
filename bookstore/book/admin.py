@@ -3,7 +3,11 @@ from .models import Book, Category, Review
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ("title", "author", "price",)
+    list_display = (
+        "title",
+        "author",
+        "price",
+    )
     list_filter = ("catid",)
     prepopulated_fields = {"slug": ("title", "author")}
 

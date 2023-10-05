@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('book', '0003_review_alter_book_options_and_more'),
+        ("book", "0003_review_alter_book_options_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='review',
-            name='slug',
-            field=models.SlugField(default=''),
+            model_name="review",
+            name="slug",
+            field=models.SlugField(default=""),
         ),
     ]

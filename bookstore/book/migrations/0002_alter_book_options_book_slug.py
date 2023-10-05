@@ -4,19 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('book', '0001_initial'),
+        ("book", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='book',
-            options={'ordering': ['-title']},
+            name="book",
+            options={"ordering": ["-title"]},
         ),
         migrations.AddField(
-            model_name='book',
-            name='slug',
-            field=models.SlugField(default=''),
+            model_name="book",
+            name="slug",
+            field=models.SlugField(default=""),
         ),
     ]

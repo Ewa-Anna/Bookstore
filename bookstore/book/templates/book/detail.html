@@ -6,6 +6,7 @@
 <div>
     <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
 </div>
+
 <div class="bookdetails">
     <b>Title:</b> {{ book.title }}
     <br>
@@ -13,9 +14,30 @@
     <br>
     <b>Price:</b> &#36;{{ book.price }}
     <br>
-    <b>Description:</b> 
+    <b>Description:</b>
     <br>
     {{ book.description | linebreaks }}
+</div>
+
+<div class="bookdetails">
+
+    <h4>Might interest you as well:</h4>
+
+    {% for book in similar_books %}
+    <p>
+        <a href="{{ book.get_absolute_url }}">
+            <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
+            {{ book.title }}
+        </a>
+        <br>
+        {{ book.author }}
+        <br>
+        &#36;{{ book.price }}
+    </p>
+    {% empty %}
+    <p>Nothing here yet.</p>
+    {% endfor %}
+
 </div>
 
 {% with reviews.count as total_reviews %}
@@ -27,7 +49,7 @@
 {% for review in reviews reversed %}
 <div class="review">
     <p class="info">
-        Review {{ forloop.counter }} added by {{ review.name }}
+        Review {{ forloop.counter }} added by {{ review.name }} on
         {{ review.created }}
     </p>
     {{ review.body|linebreaks }}
@@ -36,5 +58,10 @@
 <p>There are no reviews yet.</p>
 {% endfor %}
 
+{% if user.is_authenticated %}
 {% include "book/includes/review_form.html" %}
+{% else %}
+<a href="#">Login</a> or <a href="#">Register</a> to post a review.
+{% endif %}
+
 {% endblock %}

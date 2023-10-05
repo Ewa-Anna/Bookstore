@@ -57,7 +57,7 @@
     color: #023368;
 }
 
-.wishlist-icon {
+.wishlist-icon, .cart-icon {
     position: relative;
     display: inline-block;
 }
