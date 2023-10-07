@@ -1,0 +1,14 @@
+<div class="bookcontainer">
+{% for book in latest_books %}
+
+<div class="bookdetails">
+    <a href="{{ book.get_absolute_url }}">
+        <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
+        {{ book.title }}
+    </a>
+    {{ book.author }}
+    <br>
+    &#36;{{ book.price }}
+</div>
+{% endfor %}
+</div>

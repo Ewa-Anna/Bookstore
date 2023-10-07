@@ -10,18 +10,21 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-n9nuie=kr3rbpz31^8mnef$_8o^+0*^7+fzpa=094q)=wh(-y="
+SECRET_KEY = os.getenv('SECRET_KEY')
+PASSWORD_POSTGRES = os.getenv('PASSWORD_POSTGRES')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "book.apps.BookConfig",
     "taggit",
+    "django.contrib.postgres",
 ]
 
 MIDDLEWARE = [
@@ -78,8 +82,10 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "bookstore",
+        "USER": "book",
+        "PASSWORD": PASSWORD_POSTGRES
     }
 }
 

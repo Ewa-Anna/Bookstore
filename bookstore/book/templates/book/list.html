@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load book_tags %}
+
 {% block title %}Bookstore{% endblock %}
 
 {% block content %}
@@ -15,7 +17,7 @@
 
     <div class="book">
         <div class="bookdetails">
-            
+
             <div class="icon-container">
                 <a class="wishlist-icon" href="">
                     <i class="fa-regular fa-heart"></i>
@@ -48,5 +50,10 @@
     {% endfor %}
 </div>
 {% include "pagination.html" with page=books %}
+
+<h4>Latest arrivals:</h4>
+{% show_latest_books 6 %}
+<br>
+<p style="text-align: center;">We have {% total_books %} books in our store.</p>
 
 {% endblock %}

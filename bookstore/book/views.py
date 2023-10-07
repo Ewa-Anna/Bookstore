@@ -2,11 +2,12 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views.decorators.http import require_POST
 from django.db.models import Count
+from django.contrib.postgres.search import SearchVector
 
 from taggit.models import Tag
 
 from .models import Book
-from .forms import ReviewForm
+from .forms import ReviewForm, SearchForm
 
 
 def book_list(request, tag_slug=None):
@@ -16,7 +17,7 @@ def book_list(request, tag_slug=None):
         tag = get_object_or_404(Tag, slug=tag_slug)
         book_list = book_list.filter(tags__in=[tag])
 
-    paginator = Paginator(book_list, 6)
+    paginator = Paginator(book_list, 12)
     page_number = request.GET.get("page", 1)
     try:
         books = paginator.page(page_number)
@@ -67,3 +68,21 @@ def post_review(request, bookid):
     return render(
         request, "book/review.html", {"book": book, "form": form, "review": review}
     )
+
+
+def book_search(request):
+    form = SearchForm()
+    query = None
+    results = []
+
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Book.objects.annotate(search=SearchVector('title', 'author', 'description'),).filter(search=query)
+
+    return render(request,
+                  "book/search.html",
+                  {'form': form,
+                   'query': query,
+                   'results': results})
