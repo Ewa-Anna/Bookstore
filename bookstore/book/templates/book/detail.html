@@ -41,21 +41,25 @@
 </div>
 
 {% with reviews.count as total_reviews %}
-<h2>
+<h2 style="text-align: center;">
+    {% if total_reviews  == 1 %}
+    {{ total_reviews }} review
+    {% else %}
     {{ total_reviews }} reviews
+    {% endif %}
 </h2>
 {% endwith %}
 
 {% for review in reviews reversed %}
-<div class="review">
-    <p class="info">
-        Review {{ forloop.counter }} added by {{ review.name }} on
-        {{ review.created }}
+<div style="text-align: center;" class="review">
+    <p style="text-align: center;" class="info">
+        <b>Review {{ forloop.counter }} added by {{ review.name }} on
+        {{ review.created }}</b>
     </p>
     {{ review.body|linebreaks }}
 </div>
 {% empty %}
-<p>There are no reviews yet.</p>
+<p style="text-align: center;">There are no reviews yet.</p>
 {% endfor %}
 
 {% if user.is_authenticated %}

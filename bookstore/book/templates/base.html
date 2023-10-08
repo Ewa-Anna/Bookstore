@@ -32,13 +32,15 @@
 
             <li><a href="#"><i class="fas fa-shopping-cart"></i>Cart</a></li>
             <li><a href="/search"><i class="fa-solid fa-magnifying-glass"></i>Search</a></li>
+
             {% if user.is_authenticated %}
-            <li><a href="#"><i class="fa-solid fa-user"></i>Profile</a></li>
-            <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+            <li><a href="/user/dashboard"><i class="fa-solid fa-user"></i>Profile</a></li>
+            <li><a href="/user/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
             {% else %}
-            <li><a href="#"><i class="fa-solid fa-right-to-bracket"></i>Login</a></li>
-            <li><a href="#"><i class="fa-solid fa-registered"></i>Register</a></li>
+            <li><a href="/user/login"><i class="fa-solid fa-right-to-bracket"></i>Login</a></li>
+            <li><a href="/user/register"><i class="fa-solid fa-registered"></i>Register</a></li>
             {% endif %}
+            
         </ul>
     </nav>
 
