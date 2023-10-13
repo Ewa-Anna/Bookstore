@@ -52,20 +52,20 @@
 
 {% for review in reviews reversed %}
 <div style="text-align: center;" class="review">
-    <p style="text-align: center;" class="info">
+    <p class="info">
         <b>Review {{ forloop.counter }} added by {{ review.name }} on
         {{ review.created }}</b>
     </p>
     {{ review.body|linebreaks }}
 </div>
 {% empty %}
-<p style="text-align: center;">There are no reviews yet.</p>
+<p>There are no reviews yet.</p>
 {% endfor %}
 
 {% if user.is_authenticated %}
 {% include "book/includes/review_form.html" %}
 {% else %}
-<a href="#">Login</a> or <a href="#">Register</a> to post a review.
+<p><a href="/user/login">Login</a> or <a href="/user/register">Register</a> to post a review.</p>
 {% endif %}
 
 {% endblock %}

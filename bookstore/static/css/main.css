@@ -25,9 +25,10 @@ body {
     text-decoration: none;
 }
 
-.active {
-    background-color: #007bff; 
-    color: white; 
+
+.selected {
+    background-color: blue;
+    color: rgb(160, 6, 6) !important; 
 }
 
 

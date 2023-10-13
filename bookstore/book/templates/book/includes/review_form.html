@@ -1,6 +1,14 @@
-<h2 style="text-align: center;" >Add new review</h2>
-<form style="text-align: center;" action="{% url 'book:post_review' book.bookid %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class="btn btn-primary" value="Add review">
-</form>
+<h2 style="text-align: center;">Add new review</h2>
+<div class="form-group">
+    <form action="{% url 'book:post_review' book.bookid %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        {{ field.errors }}
+        {{ field.label_tag }}
+        <div class="form-control">
+            {{ field }}
+        </div>
+        {% endfor %}
+        <input type="submit" class="btn btn-primary" value="Add review">
+    </form>
+</div>

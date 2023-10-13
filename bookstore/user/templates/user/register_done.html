@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+
+<h3>Welcome {{ new_user.first_name }}!</h3>
+<p>Your account has been created</p>
+<p>You can <a href="{% url 'login' %}">login</a> now.</p>
+
+{% endblock %}

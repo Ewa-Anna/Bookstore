@@ -26,23 +26,25 @@
                     <i class="fa-solid fa-basket-shopping"></i>
                 </a>
             </div>
-            
+
             <a class="booklink" href="{% url 'book:book_detail' book.slug %}">
                 <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
 
-                {{ book.title }}
+                {{ book.title|truncatechars:30 }}
             </a>
             <br>
-            {{ book.author }}
+            {{ book.author|truncatechars:30 }}
             <br>
             &#36;{{ book.price }}
             <p class="tags">Tags:
+                {% spaceless %}
                 {% for tag in book.tags.all %}
-                <a href="{% url 'book:book_list_by_tag' tag.slug %}">
-                    {{ tag.name }}
-                </a>
-                {% if not forloop.last %}, {% endif %}
+
+                <a href="{% url 'book:book_list_by_tag' tag.slug %}">{{ tag.name.strip }}</a>{% if not forloop.last %},
+                {% endif %}
+
                 {% endfor %}
+                {% endspaceless %}
             </p>
         </div>
     </div>
