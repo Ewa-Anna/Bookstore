@@ -35,16 +35,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "book.apps.BookConfig",
+    "user.apps.UserConfig",
+    "taggit",
+    "django.contrib.postgres",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "book.apps.BookConfig",
-    "user.apps.UserConfig",
-    "taggit",
-    "django.contrib.postgres",
 ]
 
 MIDDLEWARE = [
@@ -62,7 +62,7 @@ ROOT_URLCONF = "bookstore.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, 'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -138,4 +138,7 @@ LOGIN_URL = "login"
 LOGOUT_REDIRECT_URL = "logout"
 LOGOUT_URL = "logout"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # for development
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # for development
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'

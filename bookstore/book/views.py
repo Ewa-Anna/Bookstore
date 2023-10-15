@@ -81,7 +81,7 @@ def book_search(request):
             query = form.cleaned_data["query"]
             results = (
                 Book.objects.annotate(
-                    similarity=TrigramSimilarity('title', query),
+                    similarity=TrigramSimilarity("title", query),
                 )
                 .filter(similarity__gt=0.1)
                 .order_by("-similarity")

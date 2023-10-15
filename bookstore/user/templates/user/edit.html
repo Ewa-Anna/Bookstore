@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Edit profile{% endblock %}
+
+{% block content %}
+
+<h3>Edit profile</h3>
+<p> You can change the settings of your account via below form:</p>
+<form method="post" enctype="multipart/form-data">
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" values="Save"></p>
+</form>
+
+{% endblock %}
