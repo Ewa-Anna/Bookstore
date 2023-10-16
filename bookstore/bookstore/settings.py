@@ -11,11 +11,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+import sys
 from pathlib import Path
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(str(BASE_DIR / 'bookstore'))
 
 load_dotenv()
 
@@ -62,7 +64,7 @@ ROOT_URLCONF = "bookstore.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'templates')],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -87,7 +89,25 @@ DATABASES = {
         "NAME": "bookstore",
         "USER": "book",
         "PASSWORD": PASSWORD_POSTGRES,
-    }
+        "HOST": "localhost",
+        "PORT": "5432",
+    },
+    # "test": {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "NAME": "bookstore_test",
+    #     "USER": "book",
+    #     "PASSWORD": PASSWORD_POSTGRES,
+    #     "HOST": "localhost",
+    #     "PORT": "5432",
+    # },
+    "test": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    },
+}
+
+TEST = {
+    "DEPENDENCIES": ["user", "book"],
 }
 
 
@@ -140,5 +160,5 @@ LOGOUT_URL = "logout"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # for development
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"

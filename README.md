@@ -5,6 +5,7 @@ This repository contains the source code for a dynamic e-commerce website built 
 
 ## Table of Contents
 - [Installation](#how-to-install-and-run-the-project)
+- [Docker](#docker)
 - [Overview](#project-overview)
 - [Features](#features)
 - [Tools](#technologies-and-frameworks)
@@ -29,6 +30,15 @@ This repository contains the source code for a dynamic e-commerce website built 
 ` python manage.py runserver `
 
 Project will run on http://127.0.0.1:8000/
+
+## Docker
+Building Docker Image
+<br>
+` docker build -t bookstore . `
+<br>
+Running Docker Container
+<br>
+` docker run -p 8000:8000 bookstore `
 
 ## Project overview
 <div style="text-align: justify;">
@@ -69,7 +79,9 @@ Its primary purpose is to serve as an online bookstore, offering a range of core
     [![Docker](https://skillicons.dev/icons?i=docker)](https://skillicons.dev)
 
 ## Tests
-
+Run all tests
+<br>
+``python manage.py test``
 ## Future plans
 
 1.	**Advanced Search**: Implement an advanced search feature that allows users to filter books by various criteria such as genre, price range, author, and publication date.
