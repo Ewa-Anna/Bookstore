@@ -32,6 +32,9 @@ class BookModelTestCase(TestCase):
         actual_str = str(self.book)
         self.assertEqual(actual_str, expected_str)
 
+    def tearDown(self) -> None:
+        return super().tearDown()
+
 
 class ReviewModelTestCase(BookModelTestCase):
     databases = {"test"}
@@ -46,3 +49,6 @@ class ReviewModelTestCase(BookModelTestCase):
         expected_str = "Review added by Test for book Test Book"
         actual_str = str(self.review)
         self.assertEqual(actual_str, expected_str)
+
+    def tearDown(self) -> None:
+        return super().tearDown()

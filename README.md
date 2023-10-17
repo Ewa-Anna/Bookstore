@@ -54,6 +54,7 @@ Its primary purpose is to serve as an online bookstore, offering a range of core
 2.	**User Reviews**: Registered users can post reviews and ratings for books they have read. These reviews help other users make informed decisions about their purchases.
 3.	**Search**: User can perform simple search.
 4.	**Tag System**: The project includes a tagging system that allows books to be categorized based on tags. Users can search for books with similar tags, enhancing their browsing experience.
+5. **User Profile**: User can now access basic profile with option to edit their data.
 
 ## Technologies and frameworks
 - Backend
