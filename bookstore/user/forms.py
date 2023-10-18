@@ -16,6 +16,12 @@ class UserRegistrationForm(forms.ModelForm):
         if cd["password"] != cd["password2"]:
             raise forms.ValidationError("Passwords are not matching.")
         return cd["password2"]
+    
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        if User.objects.filter(email=data).exists():
+            raise forms.ValidationError("This e-mail address is already occupied.")
+        return data
 
 
 class UserEditForm(forms.ModelForm):
@@ -23,6 +29,12 @@ class UserEditForm(forms.ModelForm):
         model = User
         fields = ["first_name", "last_name", "email"]
 
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        qs = User.objects.exclude(id=self.instance.id).filter(email=data)
+        if qs.exists():
+            raise forms.ValidationError("This e-mail address is already occupied.")
+        return data
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:

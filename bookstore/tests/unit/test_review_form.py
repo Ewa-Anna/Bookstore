@@ -8,7 +8,7 @@ class ReviewFormTestCase(TestCase):
         form_data = {
             "name": "Jane Doe",
             "email": "jane.doe@example.com",
-            "body": "Test review"
+            "body": "Test review",
         }
 
         form = ReviewForm(data=form_data)
@@ -19,7 +19,7 @@ class ReviewFormTestCase(TestCase):
         form_data = {
             "name": "Jane Doe",
             # missing email
-            "body": "Test review"
+            "body": "Test review",
         }
 
         form = ReviewForm(data=form_data)

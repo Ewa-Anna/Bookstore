@@ -9,8 +9,7 @@ class ProfileModelTestCase(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(
-            username="testuser",
-            password="testpassword"
+            username="testuser", password="testpassword"
         )
 
         self.profile = Profile.objects.create(
@@ -22,7 +21,7 @@ class ProfileModelTestCase(TestCase):
             city="testcity",
             postal_code="66-200",
             state="teststate",
-            country="testcountry"
+            country="testcountry",
         )
 
     def test_str_rep(self):
