@@ -39,6 +39,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "book.apps.BookConfig",
     "user.apps.UserConfig",
+    "cart.apps.CartConfig",
     "taggit",
     "django.contrib.postgres",
     "django.contrib.admin",
@@ -167,3 +168,5 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "user.authentication.EmailAuthBackend",
 ]
+
+CART_SESSION_ID = "cart"

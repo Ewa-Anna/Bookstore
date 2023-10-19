@@ -10,13 +10,16 @@ class Category(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['cat_name']
-        indexes = [models.Index(fields=['cat_name'])]
-        verbose_name = 'category'
-        verbose_name_plural = 'categories'
+        ordering = ["cat_name"]
+        indexes = [models.Index(fields=["cat_name"])]
+        verbose_name = "category"
+        verbose_name_plural = "categories"
 
     def __str__(self):
         return f"{self.cat_name}"
+
+    def get_absolute_ulr(self):
+        return reverse("book:book_list", args=[self.cat_name])
 
 
 class Book(models.Model):
@@ -34,10 +37,12 @@ class Book(models.Model):
 
     class Meta:
         ordering = ["-created"]
-        indexes = [models.Index(fields=['bookid', 'slug']), 
-                   models.Index(fields=["title"]), 
-                   models.Index(fields=["author"]), 
-                   models.Index(fields=['-created'])]
+        indexes = [
+            models.Index(fields=["bookid", "slug"]),
+            models.Index(fields=["title"]),
+            models.Index(fields=["author"]),
+            models.Index(fields=["-created"]),
+        ]
 
     def __str__(self):
         return f"{self.title} by {self.author}"

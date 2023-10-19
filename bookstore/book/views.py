@@ -8,11 +8,16 @@ from taggit.models import Tag
 
 from .models import Book
 from .forms import ReviewForm, SearchForm
+from cart.forms import CartAddBookForm
+from cart.cart import Cart
 
 
 def book_list(request, tag_slug=None):
     book_list = Book.objects.all()
     tag = None
+    cart = Cart(request)
+    # book_in_cart = cart.has_book(book)
+    cart_book_form = CartAddBookForm()
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         book_list = book_list.filter(tags__in=[tag])
@@ -26,7 +31,11 @@ def book_list(request, tag_slug=None):
     except EmptyPage:
         books = paginator.page(paginator.num_pages)
 
-    return render(request, "book/list.html", {"books": books, "tag": tag})
+    return render(
+        request,
+        "book/list.html",
+        {"books": books, "tag": tag, "cart_book_form": cart_book_form,},
+    )
 
 
 def book_detail(request, slug):

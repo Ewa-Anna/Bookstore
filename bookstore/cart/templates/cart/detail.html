@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+
+<h4>Shopping cart</h4>
+<table class="cart">
+    <thead>
+        <tr>
+            <th>Photo</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Amount</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart %}
+        {% with book=item.book %}
+        <tr>
+            <td>
+                <a href="{{ book.get_absolute_url }}">
+                    <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
+                </a>
+            </td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>
+                <form action="{% url 'cart:cart_remove' book.bookid %}" method="post">
+                    <input type="submit" value="Delete">
+                    {% csrf_token %}
+                </form>
+            </td>
+            <td>${{ item.price }}</td>
+            <td>${{ item.total_price }}</td>
+        </tr>
+        {% endwith %}
+        {% endfor %}
+        <tr>
+            <td>Total</td>
+            <td colspan="4"></td>
+            <td>${{ cart.get_total_price }}</td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    <a href="{% url 'book:book_list' %}" class="btn btn-primary">Resume shopping</a>
+    <a href="#" class="btn btn-primary">Checkout</a>
+</p>
+
+{% endblock %}
