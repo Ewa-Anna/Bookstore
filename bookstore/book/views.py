@@ -9,15 +9,11 @@ from taggit.models import Tag
 from .models import Book, Category
 from .forms import ReviewForm, SearchForm
 from cart.forms import CartAddBookForm
-from cart.cart import Cart
 
 
 def book_list(request, tag_slug=None):
     book_list = Book.objects.all()
-    categories = Category.objects.all()
     tag = None
-    cart = Cart(request)
-    # book_in_cart = cart.has_book(book)
     cart_book_form = CartAddBookForm()
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
@@ -39,7 +35,6 @@ def book_list(request, tag_slug=None):
             "books": books,
             "tag": tag,
             "cart_book_form": cart_book_form,
-            "categories": categories,
         },
     )
 
@@ -105,3 +100,22 @@ def book_search(request):
     return render(
         request, "book/search.html", {"form": form, "query": query, "results": results}
     )
+
+
+def category_display(request, catid):
+    category = get_object_or_404(Category, pk=catid)
+    book_list = Book.objects.filter(catid=catid)
+    
+    paginator = Paginator(book_list, 12)
+    page_number = request.GET.get("page", 1)
+    try:
+        books = paginator.page(page_number)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+
+    return render(
+        request,
+        "category/detail.html",
+        {"category": category, "book_list": book_list, "books": books})

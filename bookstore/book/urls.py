@@ -9,4 +9,5 @@ urlpatterns = [
     path("<int:bookid>/review/", views.post_review, name="post_review"),
     path("tag/<slug:tag_slug>/", views.book_list, name="book_list_by_tag"),
     path("search/", views.book_search, name="book_search"),
+    path("category/<int:catid>/", views.category_display, name="category_display"),
 ]

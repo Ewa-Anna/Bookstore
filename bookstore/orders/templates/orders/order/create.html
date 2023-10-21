@@ -11,7 +11,7 @@
         {% for item in cart %}
         <li>
             {{ item.quantity }}x {{ item.book.title }} by {{ item.book.author }}
-            <span>${{ item.total_priice }}</span>
+            <span>${{ item.total_price }}</span>
         </li>
         {% endfor %}
     </ul>
