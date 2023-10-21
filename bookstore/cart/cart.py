@@ -29,7 +29,7 @@ class Cart:
     def has_book(self, book):
         return book in self.cart
 
-    def remove(self, book, request):
+    def remove(self, book):
         book_id = str(book.bookid)
         if book_id in self.cart:
             del self.cart[book_id]
@@ -37,7 +37,7 @@ class Cart:
 
     def __iter__(self):
         book_ids = self.cart.keys()
-        books = Book.objects.filter(id__in=book_ids)
+        books = Book.objects.filter(bookid__in=book_ids)
         cart = self.cart.copy()
 
         for book in books:

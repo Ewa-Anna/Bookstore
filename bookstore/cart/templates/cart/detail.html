@@ -27,10 +27,17 @@
             </td>
             <td>{{ book.title }}</td>
             <td>{{ book.author }}</td>
-            <td>{{ item.quantity }}</td>
+            <td>
+                <form action="{% url 'cart:cart_add' book.bookid %}" method="post">
+                    {{ item.update_quantity_form.quantity }}
+                    {{ item.update_quantity_form.update }}
+                    <input type="submit" class="btn btn-info" value="Change">
+                    {% csrf_token %}
+                </form>
+            </td>
             <td>
                 <form action="{% url 'cart:cart_remove' book.bookid %}" method="post">
-                    <input type="submit" value="Delete">
+                    <input type="submit" class="btn btn-danger" value="Delete">
                     {% csrf_token %}
                 </form>
             </td>
@@ -42,13 +49,13 @@
         <tr>
             <td>Total</td>
             <td colspan="4"></td>
-            <td>${{ cart.get_total_price }}</td>
+            <td>${{ cart.calc_total_price }}</td>
         </tr>
     </tbody>
 </table>
 <p>
     <a href="{% url 'book:book_list' %}" class="btn btn-primary">Resume shopping</a>
-    <a href="#" class="btn btn-primary">Checkout</a>
+    <a href="{% url 'orders:order_create' %}" class="btn btn-primary">Checkout</a>
 </p>
 
 {% endblock %}

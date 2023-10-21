@@ -38,9 +38,16 @@ def cart_toggle(request, book_id):
         form = CartAddBookForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            cart.add(book=book, quantity=cd["quantity"], override_quantity=cd["override"])
+            cart.add(
+                book=book, quantity=cd["quantity"], override_quantity=cd["override"]
+            )
     return HttpResponse(status=204)
+
 
 def cart_detail(request):
     cart = Cart(request)
+    for item in cart:
+        item["update_quantity_form"] = CartAddBookForm(
+            initial={"quantity": item["quantity"], "override": True}
+        )
     return render(request, "cart/detail.html", {"cart": cart})

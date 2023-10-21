@@ -29,11 +29,22 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Category placeholder 1</a>
-                <a class="dropdown-item" href="#">Category placeholder 2</a>
+                {% for category in categories %}
+                <a class="dropdown-item" href="#">{{ category.cat_name }}</a>
+                {% endfor %}
             </div>
 
-            <li><a href="#"><i class="fas fa-shopping-cart"></i>Cart</a></li>
+            <li>
+                {% with total_items=cart|length %}
+                {% if total_items > 0 %}
+                <a href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>
+                    Cart: {{ total_items }} item{{ total_items|pluralize }}, {{ cart.calc_total_price }}
+                </a>
+                {% else %}
+                <a href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>Cart</a>
+                {% endif %}
+                {% endwith %}
+            </li>
             <li><a {% if request.resolver_match.route == "search/" %} class="selected" {% endif %} href="/search"><i
                         class="fa-solid fa-magnifying-glass"></i>Search</a></li>
 

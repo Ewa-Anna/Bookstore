@@ -6,7 +6,7 @@ from django.contrib.postgres.search import TrigramSimilarity
 
 from taggit.models import Tag
 
-from .models import Book
+from .models import Book, Category
 from .forms import ReviewForm, SearchForm
 from cart.forms import CartAddBookForm
 from cart.cart import Cart
@@ -14,6 +14,7 @@ from cart.cart import Cart
 
 def book_list(request, tag_slug=None):
     book_list = Book.objects.all()
+    categories = Category.objects.all()
     tag = None
     cart = Cart(request)
     # book_in_cart = cart.has_book(book)
@@ -34,7 +35,12 @@ def book_list(request, tag_slug=None):
     return render(
         request,
         "book/list.html",
-        {"books": books, "tag": tag, "cart_book_form": cart_book_form,},
+        {
+            "books": books,
+            "tag": tag,
+            "cart_book_form": cart_book_form,
+            "categories": categories,
+        },
     )
 
 
