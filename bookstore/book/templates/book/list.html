@@ -8,8 +8,6 @@
 
 <h1> Bookstore </h1>
 
-{% include "filter/filter.html" %}
-
 {% if tag %}
 <h4>Books with tag: "{{ tag.name }}"</h4>
 {% endif %}
@@ -50,6 +48,11 @@
                 {% endfor %}
                 {% endspaceless %}
             </p>
+            <form action="{% url 'cart:cart_add' book.bookid %}" method="post">
+                {{ cart_book_form }}
+                {% csrf_token %}
+                <input type="submit" class="btn btn-primary" value="Add to cart">
+            </form>
         </div>
     </div>
 

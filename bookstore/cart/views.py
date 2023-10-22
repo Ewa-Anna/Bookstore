@@ -28,6 +28,27 @@ def cart_remove(request, book_id):
 
 
 @require_POST
+def cart_update(request, book_id):
+    cart = Cart(request)
+    book = get_object_or_404(Book, bookid=book_id)
+    cart.remove(book)
+    form = CartAddBookForm(request.POST)
+    if form.is_valid():
+        cd = form.cleaned_data
+        cart.add(book=book, quantity=cd["quantity"], override_quantity=cd["override"])
+    return redirect("cart:cart_detail")
+
+
+def cart_detail(request):
+    cart = Cart(request)
+    for item in cart:
+        item["update_quantity_form"] = CartAddBookForm(
+            initial={"quantity": item["quantity"], "override": True}
+        )
+    return render(request, "cart/detail.html", {"cart": cart})
+
+
+@require_POST
 def cart_toggle(request, book_id):
     cart = Cart(request)
     book = get_object_or_404(Book, bookid=book_id)
@@ -42,12 +63,3 @@ def cart_toggle(request, book_id):
                 book=book, quantity=cd["quantity"], override_quantity=cd["override"]
             )
     return HttpResponse(status=204)
-
-
-def cart_detail(request):
-    cart = Cart(request)
-    for item in cart:
-        item["update_quantity_form"] = CartAddBookForm(
-            initial={"quantity": item["quantity"], "override": True}
-        )
-    return render(request, "cart/detail.html", {"cart": cart})

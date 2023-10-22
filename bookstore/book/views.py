@@ -41,6 +41,7 @@ def book_list(request, tag_slug=None):
 
 def book_detail(request, slug):
     book = get_object_or_404(Book, slug=slug)
+    cart_book_form = CartAddBookForm()
     reviews = book.review.filter(active=True)
     form = ReviewForm()
 
@@ -60,6 +61,7 @@ def book_detail(request, slug):
             "reviews": reviews,
             "form": form,
             "similar_books": similar_books,
+            "cart_book_form": cart_book_form,
         },
     )
 
@@ -105,6 +107,7 @@ def book_search(request):
 def category_display(request, catid):
     category = get_object_or_404(Category, pk=catid)
     book_list = Book.objects.filter(catid=catid)
+    cart_book_form = CartAddBookForm()
 
     paginator = Paginator(book_list, 12)
     page_number = request.GET.get("page", 1)
@@ -118,5 +121,9 @@ def category_display(request, catid):
     return render(
         request,
         "category/detail.html",
-        {"category": category, "book_list": book_list, "books": books},
+        {
+            "category": category, 
+            "book_list": book_list, 
+            "books": books,
+            "cart_book_form": cart_book_form},
     )

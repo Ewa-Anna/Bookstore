@@ -5,17 +5,53 @@
 {% block content %}
 
 <h3>Checkout</h3>
+<table class="tables">
+    <thead>
+        <tr>
+            <th>Photo</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Amount</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart %}
+        {% with book=item.book %}
+        <tr>
+            <td>
+                <a href="{{ book.get_absolute_url }}">
+                    <img class="bookimagesmall" src="{{ book.img_url }}" alt="Book image">
+                </a>
+            </td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.price }}</td>
+            <td>${{ item.total_price }}</td>
+        </tr>
+        {% endwith %}
+        {% endfor %}
+        <tr>
+            <td><b>Total</b></td>
+            <td colspan="4"></td>
+            <td>$<b>{{ cart.calc_total_price }}</b></td>
+        </tr>
+    </tbody>
+</table>
+
 <div class="order-info">
     <h4>Order</h4>
-    <ul>
+    <ul style="text-align:center; list-style: none;">
         {% for item in cart %}
         <li>
-            {{ item.quantity }}x {{ item.book.title }} by {{ item.book.author }}
+            {{ item.quantity }}x <b>{{ item.book.title }} by {{ item.book.author }}</b>
             <span>${{ item.total_price }}</span>
         </li>
         {% endfor %}
     </ul>
-    <p>Total: {{ cart.calc_total_price }}</p>
+    <p>Total: $<b>{{ cart.calc_total_price }}</b></p>
 </div>
 <form method="post" class="order-form">
     {{ form.as_p }}

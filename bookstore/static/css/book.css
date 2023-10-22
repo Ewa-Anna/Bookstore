@@ -47,6 +47,14 @@
     text-decoration: none;
 }
 
+.bookimagesmall {
+    max-width: 250px;
+    height: 100px;
+    display: block;
+    margin: 0 auto;
+    text-decoration: none;
+}
+
 .booklink {
     text-decoration: none;
     color: #007bff;

@@ -42,7 +42,7 @@ Running Docker Container
 
 ## Project overview
 <div style="text-align: justify;">
-The Bookstore is a web-based application developed using Python (Django) for backend and HTML (jinja2), CSS (bootstrap), and JavaScript for frontend. The project combines the power of Django for backend development with HTML, CSS, and JavaScript for the frontend to create a user-friendly and feature-rich online bookstore. 
+The Bookstore is a web-based application developed using Python (Django) for backend and HTML (jinja2), CSS (bootstrap), and JavaScript for frontend to create a user-friendly and feature-rich online bookstore. 
 <br>
 PostgreSQL is used as the primary database to store core data, such as books, user profiles, and orders and manages critical data. Additionally, Redis is utilized for enhancing user experience through personalized book recommendations tailored to individual interests.
 <br>
@@ -55,6 +55,8 @@ Its primary purpose is to serve as an online bookstore, offering a range of core
 3.	**Search**: User can perform simple search.
 4.	**Tag System**: The project includes a tagging system that allows books to be categorized based on tags. Users can search for books with similar tags, enhancing their browsing experience.
 5. **User Profile**: User can now access basic profile with option to edit their data.
+6.	**Cart**: Users can add books to their shopping cart while browsing the catalog. The cart displays the selected books, their quantities, and the total cost. Users can review and modify their cart contents before proceeding to checkout.
+7. **Order Summary**: A summary of the order is displayed, showing the total cost, quantity and price of the books. Users can review the order details one last time before confirming the purchase.
 
 ## Technologies and frameworks
 - Backend
@@ -83,11 +85,12 @@ Its primary purpose is to serve as an online bookstore, offering a range of core
 Run all tests
 <br>
 ``python manage.py test``
+
 ## Future plans
 
 1.	**Advanced Search**: Implement an advanced search feature that allows users to filter books by various criteria such as genre, price range, author, and publication date.
-2.	**Cart**: Users can add books to their shopping cart while browsing the catalog. The cart displays the selected books, their quantities, and the total cost. Users can review and modify their cart contents before proceeding to checkout.
-3.	**User Profiles**: User authentication functionality is implemented, enabling users to create accounts and maintain profiles. In their profiles, users can view their order history and other account-related information.
+2. **Order Confirmation**: Once the user clicks "Submit order" the system processes the transaction, verifies payment information, and generates an order confirmation. Users receive an email confirmation with details of their purchase.
+3.	**Advanced User Profiles**: User authentication functionality is implemented, enabling users to create accounts and maintain profiles. In their profiles, users can view their order history and other account-related information.
 4.	**Wishlist**: Enable users to create a wishlist where they can save books they intend to purchase later.
 5.	**Book Ratings**: Allow users to rate books on a scale and provide detailed feedback. Display average ratings and sort search results by user ratings.
 6.	**Social Media Sharing**: Implement social sharing buttons to encourage users to share their favorite books, reviews, and recommendations on social media platforms.

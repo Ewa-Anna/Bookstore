@@ -38,7 +38,7 @@
                 {% with total_items=cart|length %}
                 {% if total_items > 0 %}
                 <a href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>
-                    Cart: {{ total_items }} item{{ total_items|pluralize }}, {{ cart.calc_total_price }}
+                    Cart: {{ total_items }} item{{ total_items|pluralize }}, ${{ cart.calc_total_price }}
                 </a>
                 {% else %}
                 <a href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>Cart</a>

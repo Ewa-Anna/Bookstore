@@ -7,6 +7,8 @@
 
 <h1> Bookstore </h1>
 
+{% include "filter/filter.html" %}
+
 {% if query %}
 
 <h4>Search results of "{{ query }}"</h4>
@@ -42,7 +44,7 @@
 
 {% else %}
 
-<h4 style="text-align: center;">Search for books</h4>
+<h4 style="text-align: center;">Search for books by title</h4>
 <form style="text-align: center;" method="get">
     {{ form.as_p }}
     <input type="submit" class="btn btn-primary" value="Search">
