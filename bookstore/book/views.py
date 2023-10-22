@@ -105,7 +105,7 @@ def book_search(request):
 def category_display(request, catid):
     category = get_object_or_404(Category, pk=catid)
     book_list = Book.objects.filter(catid=catid)
-    
+
     paginator = Paginator(book_list, 12)
     page_number = request.GET.get("page", 1)
     try:
@@ -118,4 +118,5 @@ def category_display(request, catid):
     return render(
         request,
         "category/detail.html",
-        {"category": category, "book_list": book_list, "books": books})
+        {"category": category, "book_list": book_list, "books": books},
+    )

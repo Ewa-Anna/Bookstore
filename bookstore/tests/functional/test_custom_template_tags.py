@@ -6,7 +6,7 @@ from book.models import Book
 
 class CustomTemplateTagsTest(TestCase):
     databases = {"test"}
-    
+
     def setUp(self):
         for i in range(5):
             Book.objects.create(
