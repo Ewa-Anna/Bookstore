@@ -1,0 +1,32 @@
+<div>
+    <h4>Filtering</h4>
+
+    <table class="tables">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in filter.qs %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.price }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No books match the filter criteria.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="button-form">
+        <form method="get">
+            {{ filter.form.as_p }}
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+    </div>
+</div>

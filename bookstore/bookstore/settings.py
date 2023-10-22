@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     "user.apps.UserConfig",
     "cart.apps.CartConfig",
     "orders.apps.OrdersConfig",
+    "filter.apps.FilterConfig",
     "taggit",
+    "django_filters",
     "django.contrib.postgres",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -96,23 +98,12 @@ DATABASES = {
         "HOST": "localhost",
         "PORT": "5432",
     },
-    # "test": {
-    #     "ENGINE": "django.db.backends.postgresql",
-    #     "NAME": "bookstore_test",
-    #     "USER": "book",
-    #     "PASSWORD": PASSWORD_POSTGRES,
-    #     "HOST": "localhost",
-    #     "PORT": "5432",
-    # },
     "test": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": ':memory:',
     },
 }
 
-TEST = {
-    "DEPENDENCIES": ["user", "book"],
-}
 
 
 # Password validation

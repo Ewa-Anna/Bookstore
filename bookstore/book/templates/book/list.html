@@ -8,6 +8,8 @@
 
 <h1> Bookstore </h1>
 
+{% include "filter/filter.html" %}
+
 {% if tag %}
 <h4>Books with tag: "{{ tag.name }}"</h4>
 {% endif %}
