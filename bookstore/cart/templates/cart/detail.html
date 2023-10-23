@@ -28,13 +28,14 @@
             <td>{{ book.title }}</td>
             <td>{{ book.author }}</td>
             <td>
-                <form action="{% url 'cart:cart_update' book.bookid %}" method="post">
+                <form action="{% url 'cart:cart_add' book.bookid %}" method="post">
                     {{ item.update_quantity_form.quantity }}
                     {{ item.update_quantity_form.update }}
+                    {{ item.update_quantity_form.override }}
                     <input type="submit" class="btn btn-info" value="Change">
                     {% csrf_token %}
                 </form>
-            </td>
+            </td> 
             <td>
                 <form action="{% url 'cart:cart_remove' book.bookid %}" method="post">
                     <input type="submit" class="btn btn-danger" value="Delete">

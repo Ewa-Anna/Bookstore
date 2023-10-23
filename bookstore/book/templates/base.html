@@ -37,11 +37,11 @@
             <li>
                 {% with total_items=cart|length %}
                 {% if total_items > 0 %}
-                <a href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>
+                <a {% if request.resolver_match.route == "cart/" %} class="selected" {% endif %} href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>
                     Cart: {{ total_items }} item{{ total_items|pluralize }}, ${{ cart.calc_total_price }}
                 </a>
                 {% else %}
-                <a href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>Cart</a>
+                <a {% if request.resolver_match.route == "cart/" %} class="selected" {% endif %} href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>Cart</a>
                 {% endif %}
                 {% endwith %}
             </li>
