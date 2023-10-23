@@ -5,11 +5,11 @@ from book.models import Book, Category, Review
 
 
 class BookModelTestCase(TestCase):
-    databases = {"test"}
+    # databases = {"test"}
 
     def setUp(self):
         self.category = Category.objects.create(
-            name="Test Category",
+            cat_name="Test Category",
         )
         self.book = Book.objects.create(
             title="Test Book",
@@ -37,7 +37,7 @@ class BookModelTestCase(TestCase):
 
 
 class ReviewModelTestCase(BookModelTestCase):
-    databases = {"test"}
+    # databases = {"test"}
 
     def setUp(self):
         super().setUp()
