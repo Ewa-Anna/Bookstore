@@ -5,8 +5,6 @@ from book.models import Book, Category, Review
 
 
 class BookModelTestCase(TestCase):
-    # databases = {"test"}
-
     def setUp(self):
         self.category = Category.objects.create(
             cat_name="Test Category",
@@ -37,8 +35,6 @@ class BookModelTestCase(TestCase):
 
 
 class ReviewModelTestCase(BookModelTestCase):
-    # databases = {"test"}
-
     def setUp(self):
         super().setUp()
         self.review = Review.objects.create(
@@ -46,7 +42,7 @@ class ReviewModelTestCase(BookModelTestCase):
         )
 
     def test_str_rep(self):
-        expected_str = "Review added by Test for book Test Book"
+        expected_str = "Review added by Test for book Test Book by Test Author"
         actual_str = str(self.review)
         self.assertEqual(actual_str, expected_str)
 

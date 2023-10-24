@@ -12,6 +12,7 @@
             <th>Title</th>
             <th>Author</th>
             <th>Amount</th>
+            <th>Delete</th>
             <th>Price</th>
             <th>Total</th>
         </tr>
@@ -30,7 +31,6 @@
             <td>
                 <form action="{% url 'cart:cart_add' book.bookid %}" method="post">
                     {{ item.update_quantity_form.quantity }}
-                    {{ item.update_quantity_form.update }}
                     {{ item.update_quantity_form.override }}
                     <input type="submit" class="btn btn-info" value="Change">
                     {% csrf_token %}
@@ -49,7 +49,7 @@
         {% endfor %}
         <tr>
             <td><b>Total</b></td>
-            <td colspan="4"></td>
+            <td colspan="5"></td>
             <td>$<b>{{ cart.calc_total_price }}</b></td>
         </tr>
     </tbody>

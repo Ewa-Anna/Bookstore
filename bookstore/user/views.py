@@ -3,12 +3,14 @@ from django.shortcuts import render
 from django.contrib import messages
 
 from .models import Profile
+from orders.models import Order
 from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
 
 
 @login_required
 def dashboard(request):
-    return render(request, "user/dashboard.html")
+    order_list = Order.objects.filter(email=request.user.email)
+    return render(request, "user/dashboard.html", {"order_list": order_list})
 
 
 def register(request):

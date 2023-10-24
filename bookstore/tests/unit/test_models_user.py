@@ -5,8 +5,7 @@ from user.models import Profile
 
 
 class ProfileModelTestCase(TestCase):
-    databases = {"test"}
-
+  
     def setUp(self):
         self.user = User.objects.create_user(
             username="testuser", password="testpassword"

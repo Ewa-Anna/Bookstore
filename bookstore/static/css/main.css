@@ -139,6 +139,7 @@ p {
 
 .tables td {
     padding: 8px;
+    text-align: center;
 }
   
 .tables td[colspan="3"] {

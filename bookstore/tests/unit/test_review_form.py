@@ -4,7 +4,6 @@ from book.forms import ReviewForm
 
 
 class ReviewFormTestCase(TestCase):
-    databases = {"test"}
 
     def test_valid_review_form(self):
         form_data = {

@@ -5,10 +5,40 @@
 {% block content %}
 
 <h3>Profile</h3>
-<p>
-    Welcome {{ request.user.first_name | default:request.user.username }}!
-    <br>
-    You can <a href="{% url 'edit' %}">edit your profile</a> or <a href="{% url 'password_change' %}">change your password</a>.
-</p>
+<div>
+    <p>
+        Welcome {{ request.user.first_name | default:request.user.username }}!
+        <br>
+        You can <a href="{% url 'edit' %}">edit your profile</a> or <a href="{% url 'password_change' %}">change your
+            password</a>.
+    </p>
+</div>
+<div>
+    <p>
+    <h4>Orders:</h4>
+    <table class="tables">
+        <thead>
+            <tr>
+                <th>Created</th>
+                <th>Order ID</th>
+                <th>Status</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for order in order_list %}
+            <tr>
+                <td>{{ order.created }}</td>
+                <td>{{ order.id }}</td>
+                <td>{% if order.paid %} paid {% else %} waiting for payment {% endif %}</td>
+                <td>${{ order.get_total_cost }}</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    </p>
+</div>
 
 {% endblock %}
