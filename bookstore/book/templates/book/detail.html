@@ -9,6 +9,7 @@
 </div>
 
 <div class="bookdetails">
+    <b>Average rating:</b> {{ avg_rating }}
     <b>Title:</b> {{ book.title }}
     <br>
     <b>Author:</b> {{ book.author }}
@@ -67,8 +68,16 @@
     <p class="info">
         <b>Review {{ forloop.counter }} added by {{ review.name }} on
         {{ review.created }}</b>
+        <br>
+        {{ review.name }} rated: {{ review.rating }}/5</p>
+    <p class="rating">
+       
     </p>
+    {% if not review.body %}
+    <p><i>User did not leave any review.</i></p>
+    {% else %}
     {{ review.body|linebreaks }}
+    {% endif %}
 </div>
 {% empty %}
 <p>There are no reviews yet.</p>
