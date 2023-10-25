@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views.decorators.http import require_POST
-from django.db.models import Count
+from django.db.models import Count, Avg
 from django.contrib.postgres.search import TrigramSimilarity
 
 from taggit.models import Tag
@@ -44,7 +44,8 @@ def book_detail(request, slug):
     cart_book_form = CartAddBookForm()
     reviews = book.review.filter(active=True)
     form = ReviewForm()
-
+    avg_rating = reviews.aggregate(avg_rating=Avg('rating'))['avg_rating']
+    
     book_tags_ids = book.tags.values_list("id", flat=True)
     similar_books = Book.objects.filter(tags__in=book_tags_ids).exclude(
         bookid=book.bookid
@@ -62,6 +63,7 @@ def book_detail(request, slug):
             "form": form,
             "similar_books": similar_books,
             "cart_book_form": cart_book_form,
+            "avg_rating": avg_rating,
         },
     )
 
