@@ -1,24 +1,14 @@
+import pytest
+
 from django.test import TestCase
-from decimal import Decimal
-
-from book.models import Book, Category, Review
 
 
+@pytest.mark.django_db
 class BookModelTestCase(TestCase):
-    def setUp(self):
-        self.category = Category.objects.create(
-            cat_name="Test Category",
-        )
-        self.book = Book.objects.create(
-            title="Test Book",
-            author="Test Author",
-            description="Test Desc",
-            price=Decimal("25.00"),
-            img_url="https://posterilla.pl/environment/cache/images/500_500_productGfx_19663/Plakat-So-many-books.jpg",
-            slug="sample-book",
-            catid=self.category,
-            tags="Test",
-        )
+    @pytest.fixture(autouse=True)
+    def setup(self, test_category, test_book):
+        self.category = test_category
+        self.book = test_book
 
     def test_get_absolute_url(self):
         expected_url = f"/book/{self.book.slug}/"
@@ -26,7 +16,7 @@ class BookModelTestCase(TestCase):
         self.assertEqual(actual_url, expected_url)
 
     def test_str_rep(self):
-        expected_str = "Test Book by Test Author"
+        expected_str = f"{self.book.title} by {self.book.author}"
         actual_str = str(self.book)
         self.assertEqual(actual_str, expected_str)
 
@@ -34,15 +24,14 @@ class BookModelTestCase(TestCase):
         return super().tearDown()
 
 
-class ReviewModelTestCase(BookModelTestCase):
-    def setUp(self):
-        super().setUp()
-        self.review = Review.objects.create(
-            book=self.book, name="Test", email="test@test.com", body="Test body"
-        )
-
+@pytest.mark.django_db
+class ReviewModelTestCase(TestCase):
+    @pytest.fixture(autouse=True)
+    def setup(self, test_review):
+        self.review = test_review
+    
     def test_str_rep(self):
-        expected_str = "Review added by Test for book Test Book by Test Author"
+        expected_str = f"Review added by {self.review.user.username} for book {self.review.book}"
         actual_str = str(self.review)
         self.assertEqual(actual_str, expected_str)
 

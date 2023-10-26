@@ -9,6 +9,7 @@ class ReviewFormTestCase(TestCase):
         form_data = {
             "name": "Jane Doe",
             "email": "jane.doe@example.com",
+            "rating": 5,
             "body": "Test review",
         }
 

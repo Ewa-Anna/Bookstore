@@ -1,0 +1,55 @@
+.form--group {
+    margin-bottom: 20px;
+    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    flex-direction: column;
+
+    .form--review {
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form--control {
+            margin-bottom: 10px;
+
+            input[type="text"],
+            input[type="email"],
+            select {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+            }
+
+            textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+            }
+
+        }
+    }
+}
+
+
+#review-form {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+@media (max-width: 900px) {
+    #review-form,
+    .form--group {
+        flex: 0 0 100%;
+        margin-right: 0;
+        margin-left: 0;
+    }
+}

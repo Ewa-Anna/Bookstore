@@ -52,7 +52,7 @@ def book_detail(request, slug):
     )
     similar_books = similar_books.annotate(same_tags=Count("tags")).order_by(
         "-same_tags"
-    )[:3]
+    )[:1]
 
     return render(
         request,
