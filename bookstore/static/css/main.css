@@ -1,4 +1,5 @@
 @import url("book.css");
+@import url("forms.css");
 
 *,
 *::before,
@@ -107,6 +108,7 @@ footer {
     text-align: justify;
     padding: 20px;
     border-radius: 5px;
+   
 }
 
 p {

@@ -4,27 +4,33 @@
 
 {% block content %}
 <h1> {{ book.title }} by {{ book.author }} </h1>
-<div>
-    <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
-</div>
 
-<div class="bookdetails">
-    <b>Average rating:</b> {{ avg_rating }}
-    <b>Title:</b> {{ book.title }}
-    <br>
-    <b>Author:</b> {{ book.author }}
-    <br>
-    <b>Price:</b> &#36;{{ book.price }}
-    <br>
-    <form action="{% url 'cart:cart_add' book.bookid %}" method="post">
-        {{ cart_book_form }}
-        {% csrf_token %}
-        <input type="submit" class="btn btn-primary" value="Add to cart">
-    </form>
-    <br>
-    <b>Description:</b>
-    <br>
-    {{ book.description | linebreaks }}
+<div class="book-details">
+    <div class="book-image">
+        <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
+    </div>
+    <div class="book-info">
+        <b>Title:</b> {{ book.title }}
+        <br>
+        <b>Author:</b> {{ book.author }}
+        <div class="book-rating">
+            <b>Average rating:</b> {{ avg_rating }}
+        </div>
+        <div class="book-price">
+            <b>Price:</b> &#36;{{ book.price }}
+        </div>
+        <form action="{% url 'cart:cart_add' book.bookid %}" method="post">
+            {{ cart_book_form }}
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Add to cart">
+        </form>
+    </div>
+    <div class="book-description">
+        <b>Description:</b>
+        <p id="book-description">
+            {{ book.description | linebreaks }}
+        </p>
+    </div>
 </div>
 
 <div class="bookdetails">
@@ -41,11 +47,11 @@
         {{ book.author }}
         <br>
         &#36;{{ book.price }}
-        <form action="{% url 'cart:cart_add' book.bookid %}" method="post">
-            {{ cart_book_form }}
-            {% csrf_token %}
-            <input type="submit" class="btn btn-primary" value="Add to cart">
-        </form>
+    <form action="{% url 'cart:cart_add' book.bookid %}" method="post">
+        {{ cart_book_form }}
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Add to cart">
+    </form>
     </p>
     {% empty %}
     <p>Nothing here yet.</p>
@@ -55,7 +61,7 @@
 
 {% with reviews.count as total_reviews %}
 <h2 style="text-align: center;">
-    {% if total_reviews  == 1 %}
+    {% if total_reviews == 1 %}
     {{ total_reviews }} review
     {% else %}
     {{ total_reviews }} reviews
@@ -67,11 +73,12 @@
 <div style="text-align: center;" class="review">
     <p class="info">
         <b>Review {{ forloop.counter }} added by {{ review.name }} on
-        {{ review.created }}</b>
+            {{ review.created }}</b>
         <br>
-        {{ review.name }} rated: {{ review.rating }}/5</p>
+        {{ review.name }} rated: {{ review.rating }}/5
+    </p>
     <p class="rating">
-       
+
     </p>
     {% if not review.body %}
     <p><i>User did not leave any review.</i></p>
@@ -86,7 +93,7 @@
 {% if user.is_authenticated %}
 {% include "book/includes/review_form.html" %}
 {% else %}
-<p><a href="/user/login">Login</a> or <a href="/user/register">Register</a> to post a review.</p>
+<p><a href="/user/login">Login</a> or <a href="/user/register">Register</a> to rate a book or post a review.</p>
 {% endif %}
 
 {% endblock %}

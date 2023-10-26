@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-from django.core.validators import MaxValueValidator, MinValueValidator
 
 from taggit.managers import TaggableManager
 
@@ -19,7 +18,7 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.cat_name}"
 
-    def get_absolute_ulr(self):
+    def get_absolute_url(self):
         return reverse("book:book_list", args=[self.cat_name])
 
 
