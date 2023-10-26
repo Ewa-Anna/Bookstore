@@ -7,10 +7,9 @@ This repository contains the source code for a dynamic e-commerce website built 
 - [Installation](#how-to-install-and-run-the-project)
 - [Docker](#docker)
 - [Overview](#project-overview)
-- [Features](#features)
+- [Features and Future plans](#features-and-future-plans)
 - [Tools](#technologies-and-frameworks)
 - [Tests](#tests)
-- [Future plans](#future-plans)
 
 ## How to install and run the project?
 1. Clone the repository
@@ -49,14 +48,14 @@ PostgreSQL is used as the primary database to store core data, such as books, us
 Its primary purpose is to serve as an online bookstore, offering a range of core functionalities.
 </div>
 
-## Features & Future plans
-1.	**Book Catalog**: Users can view a list of available books for purchase. Each book is presented with basic information. Users can click on individual books to access detailed information about them, such as the book's description, author, price, and reviews from other users. :heavy_check_mark:
-2.	**User Reviews**: Registered users can post reviews and ratings for books they have read. These reviews help other users make informed decisions about their purchases. :heavy_check_mark:
-3.	**Search**: User can perform simple search. :heavy_check_mark:
-4.	**Tag System**: The project includes a tagging system that allows books to be categorized based on tags. Users can search for books with similar tags, enhancing their browsing experience. :heavy_check_mark:
-5. **User Profile**: User can now access basic profile with option to edit their data. :heavy_check_mark:
-6.	**Cart**: Users can add books to their shopping cart while browsing the catalog. The cart displays the selected books, their quantities, and the total cost. Users can review and modify their cart contents before proceeding to checkout. :heavy_check_mark:
-7. **Order Summary**: A summary of the order is displayed, showing the total cost, quantity and price of the books. Users can review the order details one last time before confirming the purchase. :heavy_check_mark:
+## Features and Future plans
+1. :heavy_check_mark: **Book Catalog**: Users can view a list of available books for purchase. Each book is presented with basic information. Users can click on individual books to access detailed information about them, such as the book's description, author, price, and reviews from other users. 
+2. :heavy_check_mark: **User Reviews**: Registered users can post reviews and ratings for books they have read. These reviews help other users make informed decisions about their purchases. :heavy_check_mark:
+3. :heavy_check_mark: **Search**: User can perform simple search. 
+4. :heavy_check_mark: **Tag System**: The project includes a tagging system that allows books to be categorized based on tags. Users can search for books with similar tags, enhancing their browsing experience. 
+5. :heavy_check_mark: **User Profile**: User can now access basic profile with option to edit their data. 
+6. :heavy_check_mark: **Cart**: Users can add books to their shopping cart while browsing the catalog. The cart displays the selected books, their quantities, and the total cost. Users can review and modify their cart contents before proceeding to checkout. 
+7. :heavy_check_mark: **Order Summary**: A summary of the order is displayed, showing the total cost, quantity and price of the books. Users can review the order details one last time before confirming the purchase. 
 1.	**Advanced Search**: Implement an advanced search feature that allows users to filter books by various criteria such as genre, price range, author, and publication date.
 2. **Order Confirmation**: Once the user clicks "Submit order" the system processes the transaction, verifies payment information, and generates an order confirmation. Users receive an email confirmation with details of their purchase.
 3.	**Advanced User Profiles**: User authentication functionality is implemented, enabling users to create accounts and maintain profiles. In their profiles, users can view their order history and other account-related information.
@@ -97,4 +96,4 @@ Its primary purpose is to serve as an online bookstore, offering a range of core
 ## Tests
 Run all tests
 <br>
-``python manage.py test``
+``python manage.py test tests``
