@@ -29,9 +29,11 @@ class ReviewModelTestCase(TestCase):
     @pytest.fixture(autouse=True)
     def setup(self, test_review):
         self.review = test_review
-    
+
     def test_str_rep(self):
-        expected_str = f"Review added by {self.review.user.username} for book {self.review.book}"
+        expected_str = (
+            f"Review added by {self.review.user.username} for book {self.review.book}"
+        )
         actual_str = str(self.review)
         self.assertEqual(actual_str, expected_str)
 

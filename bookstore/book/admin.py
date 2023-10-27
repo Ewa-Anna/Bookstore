@@ -14,9 +14,9 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "book", "created", "active")
+    list_display = ("user", "rating", "book", "created", "active")
     list_filter = ("active", "created")
-    search_fields = ("name", "email", "body")
+    search_fields = ("user", "rating", "body")
 
 
 admin.site.register(Book, BookAdmin)

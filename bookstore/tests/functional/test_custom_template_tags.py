@@ -5,7 +5,6 @@ from book.models import Book, Category
 
 
 class CustomTemplateTagsTest(TestCase):
-
     def setUp(self):
         self.category = Category.objects.create(
             cat_name="Test Category",
@@ -29,17 +28,17 @@ class CustomTemplateTagsTest(TestCase):
         self.assertEqual(int(rendered), expected_count)
 
     def test_show_latest_books_templatetag(self):
-        rendered = Template(
-            "{% load book_tags %}{% show_latest_books 3 %}"
-        ).render(Context({}))
+        rendered = Template("{% load book_tags %}{% show_latest_books 3 %}").render(
+            Context({})
+        )
         expected_count = 3
         for i in range(expected_count):
             self.assertInHTML(f"Test Book {4 - i}", rendered)
 
     def test_show_latest_books_templatetag_when_more(self):
-        rendered = Template(
-            "{% load book_tags %}{% show_latest_books 10 %}"
-        ).render(Context({}))
+        rendered = Template("{% load book_tags %}{% show_latest_books 10 %}").render(
+            Context({})
+        )
         expected_count = 5
         for i in range(expected_count):
             self.assertInHTML(f"Test Book {4 - i}", rendered)

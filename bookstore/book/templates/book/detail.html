@@ -72,7 +72,7 @@
 {% for review in reviews reversed %}
 <div style="text-align: center;" class="review">
     <p class="info">
-        <b>Review {{ forloop.counter }} added by {{ review.name }} on
+        <b>Review {{ forloop.counter }} added by {{ review.user }} on
             {{ review.created }}</b>
         <br>
         {{ review.name }} rated: {{ review.rating }}/5
@@ -85,6 +85,8 @@
     {% else %}
     {{ review.body|linebreaks }}
     {% endif %}
+    {{ review.upvotes }} <a href="#" class="vote-up" data-review-id="{{ review.id }}" data-score="1">Agree</a>
+    {{ review.downvotes }} <a href="#" class="vote-down" data-review-id="{{ review.id }}" data-score="-1">Disagree</a>
 </div>
 {% empty %}
 <p>There are no reviews yet.</p>

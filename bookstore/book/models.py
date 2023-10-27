@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
 
 from taggit.managers import TaggableManager
 
@@ -53,9 +54,12 @@ class Book(models.Model):
 
 class Review(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="review")
-    name = models.CharField(max_length=80)
-    email = models.EmailField()
-    rating = models.PositiveIntegerField(choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')])
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None
+    )
+    rating = models.PositiveIntegerField(
+        choices=[(1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")]
+    )
     body = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -63,7 +67,16 @@ class Review(models.Model):
 
     class Meta:
         ordering = ["-created"]
-        indexes = [models.Index(fields=["book"]), models.Index(fields=["name"])]
+        indexes = [models.Index(fields=["book"]), models.Index(fields=["user"])]
 
     def __str__(self):
-        return f"Review added by {self.name} for book {self.book}"
+        return f"Review added by {self.user.username} for book {self.book}"
+
+
+class Vote(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    score = models.IntegerField(choices=((-1, "Thumbs Down"), (+1, "Thumbs Up")))
+    review = models.ForeignKey(Review, related_name="votes", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Vote by {self.user} on {self.review}"

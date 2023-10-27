@@ -17,9 +17,9 @@ class OrderModelTestCase(TestCase):
             postal_code="30-300",
             state="Test",
             country="Test",
-            paid=False
+            paid=False,
         )
-        
+
     def test_str_rep(self):
         expected_str = f"Order no {self.order.pk}"
         actual_str = str(self.order)
@@ -42,13 +42,10 @@ class OrderItemModelTestCase(BookModelTestCase):
             postal_code="30-300",
             state="Test",
             country="Test",
-            paid=False
+            paid=False,
         )
         self.orderitem = OrderItem.objects.create(
-            order=self.order,
-            book=self.book,
-            price=25.00,
-            quantity=3
+            order=self.order, book=self.book, price=25.00, quantity=3
         )
 
     def test_str_rep(self):

@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Avg
 from django.contrib.postgres.search import TrigramSimilarity
+from django.http import JsonResponse
 
 from taggit.models import Tag
 
-from .models import Book, Category
+from .models import Book, Category, Review, Vote
 from .forms import ReviewForm, SearchForm
 from cart.forms import CartAddBookForm
 
@@ -44,8 +46,8 @@ def book_detail(request, slug):
     cart_book_form = CartAddBookForm()
     reviews = book.review.filter(active=True)
     form = ReviewForm()
-    avg_rating = reviews.aggregate(avg_rating=Avg('rating'))['avg_rating']
-    
+    avg_rating = reviews.aggregate(avg_rating=Avg("rating"))["avg_rating"]
+
     book_tags_ids = book.tags.values_list("id", flat=True)
     similar_books = Book.objects.filter(tags__in=book_tags_ids).exclude(
         bookid=book.bookid
@@ -72,7 +74,7 @@ def book_detail(request, slug):
 def post_review(request, bookid):
     book = get_object_or_404(Book, bookid=bookid)
     review = None
-    form = ReviewForm(data=request.POST)
+    form = ReviewForm(initial={"user": request.user}, data=request.POST)
 
     if form.is_valid():
         review = form.save(commit=False)
@@ -82,6 +84,31 @@ def post_review(request, bookid):
     return render(
         request, "book/review.html", {"book": book, "form": form, "review": review}
     )
+
+
+@login_required
+def vote_review(request, review_id):
+    if request.method == "POST":
+        score = int(request.POST.get("score", 0))
+        if score in [-1, 1]:
+            review = Review.objects.get(pk=review_id)
+            user = request.user
+            vote, created = Vote.objects.get_or_create(user=user, review=review)
+            vote.score = score
+            vote.save()
+
+            upvotes = review.filter(score=1).count()
+            downvotes = review.filter(score=-1).count()
+
+            return JsonResponse(
+                {
+                    "status": "success",
+                    "score": score,
+                    "upvotes": upvotes,
+                    "downvotes": downvotes,
+                }
+            )
+    return JsonResponse({"status": "error", "message": "Invalid request"})
 
 
 def book_search(request):
@@ -124,8 +151,9 @@ def category_display(request, catid):
         request,
         "category/detail.html",
         {
-            "category": category, 
-            "book_list": book_list, 
+            "category": category,
+            "book_list": book_list,
             "books": books,
-            "cart_book_form": cart_book_form},
+            "cart_book_form": cart_book_form,
+        },
     )
