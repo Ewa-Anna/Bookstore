@@ -30,7 +30,7 @@
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 {% for category in categories %}
-                <a class="dropdown-item" href="{% url 'book:category_display' category.catid %}">{{ category.cat_name
+                <a id="dropdown-item" class="dropdown-item" href="{% url 'book:category_display' category.catid %}">{{ category.cat_name
                     }}</a>
                 {% endfor %}
             </div>
@@ -53,14 +53,14 @@
 
             {% if user.is_authenticated %}
             <li><a {% if request.resolver_match.route == "user/dashboard/" %} class="selected" {% endif %}
-                    href="/user/dashboard"><i class="fa-solid fa-user"></i>Profile</a></li>
+                    href="{% url 'user:dashboard' %}"><i class="fa-solid fa-user"></i>Profile</a></li>
             <li><a {% if request.resolver_match.route == "user/logout/" %} class="selected" {% endif %}
-                    href="/user/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                    href="{% url 'user:logout' %}"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
             {% else %}
             <li><a {% if request.resolver_match.route == "user/login/" %} class="selected" {% endif %}
-                    href="/user/login"><i class="fa-solid fa-right-to-bracket"></i>Login</a></li>
+                    href="{% url 'user:login' %}"><i class="fa-solid fa-right-to-bracket"></i>Login</a></li>
             <li><a {% if request.resolver_match.route == "user/register/" %} class="selected" {% endif %}
-                    href="/user/register"><i class="fa-solid fa-registered"></i>Register</a></li>
+                    href="{% url 'user:register' %}"><i class="fa-solid fa-registered"></i>Register</a></li>
             {% endif %}
 
         </ul>

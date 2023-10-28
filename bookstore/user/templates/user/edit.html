@@ -5,12 +5,16 @@
 {% block content %}
 
 <h3>Edit profile</h3>
-<p> You can change the settings of your account via below form:</p>
-<form method="post" enctype="multipart/form-data">
+
+<div id="review-form" class="form--group">
+<form class="form--review" method="post" enctype="multipart/form-data">
+    <div class="form--control">
     {{ user_form.as_p }}
     {{ profile_form.as_p }}
     {% csrf_token %}
+    </div>
     <p><input type="submit" class="btn btn-primary" value="Update"></p>
 </form>
+</div>
 
 {% endblock %}

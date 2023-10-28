@@ -5,14 +5,15 @@
 {% block content %}
 
 <h3>Register</h3>
-<p>Create an account:</p>
 
-<form method="post">
-    <div class="form-group">
+<div id="review-form" class="form--group">
+<form class="form--review" method="post">
+    <div class="form--control">
         {{ user_form.as_p }}
         {% csrf_token %}
-        <p><input type="submit" class="btn btn-primary" value="Register"></p>
     </div>
+    <p><input type="submit" class="btn btn-primary" value="Register"></p>
 </form>
+</div>
 
 {% endblock %}

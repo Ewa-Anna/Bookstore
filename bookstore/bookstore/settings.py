@@ -72,12 +72,12 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
+                "cart.context_processors.cart",
+                "book.context_processors.categories",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "cart.context_processors.cart",
-                "book.context_processors.categories",
             ],
         },
     },
@@ -143,10 +143,10 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_REDIRECT_URL = "dashboard"
-LOGIN_URL = "login"
-LOGOUT_REDIRECT_URL = "logout"
-LOGOUT_URL = "logout"
+LOGIN_REDIRECT_URL = "user:dashboard"
+LOGIN_URL = "user:login"
+LOGOUT_REDIRECT_URL = "user:logout"
+LOGOUT_URL = "user:logout"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # for development
 

@@ -1,21 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 from book.models import Book
 
 
 class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
-    street = models.CharField(max_length=255, blank=True, verbose_name="Street Address")
-    apartment = models.CharField(
-        max_length=30, blank=True, verbose_name="Apartment Number"
-    )
-    city = models.CharField(max_length=100, blank=True, verbose_name="City")
-    postal_code = models.CharField(
-        max_length=10, blank=True, verbose_name="Postal Code"
-    )
-    state = models.CharField(max_length=100, blank=True, verbose_name="State")
-    country = models.CharField(max_length=100, blank=True, verbose_name="Country")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)

@@ -1,0 +1,16 @@
+<h4>Add new shipping address</h4>
+<div id="review-form" class="form--group">
+    <form class="form--review" action="{% url 'user:dashboard' %}" method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }} 
+
+        {% for field in form %}
+            {{ field.errors }}
+            <div class="form--control">
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+        {% endfor %}
+       <p><input type="submit" class="btn btn-primary" value="Add"></p>
+    </form>
+</div>

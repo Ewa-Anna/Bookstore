@@ -28,7 +28,7 @@ body {
 
 
 .selected {
-    color: rgb(252, 198, 198) !important; 
+    color: #ddd9d99f !important; 
 }
 
 
@@ -118,8 +118,9 @@ p {
 }
 
 .tables {
-    width: 100%;
+    width: 900px;
     border-collapse: collapse;
+    margin: auto;
     font-family: Arial, sans-serif;
 }
 
@@ -136,7 +137,7 @@ p {
 }
 
 .tables tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #ddd9d9ee;
 }
 
 .tables td {
@@ -154,4 +155,14 @@ p {
 .button-form {
     text-align: center;
     margin-top: 20px;
+}
+
+#dropdown-item {
+    background-color: #333;
+    color: #fff; 
+}
+
+#dropdown-item:hover {
+    background-color: #888484;
+    color: #fff; 
 }

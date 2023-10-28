@@ -8,7 +8,7 @@
 <h1> Bookstore </h1>
 
 {% include "book/filter.html" %}
-
+<br>
 {% if query %}
 
 <h4>Search results of "{{ query }}"</h4>
@@ -40,15 +40,19 @@
     {% endfor %}
 </div>
 
-<p style="text-align: center;"><a href="{% url 'book:book_search' %}">Search again</a></p>
+<p><a href="{% url 'book:book_search' %}">Search again</a></p>
 
 {% else %}
 
-<h4 style="text-align: center;">Search for books by title</h4>
-<form style="text-align: center;" method="get">
-    {{ form.as_p }}
-    <input type="submit" class="btn btn-primary" value="Search">
+<h4>Search for books by title</h4>
+<div id="review-form" class="form--group">
+<form class="form--review" method="get">
+    <div class="form--control">
+        {{ form.as_p }}
+    </div>
+   <p><input type="submit" class="btn btn-primary" value="Search"></p>
 </form>
+</div>
 
 {% endif %}
 

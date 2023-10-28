@@ -10,24 +10,91 @@
         Welcome {{ request.user.first_name | default:request.user.username }}!
     </p>
     {% if profile.photo %}
-    <p><img src="{{ profile.photo.url }}" alt="User Photo" width="150"></p>
+    <p><img src="{{ profile.photo.url }}" alt="User Photo" width="250"></p>
     {% else %}
     <p>No photo available</p>
     {% endif %}
 
+    {% if profile.date_of_birth is not None %}
     <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
+        {% with age=profile.calculate_age.0 months=profile.calculate_age.1 days=profile.calculate_age.2 %}
+            <p>You are {{ age }} years, {{ months }} months, and {{ days }} days old.</p>
+        {% endwith %}
+    {% endif %}
 
-    <p><strong>Shipping address:</strong></p>
-    <p>{{ profile.street }} {{ profile.apartment }}
-        <br>
-    {{ profile.postal_code }} {{ profile.city }}, {{ profile.state }}
+    <p>You can <a href="{% url 'user:edit' %}">edit your profile</a> or <a href="{% url 'user:password_change' %}">change your password</a>.</p>
+
+    <h4>Shipping addresses:</h4>
+    {% if main_shipping_address %}
+    <p><b>Primary Addresses:</b></p>
+    <table class="tables">
+        <thead>
+            <tr>
+                <th>Street</th>
+                <th>Apartment</th>
+                <th>Postal Code</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shipping_address in shipping_addresses %}
+                {% if shipping_address == main_shipping_address %}
+                    <tr>
+                        <td>{{ shipping_address.street }}</td>
+                        <td>{{ shipping_address.apartment }}</td>
+                        <td>{{ shipping_address.postal_code }}</td>
+                        <td>{{ shipping_address.city }}</td>
+                        <td>{{ shipping_address.state }}</td>
+                        <td>{{ shipping_address.country }}</td>
+                        <td><a class="btn btn-info" href="{% url 'user:edit_shipping_address' shipping_address.id %}">Edit</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table> 
+    {% endif %}
+
+    {% if shipping_addresses %}
+    <p><b>Additional Addresses:</b></p>
+    <table class="tables">
+        <thead>
+            <tr>
+                <th>Street</th>
+                <th>Apartment</th>
+                <th>Postal Code</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shipping_address in shipping_addresses %}
+                {% if shipping_address != main_shipping_address %}
+                    <tr>
+                        <td>{{ shipping_address.street }}</td>
+                        <td>{{ shipping_address.apartment }}</td>
+                        <td>{{ shipping_address.postal_code }}</td>
+                        <td>{{ shipping_address.city }}</td>
+                        <td>{{ shipping_address.state }}</td>
+                        <td>{{ shipping_address.country }}</td>
+                        <td><a class="btn btn-info" href="{% url 'user:edit_shipping_address' shipping_address.id %}">Edit</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No addresses added yet.</p>
+    {% endif %}
     <br>
-    {{ profile.country }}</p>
-    <p>
-        You can <a href="{% url 'edit' %}">edit your profile</a> or <a href="{% url 'password_change' %}">change your
-            password</a>.
-    </p>
+    <br>
+    {% include "user/add_shipping_address.html" %}
 </div>
+
 <div>
     <p>
     <h4>Orders:</h4>
