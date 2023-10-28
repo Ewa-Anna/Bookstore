@@ -4,8 +4,8 @@
 
 {% block content %}
     {% if review %}
-        <h2 style="text-align: center;">Your review has been added.</h2>
-        <p style="text-align: center;"><a href="{{ book.get_absolute_url }}">Back to book</a></p>
+        <h3>Your review has been added.</h3>
+        <p><a href="{{ book.get_absolute_url }}">Back to book</a></p>
     {% else %}
         {% include "book/includes/review_form.html" %}
     {% endif %}

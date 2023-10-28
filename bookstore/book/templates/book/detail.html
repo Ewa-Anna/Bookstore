@@ -14,7 +14,12 @@
         <br>
         <b>Author:</b> {{ book.author }}
         <div class="book-rating">
-            <b>Average rating:</b> {{ avg_rating }}
+            <b>Average rating:</b> 
+            {% if not avg_rating %}
+            N/A
+            {% else %}
+            {{ avg_rating|floatformat:2 }}
+            {% endif %}
         </div>
         <div class="book-price">
             <b>Price:</b> &#36;{{ book.price }}
@@ -70,32 +75,40 @@
 {% endwith %}
 
 {% include "review/filter.html" %}
-
+<br>
 {% for review in reviews reversed %}
 <div style="text-align: center;" class="review">
     <p class="info">
         <b>Review {{ forloop.counter }} added by {{ review.user }} on
             {{ review.created }}</b>
         <br>
-        {{ review.name }} rated: {{ review.rating }}/5
+        {{ review.name }} <b>rated:</b> {{ review.rating }}/5
+        {% if user.is_authenticated and review.user == user %}
+        <a href="{% url 'book:edit_review' review.id %}?next={{ request.path|urlencode }}" class="btn btn-info">Edit</a>
+        {% endif %}
     </p>
-    <p class="rating">
 
-    </p>
     {% if not review.body %}
     <p><i>User did not leave any review.</i></p>
     {% else %}
     {{ review.body|linebreaks }}
     {% endif %}
-    {{ review.upvotes }} <a href="#" class="vote-up" data-review-id="{{ review.id }}" data-score="1">Agree</a>
+    {{ review.upvotes }} <a href="#" class="vote-up" data-review-id="{{ review.id }}" data-score="1">Agree</a> /
     {{ review.downvotes }} <a href="#" class="vote-down" data-review-id="{{ review.id }}" data-score="-1">Disagree</a>
+    <br>
+    <br>
 </div>
 {% empty %}
 <p>There are no reviews yet.</p>
 {% endfor %}
+<br>
 
 {% if user.is_authenticated %}
+{% if user_left_review %}
+<p>You have already left a review for this book.</p>
+{% else %}
 {% include "book/includes/review_form.html" %}
+{% endif %}
 {% else %}
 <p><a href="/user/login">Login</a> or <a href="/user/register">Register</a> to rate a book or post a review.</p>
 {% endif %}

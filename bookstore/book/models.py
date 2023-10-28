@@ -54,7 +54,7 @@ class Book(models.Model):
 
 class Review(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="review")
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None
     )
     rating = models.PositiveIntegerField(
@@ -67,6 +67,7 @@ class Review(models.Model):
 
     class Meta:
         ordering = ["-created"]
+        unique_together = ['book', 'user']
         indexes = [models.Index(fields=["book"]), models.Index(fields=["user"])]
 
     def __str__(self):

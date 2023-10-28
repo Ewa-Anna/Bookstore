@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Avg
 from django.contrib.postgres.search import TrigramSimilarity
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden
+from django.urls import reverse
 
 from taggit.models import Tag
 
@@ -55,6 +56,7 @@ def book_detail(request, slug):
     similar_books = similar_books.annotate(same_tags=Count("tags")).order_by(
         "-same_tags"
     )[:1]
+    user_left_review = Review.objects.filter(book=book, user=request.user).exists()
 
     return render(
         request,
@@ -66,6 +68,7 @@ def book_detail(request, slug):
             "similar_books": similar_books,
             "cart_book_form": cart_book_form,
             "avg_rating": avg_rating,
+            "user_left_review": user_left_review
         },
     )
 
@@ -85,6 +88,28 @@ def post_review(request, bookid):
         request, "book/review.html", {"book": book, "form": form, "review": review}
     )
 
+
+@login_required
+def edit_review(request, review_id):
+    review = get_object_or_404(Review, pk=review_id)
+    
+    if request.user != review.user:
+        return HttpResponseForbidden("You don't have permission to edit this review.")
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect(review.book.get_absolute_url())
+        
+    else:
+        form = ReviewForm(instance=review)    
+    
+
+    return render(request,"book/edit_review.html", {
+        "form": form,
+        "review": review,
+    })
 
 @login_required
 def vote_review(request, review_id):
