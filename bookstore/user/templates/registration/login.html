@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<h3 style="text-align: center;">Login</h3>
+<h3>Login</h3>
 
 {% if form.errors %}
 <p>Username or password invalid.
@@ -12,15 +12,17 @@
     Try again.
 </p>
 {% endif %}
-
-<form style="text-align: center;" action="{% url 'login' %}" method="post">
+<div id="review-form" class="form--group">
+<form class="form--review" action="{% url 'user:login' %}" method="post">
+    <div class="form--control">
     {{ form.as_p }}
     {% csrf_token %}
-    <input type="hidden" name="next" value="{{ next }}" />
+    </div>
+    <input type="hidden" name="next" value="/user/dashboard"/>
     <p><input type="submit" class="btn btn-primary" value="Login"></p>
 </form>
-
-<p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
-<p><a href="{% url 'register' %}">Don't have an account yet?</a></p>
+</div>
+<p><a href="{% url 'user:password_reset' %}">Forgot your password?</a></p>
+<p><a href="{% url 'user:register' %}">Don't have an account yet?</a></p>
 
 {% endblock %}

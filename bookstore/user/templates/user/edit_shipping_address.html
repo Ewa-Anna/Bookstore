@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Edit review{% endblock %}
+{% block title %}Edit Shipping Address{% endblock %}
 
 {% block content %}
 
-<h2 style="text-align: center;">Edit review</h2>
+<h3>Edit Shipping Address</h3>
 <div id="review-form" class="form--group">
-    <form class="form--review" action="{% url 'book:edit_review' review.id %}" method="post">
+    <form class="form--review" action="{% url 'user:edit_shipping_address' shipping_address.id %}" method="post">
         {% csrf_token %}
         {% for field in form %}
         {{ field.errors }}
@@ -15,7 +15,7 @@
             {{ field }}
         </div>
         {% endfor %}
-        <p><input type="submit" class="btn btn-primary" value="Edit review"></p>
+        <p><input type="submit" class="btn btn-primary" value="Update"></p>
     </form>
 </div>
 

@@ -40,7 +40,7 @@
         </tr>
     </tbody>
 </table>
-
+<br>
 <div class="order-info">
     <h4>Order</h4>
     <ul style="text-align:center; list-style: none;">
@@ -53,10 +53,15 @@
     </ul>
     <p>Total: $<b>{{ cart.calc_total_price }}</b></p>
 </div>
-<form method="post" class="order-form">
+
+<div id="review-form" class="form--group">
+<form class="form--review" method="post" class="order-form">
+    <div class="form--control">
     {{ form.as_p }}
+    </div>
     <p><input type="submit" class="btn btn-primary" value="Submit order"></p>
     {% csrf_token %}
 </form>
+</div>
 
 {% endblock %}
