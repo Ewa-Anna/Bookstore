@@ -1,0 +1,30 @@
+<div>
+    <h4>Filtering</h4>
+
+    <table class="tables">
+        <thead>
+            <tr>
+                <th>Rating</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for review in filter.qs %}
+            <tr>
+                <td>{{ review.rating }}</td>
+                <td>{{ review.created }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">No reviews match the filter criteria.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="button-form">
+        <form method="get">
+            {{ filter.form.as_p }}
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+    </div>
+</div>

@@ -72,7 +72,7 @@ Its primary purpose is to serve as an online bookstore, offering a range of core
 19.	**Recommendation Engine**: Enhance the book recommendation system by incorporating machine learning algorithms. Provide personalized book suggestions based on users' reading history, preferences, and ratings.
 20. **Dark Mode**: Implement a dark mode option for users who prefer a darker interface.
 21. **Tests**: Unit, functional, performance, integration, authentication and authorization.
-22. **Order split**: Calculate the weight of book, in case it is more than 20kg, split the order into smaller ones.
+22. **Order Split**: Calculate the weight of books in order, in case it is more than 20kg, split it into smaller ones.
 
 
 ## Technologies and frameworks
