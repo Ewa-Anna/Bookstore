@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from .models import Profile
@@ -10,7 +10,9 @@ from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
 @login_required
 def dashboard(request):
     order_list = Order.objects.filter(email=request.user.email)
-    return render(request, "user/dashboard.html", {"order_list": order_list})
+    profile = get_object_or_404(Profile, user=request.user)
+    return render(request, "user/dashboard.html", {"order_list": order_list,
+                                                   "profile": profile})
 
 
 def register(request):
@@ -39,6 +41,7 @@ def edit(request):
             user_form.save()
             profile_form.save()
             messages.success(request, "Successfully updated profile.")
+            return redirect("dashboard")
         else:
             messages.error(request, "Profile was not updated. Error occured.")
     else:

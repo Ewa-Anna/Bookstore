@@ -30,18 +30,21 @@
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 {% for category in categories %}
-                <a class="dropdown-item" href="{% url 'book:category_display' category.catid %}">{{ category.cat_name }}</a>
+                <a class="dropdown-item" href="{% url 'book:category_display' category.catid %}">{{ category.cat_name
+                    }}</a>
                 {% endfor %}
             </div>
 
             <li>
                 {% with total_items=cart|length %}
                 {% if total_items > 0 %}
-                <a {% if request.resolver_match.route == "cart/" %} class="selected" {% endif %} href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>
+                <a {% if request.resolver_match.route == "cart/" %} class="selected" {% endif %}
+                    href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>
                     Cart: {{ total_items }} item{{ total_items|pluralize }}, ${{ cart.calc_total_price }}
                 </a>
                 {% else %}
-                <a {% if request.resolver_match.route == "cart/" %} class="selected" {% endif %} href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>Cart</a>
+                <a {% if request.resolver_match.route == "cart/" %} class="selected" {% endif %}
+                    href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>Cart</a>
                 {% endif %}
                 {% endwith %}
             </li>
@@ -64,14 +67,16 @@
     </nav>
 
     {% if messages %}
+    <p>
     <ul class="messages">
         {% for message in messages %}
-        <li class="{{ message.tags }}">
+        <li class="{{ message.tags }}" id="message-{{ forloop.counter }}">
             {{ message|safe }}
-            <a href="#" class="close">X</a>
+            <a href="#" class="close" onclick="closeMessage({{ forloop.counter }})">x</a>
         </li>
         {% endfor %}
     </ul>
+    </p>
     {% endif %}
 
     <div id="content">
@@ -113,6 +118,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+        <script src="{% static 'js/closeMessages.js' %}"></script>
 </body>
 
 </html>

@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Avg
 from django.contrib.postgres.search import TrigramSimilarity
 from django.http import JsonResponse, HttpResponseForbidden
-from django.urls import reverse
 
 from taggit.models import Tag
 

@@ -8,7 +8,22 @@
 <div>
     <p>
         Welcome {{ request.user.first_name | default:request.user.username }}!
+    </p>
+    {% if profile.photo %}
+    <p><img src="{{ profile.photo.url }}" alt="User Photo" width="150"></p>
+    {% else %}
+    <p>No photo available</p>
+    {% endif %}
+
+    <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
+
+    <p><strong>Shipping address:</strong></p>
+    <p>{{ profile.street }} {{ profile.apartment }}
         <br>
+    {{ profile.postal_code }} {{ profile.city }}, {{ profile.state }}
+    <br>
+    {{ profile.country }}</p>
+    <p>
         You can <a href="{% url 'edit' %}">edit your profile</a> or <a href="{% url 'password_change' %}">change your
             password</a>.
     </p>
