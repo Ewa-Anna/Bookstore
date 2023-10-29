@@ -55,8 +55,7 @@ class Book(models.Model):
 class Review(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="review")
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None
-    )
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     rating = models.PositiveIntegerField(
         choices=[(1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")]
     )
@@ -72,6 +71,7 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review added by {self.user.username} for book {self.book}"
+    
 
 
 class Vote(models.Model):

@@ -45,7 +45,7 @@ def book_detail(request, slug):
     book = get_object_or_404(Book, slug=slug)
     cart_book_form = CartAddBookForm()
     reviews = book.review.filter(active=True)
-    form = ReviewForm()
+    form = ReviewForm(initial={"user": request.user.username})
     avg_rating = reviews.aggregate(avg_rating=Avg("rating"))["avg_rating"]
 
     book_tags_ids = book.tags.values_list("id", flat=True)
@@ -75,16 +75,18 @@ def book_detail(request, slug):
 @require_POST
 def post_review(request, bookid):
     book = get_object_or_404(Book, bookid=bookid)
-    review = None
-    form = ReviewForm(initial={"user": request.user}, data=request.POST)
-
-    if form.is_valid():
-        review = form.save(commit=False)
-        review.book = book
-        review.save()
-
+    
+    if request.user.is_authenticated:
+        form = ReviewForm(data=request.POST, initial={"user": request.user})
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.book = book
+            review.save()
+    else:
+        form = ReviewForm(data=request.POST)
+   
     return render(
-        request, "book/review.html", {"book": book, "form": form, "review": review}
+        request, "book/review.html", {"book": book, "form": form}
     )
 
 
