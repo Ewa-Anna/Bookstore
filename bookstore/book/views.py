@@ -75,7 +75,7 @@ def book_detail(request, slug):
 @require_POST
 def post_review(request, bookid):
     book = get_object_or_404(Book, bookid=bookid)
-    
+
     if request.user.is_authenticated:
         form = ReviewForm(data=request.POST, initial={"user": request.user})
         if form.is_valid():
@@ -84,33 +84,35 @@ def post_review(request, bookid):
             review.save()
     else:
         form = ReviewForm(data=request.POST)
-   
-    return render(
-        request, "book/review.html", {"book": book, "form": form}
-    )
+
+    return render(request, "book/review.html", {"book": book, "form": form})
 
 
 @login_required
 def edit_review(request, review_id):
     review = get_object_or_404(Review, pk=review_id)
-    
+
     if request.user != review.user:
         return HttpResponseForbidden("You don't have permission to edit this review.")
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
             return redirect(review.book.get_absolute_url())
-        
-    else:
-        form = ReviewForm(instance=review)    
-    
 
-    return render(request,"book/edit_review.html", {
-        "form": form,
-        "review": review,
-    })
+    else:
+        form = ReviewForm(instance=review)
+
+    return render(
+        request,
+        "book/edit_review.html",
+        {
+            "form": form,
+            "review": review,
+        },
+    )
+
 
 @login_required
 def vote_review(request, review_id):

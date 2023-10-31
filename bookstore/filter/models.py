@@ -9,7 +9,6 @@ class BookFilter(df.FilterSet):
 
 
 class ReviewFilter(df.FilterSet):
-
     class Meta:
         model = Review
         fields = ["rating", "created"]

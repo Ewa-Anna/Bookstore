@@ -73,6 +73,7 @@ Its primary purpose is to serve as an online bookstore, offering a range of core
 20. **Dark Mode**: Implement a dark mode option for users who prefer a darker interface.
 21. **Tests**: Unit, functional, performance, integration, authentication and authorization.
 22. **Order Split**: Calculate the weight of books in order, in case it is more than 20kg, split it into smaller ones.
+23. **Small Bot**: Small bot chat, that would allow users to ask simple questions about the website and get answers.
 
 
 ## Technologies and frameworks

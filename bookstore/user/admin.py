@@ -7,6 +7,7 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ["user", "date_of_birth", "photo"]
     raw_id_fields = ["user"]
 
+
 @admin.register(ShippingAddress)
 class ShippingAddressAdmin(admin.ModelAdmin):
     list_display = ["user", "street", "city", "state", "country"]

@@ -5,7 +5,6 @@ from user.models import ShippingAddress
 from .models import Order
 
 
-
 class OrderCreateForm(forms.Form):
     first_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50)
@@ -16,4 +15,3 @@ class OrderCreateForm(forms.Form):
     postal_code = forms.CharField(max_length=10, required=False)
     state = forms.CharField(max_length=100, required=False)
     country = forms.CharField(max_length=100, required=False)
-    

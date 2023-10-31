@@ -6,22 +6,34 @@ from django.http import HttpResponseForbidden
 
 from .models import Profile, ShippingAddress
 from orders.models import Order
-from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm, ShippingAddressEditForm, ShippingAddressForm
+from .forms import (
+    UserRegistrationForm,
+    UserEditForm,
+    ProfileEditForm,
+    ShippingAddressEditForm,
+    ShippingAddressForm,
+)
 
 
 @login_required
 def dashboard(request):
     order_list = Order.objects.filter(email=request.user.email)
-    
+
     profile = get_object_or_404(Profile, user=request.user)
 
     shipping_addresses = ShippingAddress.objects.filter(user=request.user)
-    main_shipping_address = shipping_addresses.latest('updated')
-    
-    return render(request, "user/dashboard.html", {"order_list": order_list,
-                                                   "profile": profile,
-                                                   "shipping_addresses": shipping_addresses,
-                                                   "main_shipping_address": main_shipping_address})
+    main_shipping_address = shipping_addresses.latest("updated")
+
+    return render(
+        request,
+        "user/dashboard.html",
+        {
+            "order_list": order_list,
+            "profile": profile,
+            "shipping_addresses": shipping_addresses,
+            "main_shipping_address": main_shipping_address,
+        },
+    )
 
 
 def register(request):
@@ -47,7 +59,11 @@ def edit(request):
         )
         shipping_address_form = ShippingAddressEditForm(data=request.POST)
 
-        if user_form.is_valid() and profile_form.is_valid() and shipping_address_form.is_valid():
+        if (
+            user_form.is_valid()
+            and profile_form.is_valid()
+            and shipping_address_form.is_valid()
+        ):
             user_form.save()
             profile_form.save()
             shipping_address_form.save()
@@ -63,10 +79,13 @@ def edit(request):
     return render(
         request,
         "user/edit.html",
-        {"user_form": user_form, 
-         "profile_form": profile_form,
-         "shipping_address_form": shipping_address_form},
+        {
+            "user_form": user_form,
+            "profile_form": profile_form,
+            "shipping_address_form": shipping_address_form,
+        },
     )
+
 
 @require_POST
 def add_shipping_address(request):
@@ -74,27 +93,24 @@ def add_shipping_address(request):
     shipping_address = None
 
     if request.method == "POST":
-        form = ShippingAddressForm(initial={"user": request.user}, data=request.POST)    
+        form = ShippingAddressForm(initial={"user": request.user}, data=request.POST)
 
         if form.is_valid():
-            
             if form.is_duplicate():
                 messages.error(request, "This shipping address already exists.")
-            else:    
+            else:
                 shipping_address = form.save(commit=False)
                 shipping_address.user = user
                 shipping_address.save()
-                return redirect('user:dashboard')
-            
+                return redirect("user:dashboard")
+
     else:
         form = ShippingAddressForm()
-    
+
     return render(
         request,
         "user/dashboard.html",
-        {"user": user,
-         "form": form,
-         "shipping_address": shipping_address}
+        {"user": user, "form": form, "shipping_address": shipping_address},
     )
 
 
@@ -104,15 +120,17 @@ def edit_shipping_address(request, shipping_address_id):
 
     if request.user != shipping_address.user:
         return HttpResponseForbidden("You don't have permission to edit this address.")
-    
+
     if request.method == "POST":
         form = ShippingAddressEditForm(request.POST, instance=shipping_address)
         if form.is_valid():
             form.save()
-            return redirect('user:dashboard')
+            return redirect("user:dashboard")
     else:
         form = ShippingAddressEditForm(instance=shipping_address)
 
-    return render(request, "user/edit_shipping_address.html",
-                  {"shipping_address": shipping_address,
-                   "form": form})
+    return render(
+        request,
+        "user/edit_shipping_address.html",
+        {"shipping_address": shipping_address, "form": form},
+    )

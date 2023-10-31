@@ -28,7 +28,6 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["first_name", "last_name", "email"]
-    
 
     def clean_email(self):
         data = self.cleaned_data["email"]
@@ -42,15 +41,14 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ["user"]
-        widgets = {'date_of_birth': forms.DateInput(attrs={'type': 'date'})}
+        widgets = {"date_of_birth": forms.DateInput(attrs={"type": "date"})}
 
 
 class ShippingAddressForm(forms.ModelForm):
     class Meta:
         model = ShippingAddress
-        fields = ["street", "apartment", "city", "postal_code",
-                  "state", "country"]
-    
+        fields = ["street", "apartment", "city", "postal_code", "state", "country"]
+
     def is_duplicate(self):
         street = self.cleaned_data.get("street")
         apartment = self.cleaned_data.get("apartment")
@@ -65,12 +63,13 @@ class ShippingAddressForm(forms.ModelForm):
             city=city,
             postal_code=postal_code,
             state=state,
-            country=country
+            country=country,
         )
 
         return existing_addresses.exists()
+
+
 class ShippingAddressEditForm(forms.ModelForm):
     class Meta:
         model = ShippingAddress
-        fields = ["street", "apartment", "city", "postal_code",
-                  "state", "country"]
+        fields = ["street", "apartment", "city", "postal_code", "state", "country"]

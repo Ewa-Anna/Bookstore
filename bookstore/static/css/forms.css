@@ -5,42 +5,44 @@
     flex-wrap: wrap;
     margin: 0 auto;
     flex-direction: column;
-
-    .form--review {
-
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .form--control {
-            margin-bottom: 10px;
-
-            input[type="text"],
-            input[type="email"],
-            input[type="password"],
-            input[type="file"],
-            input[type="date"],
-            select {
-                width: 100%;
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                font-size: 16px;
-            }
-
-            textarea {
-                width: 100%;
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                font-size: 16px;
-            }
-
-        }
-    }
 }
 
+.form--review {
+
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+}
+
+.form--control {
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
 
 #review-form {
     margin-left: auto;

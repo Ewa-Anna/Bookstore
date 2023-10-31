@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    env_file:
+      - .env
+    command: ./django-setup.sh
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=bookstore
+      - POSTGRES_USER=book
+      - POSTGRES_PASSWORD=PASSWORD_POSTGRES
+      - POSTGRES_HOST_AUTH_METHOD="trust"
+    restart: always
+    container_name: postgres_db
+    ports:
+      - '5432:5432'
+    env_file:
+      - .env
+volumes:
+  postgres_data:

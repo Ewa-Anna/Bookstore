@@ -11,5 +11,5 @@ urlpatterns = [
     path("tag/<slug:tag_slug>/", views.book_list, name="book_list_by_tag"),
     path("search/", views.book_search, name="book_search"),
     path("category/<int:catid>/", views.category_display, name="category_display"),
-    path('edit_review/<int:review_id>/', views.edit_review, name='edit_review'),
+    path("edit_review/<int:review_id>/", views.edit_review, name="edit_review"),
 ]
