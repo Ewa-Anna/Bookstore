@@ -96,11 +96,21 @@ DATABASES = {
         "NAME": "bookstore",
         "USER": "book",
         "PASSWORD": PASSWORD_POSTGRES,
-        "HOST": "postgres_db",  # 'localhost' for terminal run
+        "HOST": "localhost",  # 'localhost' for terminal run; 'postgres_db' for docker-compose
         "PORT": "5432",
     },
 }
 
+# Redis
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1", 
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}
 
 
 # Password validation

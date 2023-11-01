@@ -5,7 +5,7 @@ This repository contains the source code for a dynamic e-commerce website built 
 
 ## Table of Contents
 - [Installation](#how-to-install-and-run-the-project)
-- [Docker](#docker)
+- [Docker](#docker-compose)
 - [Overview](#project-overview)
 - [Features and Future plans](#features-and-future-plans)
 - [Tools](#technologies-and-frameworks)
@@ -30,14 +30,14 @@ This repository contains the source code for a dynamic e-commerce website built 
 
 Project will run on http://127.0.0.1:8000/
 
-## Docker
+## docker-compose
 Building Docker Image
 <br>
-` docker build -t bookstore . `
+` docker-compose build `
 <br>
 Running Docker Container
 <br>
-` docker run -p 8000:8000 bookstore `
+` docker-compose up -d `
 
 ## Project overview
 <div style="text-align: justify;">
