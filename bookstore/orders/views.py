@@ -49,9 +49,9 @@ def order_create(request):
                 )
 
             cart.clear()
-            order_created.delay(order.id) # Asynchronous task
-            request.session['order_id'] = order.id
-            return redirect(reverse('payment:process'))
+            order_created.delay(order.id)  # Asynchronous task
+            request.session["order_id"] = order.id
+            return redirect(reverse("payment:process"))
             # return render(request, "orders/order/created.html", {"order": order})
     else:
         if request.user.is_authenticated:
