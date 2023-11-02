@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "cart.apps.CartConfig",
     "orders.apps.OrdersConfig",
     "filter.apps.FilterConfig",
+    "wishlist.apps.WishlistConfig",
+    "payment.apps.PaymentConfig",
     "taggit",
     "django_filters",
     "django.contrib.postgres",
@@ -171,3 +173,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 CART_SESSION_ID = "cart"
+
+STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
+STRIPE_API_VERSION = '2023-10-16'

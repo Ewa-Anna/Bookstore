@@ -21,9 +21,7 @@
         {% with book=item.book %}
         <tr>
             <td>
-                <a href="{{ book.get_absolute_url }}">
-                    <img class="bookimagesmall" src="{{ book.img_url }}" alt="Book image">
-                </a>
+                <img class="bookimagesmall" src="{{ book.img_url }}" alt="Book image">
             </td>
             <td>{{ book.title }}</td>
             <td>{{ book.author }}</td>
@@ -55,7 +53,7 @@
 </div>
 
 <div id="review-form" class="form--group">
-<form class="form--review" method="post" class="order-form">
+<form class="form--review" method="post">
     <div class="form--control">
     {{ form.as_p }}
     </div>

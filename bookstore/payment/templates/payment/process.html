@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Payment{% endblock %}
+
+{% block content %}
+
+<h3>Order summary</h3>
+<table class="tables">
+    <thead>
+        <tr>
+            <th>Photo</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Amount</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order.items.all %}
+        <tr>
+            <td>
+                <img class="bookimagesmall" src="{{ item.book.img_url }}" alt="Book image">
+            </td>
+            <td>{{ item.book.title }}</td>
+            <td>{{ item.book.author }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.price }}</td>
+            <td>${{ order.total_price }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td><b>Total</b></td>
+            <td colspan="4"></td>
+            <td>$<b>{{ order.calc_total_price }}</b></td>
+        </tr>
+    </tbody>
+</table>
+
+<div id="review-form" class="form--group">
+<form class="form--review" action="{% url 'payment:process' %}" method="post">
+    <p><input type="submit" class="btn btn-primary" value="Pay"></p>
+    {% csrf_token %}
+</form>
+</div>
+
+{% endblock %}

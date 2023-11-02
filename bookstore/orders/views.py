@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
 from .models import Order, OrderItem
 from .forms import OrderCreateForm
+from .tasks import order_created
 
 from user.models import ShippingAddress
 
@@ -46,8 +48,11 @@ def order_create(request):
                     quantity=item["quantity"],
                 )
 
-                cart.clear()
-                return render(request, "orders/order/created.html", {"order": order})
+            cart.clear()
+            order_created.delay(order.id) # Asynchronous task
+            request.session['order_id'] = order.id
+            return redirect(reverse('payment:process'))
+            # return render(request, "orders/order/created.html", {"order": order})
     else:
         if request.user.is_authenticated:
             most_recent_address = (
