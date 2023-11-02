@@ -56,7 +56,9 @@
 </table>
 <p>
     <a href="{% url 'book:book_list' %}" class="btn btn-primary">Resume shopping</a>
+    {% if cart.total_items > 0 %}
     <a href="{% url 'orders:order_create' %}" class="btn btn-primary">Checkout</a>
+    {% endif %}
 </p>
 
 {% endblock %}
