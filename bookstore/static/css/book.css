@@ -4,11 +4,13 @@
     gap: 20px;
     text-decoration: none;
     grid-template-columns: repeat(3, 1fr);
+    margin: 0 auto;
 }
 
 @media (min-width: 1600px) {
     .bookcontainer {
         grid-template-columns: repeat(6, 1fr);
+        margin: 0 auto;
     }
 }
 

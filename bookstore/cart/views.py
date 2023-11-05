@@ -16,7 +16,7 @@ def cart_add(request, book_id):
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(book=book, quantity=cd["quantity"], override_quantity=cd["override"])
-    return redirect("cart:cart_detail")
+    return redirect(request.META.get('HTTP_REFERER', 'cart:cart_detail')) # Redirects to current page, else if not available, redirects to cart.
 
 
 @require_POST

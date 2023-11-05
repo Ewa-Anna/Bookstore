@@ -10,6 +10,8 @@ This repository contains the source code for a dynamic e-commerce website built 
 - [Features and Future plans](#features-and-future-plans)
 - [Tools](#technologies-and-frameworks)
 - [Tests](#tests)
+- [Acknowledgments](#acknowledgments)
+- [License](#license)
 
 ## How to install and run the project?
 1. Clone the repository
@@ -103,3 +105,9 @@ Its primary purpose is to serve as an online bookstore, offering a range of core
 Run all tests
 <br>
 ``python manage.py test tests``
+
+## Acknowledgments
+- Django 4 By Example [*Antonio Melé*](https://antoniomele.es/) [Packt>](https://www.packtpub.com/)
+
+## License
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.

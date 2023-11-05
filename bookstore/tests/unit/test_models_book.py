@@ -5,7 +5,7 @@ from django.test import TestCase
 
 @pytest.mark.django_db
 class BookModelTestCase(TestCase):
-    @pytest.fixture(autouse=True)
+    @pytest.fixture(scope="class", autouse=True)
     def setup(self, test_category, test_book):
         self.category = test_category
         self.book = test_book

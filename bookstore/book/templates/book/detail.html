@@ -38,26 +38,30 @@
     </div>
 </div>
 
-<div class="bookdetails">
 
-    <h4>Might interest you as well:</h4>
+
+<h4>Might interest you as well:</h4>
+<div class="bookcontainer">
 
     {% for book in similar_books %}
-    <p>
-        <a href="{{ book.get_absolute_url }}">
-            <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
-            {{ book.title }}
-        </a>
-        <br>
-        {{ book.author }}
-        <br>
-        &#36;{{ book.price }}
-    <form action="{% url 'cart:cart_add' book.bookid %}" method="post">
-        {{ cart_book_form }}
-        {% csrf_token %}
-        <input type="submit" class="btn btn-primary" value="Add to cart">
-    </form>
-    </p>
+    <div class="book">
+        <div class="bookdetails">
+            <a href="{{ book.get_absolute_url }}">
+                <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
+                {{ book.title }}
+            </a>
+            <br>
+            {{ book.author }}
+            <br>
+            &#36;{{ book.price }}
+            <form action="{% url 'cart:cart_add' book.bookid %}" method="post">
+                {{ cart_book_form }}
+                {% csrf_token %}
+                <input type="submit" class="btn btn-primary" value="Add to cart">
+            </form>
+        </div>
+    </div>
+
     {% empty %}
     <p>Nothing here yet.</p>
     {% endfor %}

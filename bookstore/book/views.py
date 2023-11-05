@@ -54,7 +54,7 @@ def book_detail(request, slug):
     )
     similar_books = similar_books.annotate(same_tags=Count("tags")).order_by(
         "-same_tags"
-    )[:1]
+    )[:3]
     # user_left_review = Review.objects.filter(book=book, user=request.user).exists()
 
     return render(

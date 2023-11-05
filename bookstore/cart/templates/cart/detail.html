@@ -26,7 +26,11 @@
                     <img class="bookimagesmall" src="{{ book.img_url }}" alt="Book image">
                 </a>
             </td>
-            <td>{{ book.title }}</td>
+            <td>
+                <a href="{{ book.get_absolute_url }}">
+                    {{ book.title }}
+                </a>
+            </td>
             <td>{{ book.author }}</td>
             <td>
                 <form action="{% url 'cart:cart_add' book.bookid %}" method="post">
