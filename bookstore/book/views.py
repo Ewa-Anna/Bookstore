@@ -55,7 +55,7 @@ def book_detail(request, slug):
     similar_books = similar_books.annotate(same_tags=Count("tags")).order_by(
         "-same_tags"
     )[:3]
-    # user_left_review = Review.objects.filter(book=book, user=request.user).exists()
+    user_left_review = Review.objects.filter(book=book, user=request.user).exists()
 
     return render(
         request,
@@ -67,7 +67,7 @@ def book_detail(request, slug):
             "similar_books": similar_books,
             "cart_book_form": cart_book_form,
             "avg_rating": avg_rating,
-            # "user_left_review": user_left_review
+            "user_left_review": user_left_review,
         },
     )
 

@@ -3,6 +3,7 @@ __pycache__
 *.pyc
 media/
 db.sqlite3
+.pytest_cache
 
 # Virtual environment and VSC files
 venv

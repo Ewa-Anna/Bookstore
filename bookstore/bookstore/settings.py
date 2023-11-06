@@ -26,6 +26,7 @@ load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
+USER_POSTGRES = os.getenv("USER_POSTGRES")
 PASSWORD_POSTGRES = os.getenv("PASSWORD_POSTGRES")
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -96,7 +97,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "bookstore",
-        "USER": "book",
+        "USER": USER_POSTGRES,
         "PASSWORD": PASSWORD_POSTGRES,
         "HOST": "localhost",  # 'localhost' for terminal run; 'postgres_db' for docker-compose
         "PORT": "5432",

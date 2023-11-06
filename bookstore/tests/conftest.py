@@ -3,6 +3,7 @@ from decimal import Decimal
 
 from book.models import Book, Category, Review
 
+pytestmark = pytest.mark.django_db
 
 @pytest.fixture(scope="module")
 def test_category():
@@ -33,3 +34,12 @@ def test_review(test_book):
         book=test_book, name="Test", email="test@test.com", body="Test body"
     )
     return review
+
+# for Redis testing
+@pytest.fixture(autouse=True)
+def use_dummy_cache_backend(settings):
+    settings.CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+        }
+    }

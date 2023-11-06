@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 from orders.models import Order, OrderItem
-from .test_models_book import BookModelTestCase
+from .test_models_book import TestBookModel
 
 
 class OrderModelTestCase(TestCase):
@@ -29,7 +29,7 @@ class OrderModelTestCase(TestCase):
         return super().tearDown()
 
 
-class OrderItemModelTestCase(BookModelTestCase):
+class OrderItemModelTestCase(TestBookModel):
     def setUp(self):
         super().setUp()
         self.order = Order.objects.create(
