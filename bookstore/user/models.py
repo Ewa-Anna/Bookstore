@@ -84,7 +84,7 @@ class ShippingAddress(models.Model):
         blank=True,
         related_name="shipping_addresses",
     )
-
+    main = models.BooleanField(default=False, verbose_name="Main Shipping Address")
     street = models.CharField(max_length=255, blank=True, verbose_name="Street Address")
     apartment = models.CharField(
         max_length=30, blank=True, verbose_name="Apartment Number"
@@ -95,10 +95,6 @@ class ShippingAddress(models.Model):
     )
     state = models.CharField(max_length=100, blank=True, verbose_name="State")
     country = models.CharField(max_length=100, blank=True, verbose_name="Country")
-
-    order = models.ForeignKey(
-        Order, on_delete=models.CASCADE, related_name="shipping_addresses"
-    )
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

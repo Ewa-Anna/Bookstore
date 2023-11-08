@@ -20,11 +20,17 @@ def dashboard(request):
     order_list = Order.objects.filter(email=request.user.email)
 
     profile = get_object_or_404(Profile, user=request.user)
-    shipping_addresses = []
-    main_shipping_address = []
-    if ShippingAddress.objects.filter(user=request.user).exists():
-        shipping_addresses = ShippingAddress.objects.filter(user=request.user)
-        main_shipping_address = shipping_addresses.latest("updated")
+    
+    shipping_addresses = ShippingAddress.objects.filter(user=request.user)
+    primary_addresses = []  
+    additional_addresses = []  
+
+    if shipping_addresses.exists():    
+        for address in shipping_addresses:
+            if address.main:
+                primary_addresses.append(address)
+            else:
+                additional_addresses.append(address)
 
     return render(
         request,
@@ -33,7 +39,8 @@ def dashboard(request):
             "order_list": order_list,
             "profile": profile,
             "shipping_addresses": shipping_addresses,
-            "main_shipping_address": main_shipping_address,
+            "primary_addresses": primary_addresses,
+            "additional_addresses": additional_addresses,
         },
     )
 

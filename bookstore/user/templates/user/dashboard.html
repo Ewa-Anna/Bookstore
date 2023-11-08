@@ -27,7 +27,7 @@
     <p>You can <a href="{% url 'user:edit' %}">edit your profile</a> or <a href="{% url 'user:password_change' %}">change your password</a>.</p>
 
     <h4>Shipping addresses:</h4>
-    {% if main_shipping_address %}
+    {% if primary_addresses %}
     <p><b>Primary Addresses:</b></p>
     <table class="tables">
         <thead>
@@ -43,8 +43,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for shipping_address in shipping_addresses %}
-                {% if shipping_address == main_shipping_address %}
+            {% for shipping_address in primary_addresses %}
                     <tr>
                         <td>{{ shipping_address.street }}</td>
                         <td>{{ shipping_address.apartment }}</td>
@@ -55,7 +54,6 @@
                         <td><a class="btn btn-info" href="{% url 'user:edit_shipping_address' shipping_address.id %}">Edit</a></td>
                         <td><a class="btn btn-danger" href="{% url 'user:delete_shipping_address' shipping_address.id %}">Delete</a></td>
                     </tr>
-                {% endif %}
             {% endfor %}
         </tbody>
     </table> 
@@ -63,7 +61,7 @@
     <p>No main address added yet.</p>
     {% endif %}
 
-    {% if shipping_addresses %}
+    {% if additional_addresses  %}
     <p><b>Additional Addresses:</b></p>
     <table class="tables">
         <thead>
@@ -79,8 +77,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for shipping_address in shipping_addresses %}
-                {% if shipping_address != main_shipping_address %}
+            {% for shipping_address in additional_addresses %}
                     <tr>
                         <td>{{ shipping_address.street }}</td>
                         <td>{{ shipping_address.apartment }}</td>
@@ -91,7 +88,6 @@
                         <td><a class="btn btn-info" href="{% url 'user:edit_shipping_address' shipping_address.id %}">Edit</a></td>
                         <td><a class="btn btn-danger" href="{% url 'user:delete_shipping_address' shipping_address.id %}">Delete</a></td>
                     </tr>
-                {% endif %}
             {% endfor %}
         </tbody>
     </table>
