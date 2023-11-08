@@ -14,6 +14,10 @@
     <p><img src="{{ profile.photo.url }}" alt="User Photo" width="250"></p>
     {% else %}
     <p> <a href="{% url 'user:edit' %}"><img src="{% static 'img/no-photos.png' %}" alt="No Photo" width="150"></a></p>
+    <p style="font-size:12px;"><small>Photo credits: 
+        <a href="https://www.flaticon.com/free-icons/no-photo" title="no photo icons">No photo icons created by Those Icons - Flaticon</a>
+    </small>
+    </p>
     <p>No photo available</p>
     {% endif %}
 
