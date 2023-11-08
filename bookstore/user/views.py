@@ -21,6 +21,8 @@ def dashboard(request):
 
     profile = get_object_or_404(Profile, user=request.user)
     
+    form = ShippingAddressForm()
+
     shipping_addresses = ShippingAddress.objects.filter(user=request.user)
     primary_addresses = []  
     additional_addresses = []  
@@ -41,6 +43,7 @@ def dashboard(request):
             "shipping_addresses": shipping_addresses,
             "primary_addresses": primary_addresses,
             "additional_addresses": additional_addresses,
+            "form": form,
         },
     )
 
