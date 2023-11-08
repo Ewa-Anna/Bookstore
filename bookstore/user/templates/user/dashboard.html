@@ -13,7 +13,7 @@
     {% if profile.photo %}
     <p><img src="{{ profile.photo.url }}" alt="User Photo" width="250"></p>
     {% else %}
-    <p> <a href="{% url 'user:edit' %}"><img src="{% static 'img/no-photos.png' %}" alt="No Photo" width="250"></a></p>
+    <p> <a href="{% url 'user:edit' %}"><img src="{% static 'img/no-photos.png' %}" alt="No Photo" width="150"></a></p>
     <p>No photo available</p>
     {% endif %}
 
@@ -39,6 +39,7 @@
                 <th>State</th>
                 <th>Country</th>
                 <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -52,13 +53,14 @@
                         <td>{{ shipping_address.state }}</td>
                         <td>{{ shipping_address.country }}</td>
                         <td><a class="btn btn-info" href="{% url 'user:edit_shipping_address' shipping_address.id %}">Edit</a></td>
+                        <td><a class="btn btn-danger" href="{% url 'user:delete_shipping_address' shipping_address.id %}">Delete</a></td>
                     </tr>
                 {% endif %}
             {% endfor %}
         </tbody>
     </table> 
     {% else %}
-    <p>No addresses added yet.</p>
+    <p>No main address added yet.</p>
     {% endif %}
 
     {% if shipping_addresses %}
@@ -73,6 +75,7 @@
                 <th>State</th>
                 <th>Country</th>
                 <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -86,13 +89,14 @@
                         <td>{{ shipping_address.state }}</td>
                         <td>{{ shipping_address.country }}</td>
                         <td><a class="btn btn-info" href="{% url 'user:edit_shipping_address' shipping_address.id %}">Edit</a></td>
+                        <td><a class="btn btn-danger" href="{% url 'user:delete_shipping_address' shipping_address.id %}">Delete</a></td>
                     </tr>
                 {% endif %}
             {% endfor %}
         </tbody>
     </table>
     {% else %}
-    <p>No addresses added yet.</p>
+    <p>No additional addresses added yet.</p>
     {% endif %}
     <br>
     <br>
