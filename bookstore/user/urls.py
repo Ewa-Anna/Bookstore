@@ -16,4 +16,9 @@ urlpatterns = [
         views.edit_shipping_address,
         name="edit_shipping_address",
     ),
+    path(
+        "delete_shipping_address/<int:shipping_address_id>/",
+        views.delete_shipping_address,
+        name="delete_shipping_address",
+    ),
 ]

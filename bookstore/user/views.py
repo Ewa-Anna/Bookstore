@@ -136,3 +136,15 @@ def edit_shipping_address(request, shipping_address_id):
         "user/edit_shipping_address.html",
         {"shipping_address": shipping_address, "form": form},
     )
+
+
+@login_required
+def delete_shipping_address(request, shipping_address_id):
+    shipping_address = get_object_or_404(ShippingAddress, pk=shipping_address_id)
+
+    if request.user != shipping_address.user:
+        return HttpResponseForbidden("You don't have permission to edit this address.")
+
+    shipping_address.delete()
+
+    return redirect("user:dashboard")
