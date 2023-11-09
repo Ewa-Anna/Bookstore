@@ -72,8 +72,10 @@
     <ul class="messages">
         {% for message in messages %}
         <li class="{{ message.tags }}" id="message-{{ forloop.counter }}">
+        <p>
             {{ message|safe }}
             <a href="#" class="close" onclick="closeMessage({{ forloop.counter }})">x</a>
+        </p>
         </li>
         {% endfor %}
     </ul>

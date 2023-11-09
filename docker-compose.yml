@@ -20,7 +20,7 @@ services:
       POSTGRES_PASSWORD: PASSWORD_POSTGRES
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
-      - "./data/db:/var/lib/postgresql/data"
+      - pgdata:/var/lib/postgresql/data
     restart: always
     container_name: postgres_db
     ports:
@@ -31,4 +31,4 @@ services:
   # redis:
   #   image: redis
 volumes:
-  postgres_data:
+  pgdata:

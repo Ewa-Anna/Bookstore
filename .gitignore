@@ -14,5 +14,3 @@ venv
 
 # Backup files
 *.bak
-
-pg_dump.sql

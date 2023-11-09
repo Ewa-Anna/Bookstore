@@ -1,7 +1,7 @@
 # Bookstore
 **Still in progress**
 
-This repository contains the source code for a dynamic e-commerce website built for a fictional bookstore. The project is implemented using Django, a Python web framework, and incorporates features such as book listings, user authentication, shopping cart functionality, and book recommendations.
+This repository contains the source code for a dynamic e-commerce website built for a fictional bookstore. The project is build using Django, a Python web framework, for backend. HTML, CSS and a little bit of JavaScript for frontend.
 
 ## Table of Contents
 - [Installation](#how-to-install-and-run-the-project)
@@ -47,7 +47,7 @@ The Bookstore is a web-based application developed using Python (Django) for bac
 <br>
 PostgreSQL is used as the primary database to store core data, such as books, user profiles, and orders and manages critical data. Additionally, Redis is utilized for enhancing user experience through personalized book recommendations tailored to individual interests.
 <br>
-Its primary purpose is to serve as an online bookstore, offering a range of core functionalities.
+Its primary purpose is to serve as an online bookstore, offering a range of core functionalities. Inter alia: book catalog with pagination system, book details with possibility to post a review and rate a book. Tagging system and categories. Latest arrivals and recommended similar books. Search, filtering and sorting functionality. Adding to cart and to wishlist. Making order and paying (with Stripe). User profile with basic info, list of orders and shipping addresses (main and additional).
 </div>
 
 ## Features and Future plans
@@ -59,7 +59,7 @@ Its primary purpose is to serve as an online bookstore, offering a range of core
 6. :heavy_check_mark: **Cart**: Users can add books to their shopping cart while browsing the catalog. The cart displays the selected books, their quantities, and the total cost. Users can review and modify their cart contents before proceeding to checkout. 
 7. :heavy_check_mark: **Order Summary**: A summary of the order is displayed, showing the total cost, quantity and price of the books. Users can review the order details one last time before confirming the purchase. 
 8. **Advanced Search**: Implement an advanced search feature that allows users to filter books by various criteria such as genre, price range, author, and publication date.
-9. **Order Confirmation**: Once the user clicks "Submit order" the system processes the transaction, verifies payment information, and generates an order confirmation. Users receive an email confirmation with details of their purchase.
+9. :heavy_check_mark: **Order Confirmation**: Once the user clicks "Submit order" the system processes the transaction, verifies payment information, and generates an order confirmation. Users receive an email confirmation with details of their purchase.
 10.	:heavy_check_mark: **Advanced User Profiles**: User authentication functionality is implemented, enabling users to create accounts and maintain profiles. In their profiles, users can view their order history and other account-related information.
 11.	**Wishlist**: Enable users to create a wishlist where they can save books they intend to purchase later.
 11. **Quick Actions**: Enable users to add items to their wishlist or cart by clicking the icon above the book's photo.
@@ -104,7 +104,9 @@ Its primary purpose is to serve as an online bookstore, offering a range of core
 ## Tests
 Run all tests
 <br>
-``python manage.py test tests``
+`python manage.py test tests`
+<br>
+`pytest`
 
 ## Acknowledgments
 - Django 4 By Example [*Antonio Melé*](https://antoniomele.es/) [Packt>](https://www.packtpub.com/)
