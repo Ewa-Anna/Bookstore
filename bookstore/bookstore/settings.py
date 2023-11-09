@@ -99,7 +99,7 @@ DATABASES = {
         "NAME": "bookstore",
         "USER": USER_POSTGRES,
         "PASSWORD": PASSWORD_POSTGRES,
-        "HOST": "localhost",  # 'localhost' for terminal run; 'postgres_db' for docker-compose
+        "HOST": "postgres_db",  # 'localhost' for terminal run; 'postgres_db' for docker-compose
         "PORT": "5432",
     },
 }

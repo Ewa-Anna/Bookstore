@@ -100,29 +100,28 @@ def edit(request):
 
 
 @require_POST
-def add_shipping_address(request):
-    user = request.user
-    shipping_address = None
+def add_shipping_address(request, shipping_address_id):
+    shipping_address = get_object_or_404(ShippingAddress, pk=shipping_address_id)
 
     if request.method == "POST":
-        form = ShippingAddressForm(initial={"user": request.user}, data=request.POST)
+        form = ShippingAddressForm(data=request.POST, initial={"user": request.user})
 
-        if form.is_valid():
+        if form.is_valid() and any(form.cleaned_data.values()):
             if form.is_duplicate():
                 messages.error(request, "This shipping address already exists.")
             else:
                 shipping_address = form.save(commit=False)
-                shipping_address.user = user
+                shipping_address.user = request.user
                 shipping_address.save()
                 return redirect("user:dashboard")
 
     else:
-        form = ShippingAddressForm()
+        form = ShippingAddressForm(data=request.POST)
 
     return render(
         request,
         "user/dashboard.html",
-        {"user": user, "form": form, "shipping_address": shipping_address},
+        {"form": form, "shipping_address": shipping_address},
     )
 
 
