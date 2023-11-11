@@ -14,6 +14,7 @@ This repository contains the source code for a dynamic e-commerce website built 
 - [License](#license)
 
 ## How to install and run the project?
+### Running the project locally
 1. Clone the repository
 
 ` git clone https://github.com/Ewa-Anna/Bookstore `
@@ -31,6 +32,35 @@ This repository contains the source code for a dynamic e-commerce website built 
 ` python manage.py runserver `
 
 Project will run on http://127.0.0.1:8000/
+
+### Creating .env file
+In order to have full experience, you need to rename your *.env.template* file to *.env* and fill all the environmental variables:
+<br>
+![env_example](bookstore/static/img/screenshots/env_example.PNG)
+<br>
+For PostgreSQL, you need to download PostgreSQL https://www.postgresql.org/download/.
+
+For Stripe functionality, you need to create developers account on Stripe: https://dashboard.stripe.com/test/developers and download your API keys.
+
+### Running asynchronous tasks
+1. RabbitMQ
+
+`docker pull rabbitmq`
+
+`docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management`
+
+RabbitMQ will run on http://127.0.0.1:15672/
+
+2. Celery worker thread
+
+`celery -A bookstore worker -l info -P gevent`
+
+3. Flower
+
+`celery -A bookstore flower`
+
+Flower will run on http://localhost:5555/dashboard/
+
 
 ## docker-compose
 Building Docker Image
