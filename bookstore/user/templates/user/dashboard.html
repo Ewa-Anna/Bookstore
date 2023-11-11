@@ -29,7 +29,36 @@
     {% endif %}
 
     <p>You can <a href="{% url 'user:edit' %}">edit your profile</a> or <a href="{% url 'user:password_change' %}">change your password</a>.</p>
-
+    <div>
+        <p>
+        <h4>Orders:</h4>
+        <table class="tables">
+            <thead>
+                <tr>
+                    <th>Created</th>
+                    <th>Order ID</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.created }}</td>
+                    <td>{{ order.id }}</td>
+                    <td>{% if order.paid %} paid {% else %} waiting for payment {% endif %}</td>
+                    <td>${{ order.get_total_cost }}</td>
+                </tr>
+                {% endfor %}
+               
+            </tbody>
+        </table>
+        </p>
+    </div>
+    
+    {% include "pagination.html" with page=orders %}
+    <br>
     <h4>Shipping addresses:</h4>
     {% if primary_addresses %}
     <p><b>Primary Addresses:</b></p>
@@ -101,34 +130,6 @@
     <br>
     <br>
     {% include "user/add_shipping_address.html" %}
-</div>
-
-<div>
-    <p>
-    <h4>Orders:</h4>
-    <table class="tables">
-        <thead>
-            <tr>
-                <th>Created</th>
-                <th>Order ID</th>
-                <th>Status</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            {% for order in order_list %}
-            <tr>
-                <td>{{ order.created }}</td>
-                <td>{{ order.id }}</td>
-                <td>{% if order.paid %} paid {% else %} waiting for payment {% endif %}</td>
-                <td>${{ order.get_total_cost }}</td>
-            </tr>
-            {% endfor %}
-
-        </tbody>
-    </table>
-    </p>
 </div>
 
 {% endblock %}

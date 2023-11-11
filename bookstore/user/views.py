@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.views.decorators.http import require_POST
@@ -33,12 +34,21 @@ def dashboard(request):
                 primary_addresses.append(address)
             else:
                 additional_addresses.append(address)
+    
+    paginator = Paginator(order_list, 5)
+    page_number = request.GET.get("page", 1)
+    try:
+        orders = paginator.page(page_number)
+    except PageNotAnInteger:
+        orders = paginator.page(1)
+    except EmptyPage:
+        orders = paginator.page(paginator.num_pages)
 
     return render(
         request,
         "user/dashboard.html",
         {
-            "order_list": order_list,
+            "orders": orders,
             "profile": profile,
             "shipping_addresses": shipping_addresses,
             "primary_addresses": primary_addresses,
