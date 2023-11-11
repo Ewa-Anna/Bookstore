@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 from book.models import Book
+from user.models import ShippingAddress
 
 
 class Order(models.Model):
@@ -10,6 +11,7 @@ class Order(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
+    shipping_address = models.ForeignKey(ShippingAddress, on_delete=models.CASCADE, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)

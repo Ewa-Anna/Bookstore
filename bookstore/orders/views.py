@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.contrib.admin.views.decorators import staff_member_required
 
 from .models import Order, OrderItem
 from .forms import OrderCreateForm
@@ -52,7 +53,7 @@ def order_create(request):
             order_created.delay(order.id)  # Asynchronous task
             request.session["order_id"] = order.id
             return redirect(reverse("payment:process"))
-            # return render(request, "orders/order/created.html", {"order": order})
+
     else:
         if request.user.is_authenticated:
             most_recent_address = (
@@ -80,3 +81,11 @@ def order_create(request):
             form = OrderCreateForm()
 
     return render(request, "orders/order/create.html", {"cart": cart, "form": form})
+
+
+@staff_member_required
+def admin_order_detail(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    return render(request,
+                  'admin/orders/order/detail.html',
+                  {'order': order})
