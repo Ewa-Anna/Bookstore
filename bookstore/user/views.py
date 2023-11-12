@@ -22,18 +22,11 @@ def dashboard(request):
 
     profile = get_object_or_404(Profile, user=request.user)
     
-    form = ShippingAddressForm()
+    form = ShippingAddressForm(initial={"user": request.user.username})
 
     shipping_addresses = ShippingAddress.objects.filter(user=request.user)
-    primary_addresses = []  
-    additional_addresses = []  
-
-    if shipping_addresses.exists():    
-        for address in shipping_addresses:
-            if address.main:
-                primary_addresses.append(address)
-            else:
-                additional_addresses.append(address)
+    primary_addresses = shipping_addresses.filter(main=True)
+    additional_addresses = shipping_addresses.filter(main=False)
     
     paginator = Paginator(order_list, 5)
     page_number = request.GET.get("page", 1)
@@ -109,30 +102,23 @@ def edit(request):
     )
 
 
+@login_required
 @require_POST
-def add_shipping_address(request, shipping_address_id):
-    shipping_address = get_object_or_404(ShippingAddress, pk=shipping_address_id)
+def add_shipping_address(request):
+    form = ShippingAddressForm(data=request.POST, initial={"user": request.user})
 
-    if request.method == "POST":
-        form = ShippingAddressForm(data=request.POST, initial={"user": request.user})
+    if form.is_valid():
+        shipping_address = form.save(commit=False)
+        shipping_address.user = request.user
 
-        if form.is_valid() and any(form.cleaned_data.values()):
-            if form.is_duplicate():
-                messages.error(request, "This shipping address already exists.")
-            else:
-                shipping_address = form.save(commit=False)
-                shipping_address.user = request.user
-                shipping_address.save()
-                return redirect("user:dashboard")
-
+        if form.is_duplicate():
+            messages.error(request, "This shipping address already exists.")
+        else:
+            shipping_address.save()
+            return redirect("user:dashboard") 
     else:
-        form = ShippingAddressForm(data=request.POST)
-
-    return render(
-        request,
-        "user/dashboard.html",
-        {"form": form, "shipping_address": shipping_address},
-    )
+        form = ShippingAddressForm(initial={"user": request.user})
+    return render(request, "user/dashboard.html", {"form": form})
 
 
 @login_required

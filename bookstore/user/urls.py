@@ -10,7 +10,7 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name="dashboard"),
     path("register/", views.register, name="register"),
     path("edit/", views.edit, name="edit"),
-    path("<int:shipping_address_id>/shipping_address/", views.add_shipping_address, name="add_shipping_address"),
+    path("shipping_address/", views.add_shipping_address, name="add_shipping_address"),
     path(
         "edit_shipping_address/<int:shipping_address_id>/",
         views.edit_shipping_address,

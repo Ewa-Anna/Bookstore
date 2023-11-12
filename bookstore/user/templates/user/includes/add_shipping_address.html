@@ -1,6 +1,6 @@
 <h4>Add new shipping address</h4>
 <div id="review-form" class="form--group">
-    <form class="form--review" action="{% url 'user:dashboard' %}" method="post">
+    <form class="form--review" action="{% url 'user:add_shipping_address' %}" method="post">
         {% csrf_token %}
         {{ form.non_field_errors }} 
 
