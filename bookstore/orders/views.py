@@ -13,32 +13,29 @@ from cart.cart import Cart
 
 def order_create(request):
     cart = Cart(request)
-
+   
     if request.method == "POST":
         form = OrderCreateForm(request.POST)
-
+            
         if form.is_valid():
             order = Order()
+  
+            shipping_address, created = ShippingAddress.objects.get_or_create(
+                street=form.cleaned_data['street'],
+                apartment=form.cleaned_data['apartment'],
+                city=form.cleaned_data['city'],
+                postal_code=form.cleaned_data['postal_code'],
+                state=form.cleaned_data['state'],
+                country=form.cleaned_data['country']
+            )
 
-            if request.user.is_authenticated:
-                order.user = request.user
-                order.first_name = request.user.first_name
-                order.last_name = request.user.last_name
-                order.email = request.user.email
-
-                most_recent_address = (
-                    ShippingAddress.objects.filter(user=request.user)
-                    .order_by("-updated")
-                    .first()
-                )
-                if most_recent_address:
-                    order.street = most_recent_address.street
-                    order.apartment = most_recent_address.apartment
-                    order.city = most_recent_address.city
-                    order.postal_code = most_recent_address.postal_code
-                    order.state = most_recent_address.state
-                    order.country = most_recent_address.country
-
+            order = Order(
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name'],
+                email=form.cleaned_data['email'],
+                shipping_address=shipping_address
+            )
+            
             order.save()
 
             for item in cart:
@@ -56,27 +53,23 @@ def order_create(request):
 
     else:
         if request.user.is_authenticated:
-            most_recent_address = (
-                ShippingAddress.objects.filter(user=request.user)
-                .order_by("-updated")
-                .first()
-            )
             initial_data = {
                 "first_name": request.user.first_name,
                 "last_name": request.user.last_name,
                 "email": request.user.email,
-                "street": most_recent_address.street if most_recent_address else "",
-                "apartment": most_recent_address.apartment
-                if most_recent_address
-                else "",
-                "city": most_recent_address.city if most_recent_address else "",
-                "postal_code": most_recent_address.postal_code
-                if most_recent_address
-                else "",
-                "state": most_recent_address.state if most_recent_address else "",
-                "country": most_recent_address.country if most_recent_address else "",
             }
+            
+            shippingaddress = ShippingAddress.objects.filter(user=request.user, main=True).first()
+            if shippingaddress:
+                initial_data["street"] = shippingaddress.street
+                initial_data["apartment"] = shippingaddress.apartment
+                initial_data["city"] = shippingaddress.city
+                initial_data["postal_code"] = shippingaddress.postal_code
+                initial_data["state"] = shippingaddress.state
+                initial_data["country"] = shippingaddress.country
+
             form = OrderCreateForm(initial=initial_data)
+ 
         else:
             form = OrderCreateForm()
 

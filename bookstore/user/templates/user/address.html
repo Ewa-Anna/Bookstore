@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Add Shipping Address{% endblock %}
+
+{% block content %}
+    {% if shipping_address %}
+        <h3>Your address has been added.</h3>
+        <p><a href="/user/dashboard/">Back to profile</a></p>
+    {% else %}
+        {% include "user/includes/add_shipping_address.html" %}
+    {% endif %}
+{% endblock %}
