@@ -113,6 +113,7 @@ def add_shipping_address(request):
 
         if form.is_duplicate():
             messages.error(request, "This shipping address already exists.")
+            return render(request, "user/address.html", {"form": form})
         else:
             shipping_address.save()
             return redirect("user:dashboard") 

@@ -24,14 +24,14 @@
     {% if profile.date_of_birth is not None %}
     <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
         {% with age=profile.calculate_age.0 months=profile.calculate_age.1 days=profile.calculate_age.2 %}
-            <p>You are {{ age }} years, {{ months }} months, and {{ days }} days old.</p>
+            <p>You are {{ age }} years, {{ months }} months and {{ days }} days old.</p>
         {% endwith %}
     {% endif %}
 
     <p>You can <a href="{% url 'user:edit' %}">edit your profile</a> or <a href="{% url 'user:password_change' %}">change your password</a>.</p>
     <div>
         <p>
-        <h4>Orders:</h4>
+        <h4>Orders</h4>
         <table class="tables">
             <thead>
                 <tr>
@@ -59,9 +59,9 @@
     
     {% include "pagination.html" with page=orders %}
     <br>
-    <h4>Shipping addresses:</h4>
+    <h4>Shipping addresses</h4>
     {% if primary_addresses %}
-    <p><b>Primary Addresses:</b></p>
+    <p><b>Primary Addresses</b></p>
     <table class="tables">
         <thead>
             <tr>
@@ -95,7 +95,7 @@
     {% endif %}
 
     {% if additional_addresses  %}
-    <p><b>Additional Addresses:</b></p>
+    <p><b>Additional Addresses</b></p>
     <table class="tables">
         <thead>
             <tr>
