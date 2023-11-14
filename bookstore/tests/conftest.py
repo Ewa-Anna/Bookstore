@@ -5,6 +5,7 @@ from book.models import Book, Category, Review
 
 pytestmark = pytest.mark.django_db
 
+
 @pytest.fixture(scope="module")
 def test_category():
     category = Category.objects.create(
@@ -34,6 +35,7 @@ def test_review(test_book):
         book=test_book, name="Test", email="test@test.com", body="Test body"
     )
     return review
+
 
 # for Redis testing
 @pytest.fixture(autouse=True)

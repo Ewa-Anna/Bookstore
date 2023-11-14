@@ -8,4 +8,6 @@ from .models import ShippingAddress
 @receiver(pre_save, sender=ShippingAddress)
 def set_main_address(sender, instance, **kwargs):
     if instance.main:
-        ShippingAddress.objects.filter(user=instance.user).exclude(id=instance.id).update(main=False)
+        ShippingAddress.objects.filter(user=instance.user).exclude(
+            id=instance.id
+        ).update(main=False)

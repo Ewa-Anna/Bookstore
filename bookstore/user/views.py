@@ -21,13 +21,13 @@ def dashboard(request):
     order_list = Order.objects.filter(email=request.user.email)
 
     profile = get_object_or_404(Profile, user=request.user)
-    
+
     form = ShippingAddressForm(initial={"user": request.user.username})
 
     shipping_addresses = ShippingAddress.objects.filter(user=request.user)
     primary_addresses = shipping_addresses.filter(main=True)
     additional_addresses = shipping_addresses.filter(main=False)
-    
+
     paginator = Paginator(order_list, 5)
     page_number = request.GET.get("page", 1)
     try:
@@ -116,7 +116,7 @@ def add_shipping_address(request):
             return render(request, "user/address.html", {"form": form})
         else:
             shipping_address.save()
-            return redirect("user:dashboard") 
+            return redirect("user:dashboard")
     else:
         form = ShippingAddressForm(initial={"user": request.user})
     return render(request, "user/dashboard.html", {"form": form})

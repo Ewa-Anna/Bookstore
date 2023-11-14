@@ -83,13 +83,9 @@ class ShippingAddress(models.Model):
     )
     main = models.BooleanField(default=False, verbose_name="Main Shipping Address")
     street = models.CharField(max_length=255, verbose_name="Street Address")
-    apartment = models.CharField(
-        max_length=30, verbose_name="Apartment Number"
-    )
+    apartment = models.CharField(max_length=30, verbose_name="Apartment Number")
     city = models.CharField(max_length=100, verbose_name="City")
-    postal_code = models.CharField(
-        max_length=10, verbose_name="Postal Code"
-    )
+    postal_code = models.CharField(max_length=10, verbose_name="Postal Code")
     state = models.CharField(max_length=100, blank=True, verbose_name="State")
     country = models.CharField(max_length=100, blank=True, verbose_name="Country")
 

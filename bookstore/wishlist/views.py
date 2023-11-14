@@ -6,9 +6,9 @@ from django.conf import settings
 
 from book.models import Book
 
-r = redis.Redis(host=settings.REDIS_HOST,
-                port=settings.REDIS_PORT,
-                db=settings.REDIS_DB)
+r = redis.Redis(
+    host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB
+)
 
 
 def add_to_wishlist(request, bookid):

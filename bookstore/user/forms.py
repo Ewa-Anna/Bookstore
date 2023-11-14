@@ -47,7 +47,15 @@ class ProfileEditForm(forms.ModelForm):
 class ShippingAddressForm(forms.ModelForm):
     class Meta:
         model = ShippingAddress
-        fields = ["main", "street", "apartment", "city", "postal_code", "state", "country"]
+        fields = [
+            "main",
+            "street",
+            "apartment",
+            "city",
+            "postal_code",
+            "state",
+            "country",
+        ]
 
     def is_duplicate(self):
         street = self.cleaned_data.get("street")
@@ -72,4 +80,12 @@ class ShippingAddressForm(forms.ModelForm):
 class ShippingAddressEditForm(forms.ModelForm):
     class Meta:
         model = ShippingAddress
-        fields = ["main", "street", "apartment", "city", "postal_code", "state", "country"]
+        fields = [
+            "main",
+            "street",
+            "apartment",
+            "city",
+            "postal_code",
+            "state",
+            "country",
+        ]

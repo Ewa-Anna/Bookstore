@@ -11,7 +11,9 @@ class Order(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
-    shipping_address = models.ForeignKey(ShippingAddress, on_delete=models.CASCADE, null=True, blank=True)
+    shipping_address = models.ForeignKey(
+        ShippingAddress, on_delete=models.CASCADE, null=True, blank=True
+    )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
@@ -26,15 +28,15 @@ class Order(models.Model):
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
-    
+
     def get_stripe_url(self):
         if not self.stripe_id:
-            return ''
-        if '_test_' in settings.STRIPE_SECRET_KEY:
-            path = '/test/' # for testing
-        else: 
-            path = '/' # for production
-        return f'https://dashboard.stripe.com{path}payments/{self.stripe_id}'
+            return ""
+        if "_test_" in settings.STRIPE_SECRET_KEY:
+            path = "/test/"  # for testing
+        else:
+            path = "/"  # for production
+        return f"https://dashboard.stripe.com{path}payments/{self.stripe_id}"
 
 
 class OrderItem(models.Model):

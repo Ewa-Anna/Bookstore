@@ -13,29 +13,29 @@ from cart.cart import Cart
 
 def order_create(request):
     cart = Cart(request)
-   
+
     if request.method == "POST":
         form = OrderCreateForm(request.POST)
-            
+
         if form.is_valid():
             order = Order()
-  
+
             shipping_address, created = ShippingAddress.objects.get_or_create(
-                street=form.cleaned_data['street'],
-                apartment=form.cleaned_data['apartment'],
-                city=form.cleaned_data['city'],
-                postal_code=form.cleaned_data['postal_code'],
-                state=form.cleaned_data['state'],
-                country=form.cleaned_data['country']
+                street=form.cleaned_data["street"],
+                apartment=form.cleaned_data["apartment"],
+                city=form.cleaned_data["city"],
+                postal_code=form.cleaned_data["postal_code"],
+                state=form.cleaned_data["state"],
+                country=form.cleaned_data["country"],
             )
 
             order = Order(
-                first_name=form.cleaned_data['first_name'],
-                last_name=form.cleaned_data['last_name'],
-                email=form.cleaned_data['email'],
-                shipping_address=shipping_address
+                first_name=form.cleaned_data["first_name"],
+                last_name=form.cleaned_data["last_name"],
+                email=form.cleaned_data["email"],
+                shipping_address=shipping_address,
             )
-            
+
             order.save()
 
             for item in cart:
@@ -58,8 +58,10 @@ def order_create(request):
                 "last_name": request.user.last_name,
                 "email": request.user.email,
             }
-            
-            shippingaddress = ShippingAddress.objects.filter(user=request.user, main=True).first()
+
+            shippingaddress = ShippingAddress.objects.filter(
+                user=request.user, main=True
+            ).first()
             if shippingaddress:
                 initial_data["street"] = shippingaddress.street
                 initial_data["apartment"] = shippingaddress.apartment
@@ -69,7 +71,7 @@ def order_create(request):
                 initial_data["country"] = shippingaddress.country
 
             form = OrderCreateForm(initial=initial_data)
- 
+
         else:
             form = OrderCreateForm()
 
@@ -79,6 +81,4 @@ def order_create(request):
 @staff_member_required
 def admin_order_detail(request, order_id):
     order = get_object_or_404(Order, id=order_id)
-    return render(request,
-                  'admin/orders/order/detail.html',
-                  {'order': order})
+    return render(request, "admin/orders/order/detail.html", {"order": order})
