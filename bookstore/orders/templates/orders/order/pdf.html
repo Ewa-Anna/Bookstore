@@ -1,0 +1,60 @@
+<html>
+    <body>
+        <h3>Bookstore</h3>
+        <p>
+            Invoice no {{ order.id }}
+            <br>
+            <span>
+                {{ order.created|date:"M d, Y" }}
+            </span>
+        </p>
+        <h4>Buyer</h4>
+        <p>
+            {{ order.first_name }} {{ order.last_name }}
+            <br>
+            {{ order.email }}
+            <br>
+            {{ order.shipping_address.street }} {{ order.shipping_address.apartment }},
+            <br>
+            {{ order.shipping_address.postal_code }} {{ order.shipping_address.city }},
+            <br>
+            {{ order.shipping_address.state }} {{ order.shipping_address.country }}
+        </p>
+        <h4>Order</h4>
+        <table class="tables">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Amount</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                {% with book=item.book %}
+                <tr>
+                    <td>
+                        <img class="bookimagesmall" src="{{ book.img_url }}" alt="Book image">
+                    </td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.price }}</td>
+                    <td>${{ item.total_price }}</td>
+                </tr>
+                {% endwith %}
+                {% endfor %}
+                <tr>
+                    <td><b>Total</b></td>
+                    <td colspan="4"></td>
+                    <td>$<b>{{ cart.calc_total_price }}</b></td>
+                </tr>
+            </tbody>
+        </table>
+        <h4>Status</h4>
+        <p>{% if order.paid %}Paid{% else %}Waiting for payment{% endif %}</p>        
+    </body>
+</html>

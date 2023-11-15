@@ -42,6 +42,13 @@ For PostgreSQL, you need to download PostgreSQL https://www.postgresql.org/downl
 
 For Stripe functionality, you need to create developers account on Stripe: https://dashboard.stripe.com/test/developers and download your API keys.
 
+### GTK3 - WeasyPrint
+For Windows, install GTK3, latest release:
+https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases
+
+For other machines, follow guidelines:
+https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#installation
+
 ### Running asynchronous tasks
 1. RabbitMQ
 
