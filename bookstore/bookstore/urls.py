@@ -28,6 +28,7 @@ urlpatterns = [
     path("filter/", include("filter.urls", namespace="filter")),
     path("wishlist/", include("wishlist.urls", namespace="wishlist")),
     path("payment/", include("payment.urls", namespace="payment")),
+    path("coupons/", include("coupons.urls", namespace="coupons")),
     path("", include("book.urls", namespace="book")),
 ]
 

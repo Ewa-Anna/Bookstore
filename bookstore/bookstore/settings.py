@@ -157,8 +157,8 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # STATIC_ROOT = BASE_DIR / "static"
-GTK_FOLDER = r'C:\Program Files\GTK3-Runtime Win64\bin'
-os.environ['PATH'] = GTK_FOLDER + os.pathsep + os.environ.get('PATH', '')
+GTK_FOLDER = r"C:\Program Files\GTK3-Runtime Win64\bin"
+os.environ["PATH"] = GTK_FOLDER + os.pathsep + os.environ.get("PATH", "")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
