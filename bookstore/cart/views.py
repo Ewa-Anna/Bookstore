@@ -32,11 +32,13 @@ def cart_remove(request, book_id):
 
 def cart_detail(request):
     cart = Cart(request)
+
     for item in cart:
         item["update_quantity_form"] = CartAddBookForm(
             initial={"quantity": item["quantity"], "override": True}
         )
-        coupon_apply_form = CouponApplyForm()
+    coupon_apply_form = CouponApplyForm()
+    
     return render(
         request,
         "cart/detail.html",

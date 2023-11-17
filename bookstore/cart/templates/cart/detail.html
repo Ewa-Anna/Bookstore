@@ -51,7 +51,7 @@
         </tr>
         {% endwith %}
         {% endfor %}
-        {% if cart.coupon %}
+        {% if cart.coupon and cart.total_items > 0 %} 
             <tr>
                 <td>Subtotal</td>
                 <td colspan="5"></td>
@@ -75,8 +75,8 @@
         </tr>
     </tbody>
 </table>
-
 <br>
+{% if cart.total_items > 0 %} 
 <p><b>Coupon</b></p>
 <div id="coupon-form" class="form--group">
 <form class="form--review" action="{% url 'coupons:apply' %}" method="post">
@@ -87,6 +87,7 @@
     {% csrf_token %}
 </form>
 </div>
+{% endif %}
 
 <p>
     <a href="{% url 'book:book_list' %}" class="btn btn-primary">Resume shopping</a>
