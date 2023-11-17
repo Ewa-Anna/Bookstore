@@ -48,7 +48,7 @@
                     <td>{{ order.created }}</td>
                     <td>{{ order.id }}</td>
                     <td>{% if order.paid %} paid {% else %} waiting for payment {% endif %}</td>
-                    <td>${{ order.get_total_cost }}</td>
+                    <td>${{ order.get_total_cost|floatformat:2 }}</td>
                 </tr>
                 {% endfor %}
                
