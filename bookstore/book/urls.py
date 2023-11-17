@@ -12,4 +12,6 @@ urlpatterns = [
     path("search/", views.book_search, name="book_search"),
     path("category/<int:catid>/", views.category_display, name="category_display"),
     path("edit_review/<int:review_id>/", views.edit_review, name="edit_review"),
+    path("about/", views.about, name="about"),
+    path("contact/", views.contact, name="contact"),
 ]

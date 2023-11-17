@@ -130,3 +130,13 @@
 #description {
     text-align: justify;
 }
+
+.about {
+        margin: auto;
+        padding-left: 100px;
+        padding-right: 100px;
+}
+
+.about-text {
+    text-align: justify;
+}

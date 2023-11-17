@@ -89,8 +89,10 @@
     <footer>
         <div>
             <ul class="nav-bar">
-                <li><a href="#"><i class="fa-solid fa-address-card"></i>About</a></li>
-                <li><a href="#"><i class="fa-solid fa-address-book"></i>Contact</a></li>
+                <li><a {% if request.resolver_match.route == "other/about " %} class="selected" {% endif %}
+                    href="{% url 'book:about' %}"><i class="fa-solid fa-address-card"></i>About</a></li>
+                <li><a {% if request.resolver_match.route == "other/about " %} class="selected" {% endif %}
+                    href="{% url 'book:contact' %}"><i class="fa-solid fa-address-book"></i>Contact</a></li>
                 <li><a href="#top"><i class="fa-solid fa-arrow-up"></i>Go to Top</a></li>
             </ul>
         </div>
@@ -98,15 +100,20 @@
         <p>Copyright &copy; 2023 Bookstore. All rights reserved.</p>
 
         <div class="social-media">
+            <a href="https://github.com/Ewa-Anna/" class="icon-link">
+                <i class="fa-brands fa-github"></i>
+            </a>
             <a href="https://www.facebook.com/" class="icon-link">
                 <i class="fab fa-facebook-f"></i>
             </a>
             <a href="https://twitter.com/" class="icon-link">
                 <i class="fab fa-twitter"></i>
             </a>
-            <a href="https://www.instagram.com/" class="icon-link">
+            <a href="https://www.instagram.com/flynnlyssa/" class="icon-link">
                 <i class="fab fa-instagram"></i>
             </a>
+            <a href="https://www.linkedin.com/in/ewa-kucala/" class="icon-link">
+                <i class="fa-brands fa-linkedin"></i>
             </a>
         </div>
 

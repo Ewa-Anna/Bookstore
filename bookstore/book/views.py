@@ -185,3 +185,10 @@ def category_display(request, catid):
             "cart_book_form": cart_book_form,
         },
     )
+
+
+def about(request):
+    return render(request, "other/about.html")
+
+def contact(request):
+    return render(request, "other/contact.html")
