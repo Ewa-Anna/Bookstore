@@ -31,10 +31,27 @@
         </tr>
         {% endwith %}
         {% endfor %}
+        {% if cart.coupon %}
+        <tr>
+            <td>Subtotal</td>
+            <td colspan="4"></td>
+            <td>${{ cart.calc_total_price|floatformat:2 }}</td>
+        </tr>
+        <tr>
+            <td>
+                Coupon "{{ cart.coupon.code }}"
+                ({{ cart.coupon.discount }}% discount)
+            </td>
+            <td colspan="4"></td>
+            <td>
+                - {{ cart.get_discount|floatformat:2 }}
+            </td>
+        </tr>
+    {% endif %}
         <tr>
             <td><b>Total</b></td>
             <td colspan="4"></td>
-            <td>$<b>{{ cart.calc_total_price }}</b></td>
+            <td>$<b>{{ cart.get_total_price_after_discount|floatformat:2 }}</b></td>
         </tr>
     </tbody>
 </table>
@@ -48,8 +65,16 @@
             <span>${{ item.total_price }}</span>
         </li>
         {% endfor %}
-    </ul>
-    <p>Total: $<b>{{ cart.calc_total_price }}</b></p>
+   
+    {% if cart.coupon %}
+        <li>
+            Coupon "{{ cart.coupon.code }}"
+            ({{ cart.coupon.discount }}% discount)
+            <span> -$<b>{{ cart.get_discount|floatformat:2 }}</b></span>
+        </li>
+    {% endif %}
+</ul>
+    <p>Total: $<b>{{ cart.get_total_price_after_discount|floatformat:2 }}</b></p>
 </div>
 
 <div id="review-form" class="form--group">
