@@ -51,13 +51,43 @@
         </tr>
         {% endwith %}
         {% endfor %}
+        {% if cart.coupon %}
+            <tr>
+                <td>Subtotal</td>
+                <td colspan="5"></td>
+                <td>${{ cart.calc_total_price|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <td>
+                    Coupon "{{ cart.coupon.code }}"
+                    ({{ cart.coupon.discount }}% discount)
+                </td>
+                <td colspan="5"></td>
+                <td>
+                    - {{ cart.get_discount|floatformat:2 }}
+                </td>
+            </tr>
+        {% endif %}
         <tr>
             <td><b>Total</b></td>
             <td colspan="5"></td>
-            <td>$<b>{{ cart.calc_total_price }}</b></td>
+            <td>$<b>{{ cart.get_total_price_after_discount|floatformat:2 }}</b></td>
         </tr>
     </tbody>
 </table>
+
+<br>
+<p><b>Coupon</b></p>
+<div id="coupon-form" class="form--group">
+<form class="form--review" action="{% url 'coupons:apply' %}" method="post">
+    <div class="form--control">
+    {{ coupon_apply_form }}
+    </div>
+    <p><input id="coupon-input" class="btn btn-secondary" type="submit" value="Apply"></p>
+    {% csrf_token %}
+</form>
+</div>
+
 <p>
     <a href="{% url 'book:book_list' %}" class="btn btn-primary">Resume shopping</a>
     {% if cart.total_items > 0 %}

@@ -59,3 +59,16 @@ select {
     }
 }
 
+
+
+#coupon-form {
+    max-width: 200px;
+    margin: 0 auto; 
+    align-items: left;
+}
+
+
+#coupon-input {
+    flex: 1; 
+    margin-right: 10px;
+}
