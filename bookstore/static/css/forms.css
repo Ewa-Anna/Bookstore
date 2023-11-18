@@ -49,6 +49,10 @@ select {
     margin-right: auto;
 }
 
+#addtocart select {
+    width: 20%;
+}
+
 
 @media (max-width: 900px) {
     #review-form,

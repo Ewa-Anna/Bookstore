@@ -4,7 +4,7 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Avg
 from django.contrib.postgres.search import TrigramSimilarity
-from django.http import JsonResponse, HttpResponseForbidden
+from django.http import JsonResponse, HttpResponseForbidden, HttpResponseBadRequest
 
 from taggit.models import Tag
 
@@ -17,11 +17,17 @@ def book_list(request, tag_slug=None):
     book_list = Book.objects.all()
     tag = None
     cart_book_form = CartAddBookForm()
+
+    books_per_page = request.GET.get("books_per_page", 12)
+    if int(books_per_page) <= 0:
+        return HttpResponseBadRequest("Invalid number of books per page")
+    books_per_page = int(books_per_page)
+
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         book_list = book_list.filter(tags__in=[tag])
 
-    paginator = Paginator(book_list, 12)
+    paginator = Paginator(book_list, books_per_page)
     page_number = request.GET.get("page", 1)
     try:
         books = paginator.page(page_number)
@@ -37,6 +43,7 @@ def book_list(request, tag_slug=None):
             "books": books,
             "tag": tag,
             "cart_book_form": cart_book_form,
+            "books_per_page": books_per_page,
         },
     )
 

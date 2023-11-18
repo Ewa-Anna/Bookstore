@@ -140,3 +140,28 @@
 .about-text {
     text-align: justify;
 }
+
+#booksPerPageForm {
+    text-align: center; 
+    margin-top: 20px; 
+}
+
+#booksPerPageForm label {
+    font-size: 16px; 
+    margin-right: 10px; 
+}
+
+#booksPerPageForm select {
+    padding: 8px; 
+    font-size: 14px; 
+    width: 5%;
+}
+
+#booksPerPageForm select {
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+}
+
+#booksPerPageForm option {
+    font-size: 14px; 
+}
