@@ -19,7 +19,7 @@
                 {{ book.author }}
                 <br>
                 &#36;{{ book.price }}
-            <form action="{% url 'cart:cart_add' book.bookid %}" method="post">
+            <form id="addtocart" action="{% url 'cart:cart_add' book.bookid %}" method="post">
                 {{ cart_book_form }}
                 {% csrf_token %}
                 <input type="submit" class="btn btn-primary" value="Add to cart">
