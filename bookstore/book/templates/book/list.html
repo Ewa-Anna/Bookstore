@@ -27,11 +27,11 @@
         <div class="bookdetails">
 
             <div class="icon-container">
-                <a class="wishlist-icon" href="{% url 'wishlist:wishlist_view' %}">
+                <a class="wishlist-icon" href="javascript:void(0)" data-bookid="{{ book.bookid }}">
                     <i class="fa-regular fa-heart"></i>
                     <!-- <i class="fa-solid fa-heart"></i> For added -->
                 </a>
-                <a class="cart-icon" href="#" data-bookid="{{ book.bookid }}">
+                <a class="cart-icon" href="javascript:void(0)" data-bookid="{{ book.bookid }}">
                     <i class="fa-solid {% if book_in_cart %}fa-check{% else %}fa-basket-shopping{% endif %}"></i>
                 </a>
             </div>
@@ -70,8 +70,8 @@
 <h4>Latest arrivals:</h4>
 {% show_latest_books 6 %}
 <br>
-<p style="text-align: center;">We have {% total_books %} books in our store.</p>
+<p>We have {% total_books %} books in our store.</p>
 
-<script src="{% static 'js/cart.js' %}"></script>
+
 
 {% endblock %}

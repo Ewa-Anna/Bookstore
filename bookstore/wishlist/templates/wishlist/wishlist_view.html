@@ -6,13 +6,10 @@
 
 <h4>Wishlist</h4>
 
+{% for book in books %}
 <div class="bookcontainer">
-
-    {% for book in books %}
-
     <div class="book">
         <div class="bookdetails">
-
 
             <a class="booklink" href="{% url 'book:book_detail' book.slug %}">
                 <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
@@ -31,7 +28,9 @@
             </form>
         </div>
     </div>
-    {% empty %}
-    <p>Nothing here yet.</p>
-    {% endfor %}
+</div>
+{% empty %}
+<p>Nothing here yet.</p>
+{% endfor %}
+
 {% endblock %}
