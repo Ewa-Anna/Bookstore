@@ -5,9 +5,9 @@
 {% block content %}
 
 <h4>Wishlist</h4>
-
-{% for book in books %}
 <div class="bookcontainer">
+{% for book in books %}
+
     <div class="book">
         <div class="bookdetails">
 
@@ -28,9 +28,17 @@
             </form>
         </div>
     </div>
-</div>
 {% empty %}
 <p>Nothing here yet.</p>
 {% endfor %}
+</div>
+
+{% if books %}
+<p>
+    <a href="{% url 'wishlist:wishlist_share' %}">
+        Share your wishlist 
+    </a>
+</p>
+{% endif %}
 
 {% endblock %}
