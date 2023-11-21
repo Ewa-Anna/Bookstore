@@ -171,6 +171,13 @@ LOGOUT_REDIRECT_URL = "user:logout"
 LOGOUT_URL = "user:logout"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # for development
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # for production
+EMAIL_HOST = os.getenv("SMTP")
+EMAIL_HOST_USER = os.getenv("EMAIL_FROM")
+EMAIL_HOST_PASSWORD = os.getenv("PASSWORD")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"

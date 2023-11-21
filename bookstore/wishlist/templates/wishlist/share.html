@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Share wishlist{% endblock %}
+
+{% block content %}
+
+    {% if sent %}
+        <h3>Your message has been sent successfully.</h3>
+        <p> Your message to {{ form.cleaned_data.email_to }} has been sent successfully. </p>
+    {% else %}
+        <h3>Share your wishlist via e-mail</h3>
+        <div id="review-form" class="form--group">
+            <form class="form--review" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                {{ field.errors }}
+                <div class="form--control">
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+                {% endfor %}
+                <br>
+                <p><input type="submit" class="btn btn-primary" value="Share"></p>
+            </form>
+            </div>
+    {% endif %}
+
+{% endblock %}
