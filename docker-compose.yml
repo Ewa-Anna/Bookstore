@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+
   web:
     build: .
     env_file:
@@ -12,6 +13,7 @@ services:
       - "8000:8000"
     depends_on:
       - db
+
   db:
     image: postgres    
     environment:
@@ -28,7 +30,35 @@ services:
     env_file:
       - .env
     command: ["docker-entrypoint.sh", "postgres"]
-  # redis:
-  #   image: redis
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+
+  celery:
+    build:
+      context: .
+    command: celery -A bookstore worker -l info -P gevent
+    depends_on:
+      - redis
+
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  stripe:
+    build:
+      context: .
+    command: /Stripe/stripe_1.18.0_windows_x86_64/stripe listen --forward-to localhost:8000/payment/webhook/
+    volumes:
+      - ./stripe:/stripe 
+    ports:
+      - "8002:8002"
+    depends_on:
+      - rabbitmq
+
 volumes:
   pgdata:

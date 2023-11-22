@@ -16,3 +16,6 @@ venv
 *.bak
 
 static/admin/
+
+# Stripe .exe
+Stripe/

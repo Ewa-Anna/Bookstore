@@ -100,7 +100,7 @@ DATABASES = {
         "NAME": "bookstore",
         "USER": USER_POSTGRES,
         "PASSWORD": PASSWORD_POSTGRES,
-        "HOST": "localhost",  # 'localhost' for terminal run; 'postgres_db' for docker-compose
+        "HOST": "postgres_db",  # 'localhost' for terminal run; 'postgres_db' for docker-compose
         "PORT": "5432",
     },
 }
@@ -170,6 +170,8 @@ LOGIN_URL = "user:login"
 LOGOUT_REDIRECT_URL = "user:logout"
 LOGOUT_URL = "user:logout"
 
+
+# E-mails
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # for development
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # for production
 EMAIL_HOST = os.getenv("SMTP")
@@ -194,3 +196,6 @@ STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 STRIPE_API_VERSION = "2023-10-16"
 STRIPE_WEBHOOK_SECRET = os.getenv("endpoint_secret")
+
+# Celery
+CELERY_BROKER_URL = 'pyamqp://guest:guest@rabbitmq:5672//'
