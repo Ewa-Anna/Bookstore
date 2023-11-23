@@ -4,14 +4,23 @@
 This repository contains the source code for a dynamic e-commerce website built for a fictional bookstore. The project is build using Django, a Python web framework, for backend. HTML, CSS and a little bit of JavaScript for frontend.
 
 ## Table of Contents
-- [Installation](#how-to-install-and-run-the-project)
-- [Docker](#docker-compose)
 - [Overview](#project-overview)
+- [Installation](#how-to-install-and-run-the-project)
+- [Tests](#tests)
+- [Docker](#docker-compose)
 - [Features and Future plans](#features-and-future-plans)
 - [Tools](#technologies-and-frameworks)
-- [Tests](#tests)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
+
+## Project overview
+<div style="text-align: justify;">
+The Bookstore is a web-based application developed using Python (Django) for backend and HTML (jinja2), CSS (bootstrap), and JavaScript for frontend to create a user-friendly and feature-rich online bookstore. 
+<br>
+PostgreSQL is used as the primary database to store core data, such as books, user profiles, and orders and manages critical data. Additionally, Redis is utilized for enhancing user experience through personalized book recommendations tailored to individual interests.
+<br>
+Its primary purpose is to serve as an online bookstore, offering a range of core functionalities. Inter alia: book catalog with pagination system, book details with possibility to post a review and rate a book. Tagging system and categories. Latest arrivals and recommended similar books. Search, filtering and sorting functionality. Adding to cart and to wishlist. Making order and paying (with Stripe). User profile with basic info, list of orders and shipping addresses (main and additional).
+</div>
 
 ## How to install and run the project?
 ### Running the project locally
@@ -68,6 +77,16 @@ RabbitMQ will run on http://127.0.0.1:15672/
 
 Flower will run on http://localhost:5555/dashboard/
 
+## Tests
+Run all tests
+<br>
+`pytest`
+<br>
+Or run tests for given folder
+<br>
+`pytest tests/<folder_name>/`
+<br>
+![tests](bookstore/static/img/screenshots/tests_folder.PNG)
 
 ## docker-compose
 Building Docker Image
@@ -78,14 +97,6 @@ Running Docker Container
 <br>
 ` docker-compose up -d `
 
-## Project overview
-<div style="text-align: justify;">
-The Bookstore is a web-based application developed using Python (Django) for backend and HTML (jinja2), CSS (bootstrap), and JavaScript for frontend to create a user-friendly and feature-rich online bookstore. 
-<br>
-PostgreSQL is used as the primary database to store core data, such as books, user profiles, and orders and manages critical data. Additionally, Redis is utilized for enhancing user experience through personalized book recommendations tailored to individual interests.
-<br>
-Its primary purpose is to serve as an online bookstore, offering a range of core functionalities. Inter alia: book catalog with pagination system, book details with possibility to post a review and rate a book. Tagging system and categories. Latest arrivals and recommended similar books. Search, filtering and sorting functionality. Adding to cart and to wishlist. Making order and paying (with Stripe). User profile with basic info, list of orders and shipping addresses (main and additional).
-</div>
 
 ## Features and Future plans
 1. :heavy_check_mark: **Book Catalog**: Users can view a list of available books for purchase. Each book is presented with basic information. Users can click on individual books to access detailed information about them, such as the book's description, author, price, and reviews from other users. 
@@ -138,12 +149,6 @@ Its primary purpose is to serve as an online bookstore, offering a range of core
     [![VisualStudio](https://skillicons.dev/icons?i=vscode)](https://skillicons.dev)
     [![Docker](https://skillicons.dev/icons?i=docker)](https://skillicons.dev)
 
-## Tests
-Run all tests
-<br>
-`python manage.py test tests`
-<br>
-`pytest`
 
 ## Acknowledgments
 - Django 4 By Example [*Antonio Melé*](https://antoniomele.es/) [Packt>](https://www.packtpub.com/)
