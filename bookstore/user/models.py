@@ -1,12 +1,16 @@
+import re
 from datetime import date
 
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date_of_birth = models.DateField(
         blank=True, null=True, verbose_name="Date of Birth"
     )
@@ -62,7 +66,8 @@ class Profile(models.Model):
             if today.day < birth_day:
                 days_in_previous_month = (
                     today
-                    - date(today.year, (today.month - 1 if today.month > 1 else 12), 1)
+                    - date(today.year, (today.month -
+                           1 if today.month > 1 else 12), 1)
                 ).days
                 days = days_in_previous_month - birth_day + today.day
             else:
@@ -81,13 +86,20 @@ class ShippingAddress(models.Model):
         blank=True,
         related_name="shipping_addresses",
     )
-    main = models.BooleanField(default=False, verbose_name="Main Shipping Address")
+    main = models.BooleanField(
+        default=False, verbose_name="Main Shipping Address")
     street = models.CharField(max_length=255, verbose_name="Street Address")
-    apartment = models.CharField(max_length=30, verbose_name="Apartment Number")
+    apartment = models.CharField(
+        max_length=30, verbose_name="Apartment Number")
     city = models.CharField(max_length=100, verbose_name="City")
-    postal_code = models.CharField(max_length=10, verbose_name="Postal Code")
+    postal_code = models.CharField(max_length=10, verbose_name="Postal Code", validators=[
+        RegexValidator(
+            regex=r'^\d{2}-\d{3}$',
+            message='Postal code must be in the 00-000 format'
+        )])
     state = models.CharField(max_length=100, blank=True, verbose_name="State")
-    country = models.CharField(max_length=100, blank=True, verbose_name="Country")
+    country = models.CharField(
+        max_length=100, blank=True, verbose_name="Country")
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

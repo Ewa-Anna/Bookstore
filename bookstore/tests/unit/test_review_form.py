@@ -6,28 +6,27 @@ from book.forms import ReviewForm
 class ReviewFormTestCase(TestCase):
     def test_valid_review_form(self):
         form_data = {
-            "name": "Jane Doe",
-            "email": "jane.doe@example.com",
+            "user": "test_user",
             "rating": 5,
             "body": "Test review",
         }
 
         form = ReviewForm(data=form_data)
-        # checks if the form is valid
+        # Checks if the form is valid
         self.assertTrue(form.is_valid())
 
     def test_invalid_review_form(self):
         form_data = {
-            "name": "Jane Doe",
-            # missing email
+            "user": "test_user",
+            # Missing email
             "body": "Test review",
         }
 
         form = ReviewForm(data=form_data)
-        # checks if the form is not valid
+        # Checks if the form is not valid
         self.assertFalse(form.is_valid())
 
     def test_blank_review_form(self):
         form = ReviewForm()
-        # check if empty form is not valid
+        # Checks if empty form is not valid
         self.assertFalse(form.is_valid())

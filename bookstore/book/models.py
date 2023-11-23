@@ -20,7 +20,7 @@ class Category(models.Model):
         return f"{self.cat_name}"
 
     def get_absolute_url(self):
-        return reverse("book:book_list", args=[self.cat_name])
+        return reverse("book:category_display", args=[self.catid])
 
 
 class Book(models.Model):
@@ -78,4 +78,4 @@ class Vote(models.Model):
     review = models.ForeignKey(Review, related_name="votes", on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Vote by {self.user} on {self.review}"
+        return f"Vote by {self.user.username} on {self.review}"
