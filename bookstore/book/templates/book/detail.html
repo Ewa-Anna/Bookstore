@@ -97,8 +97,8 @@
     {% else %}
     {{ review.body|linebreaks }}
     {% endif %}
-    {{ review.upvotes }} <a href="#" class="vote-up" data-review-id="{{ review.id }}" data-score="1">Agree</a> /
-    {{ review.downvotes }} <a href="#" class="vote-down" data-review-id="{{ review.id }}" data-score="-1">Disagree</a>
+    {{ review.upvotes }} <a href="javascript:void(0);" class="vote-up" data-review-id="{{ review.id }}" data-score="1">Agree</a> /
+    {{ review.downvotes }} <a href="javascript:void(0);" class="vote-down" data-review-id="{{ review.id }}" data-score="-1">Disagree</a>
     <br>
     <br>
 </div>

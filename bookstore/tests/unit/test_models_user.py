@@ -1,31 +1,35 @@
-from django.test import TestCase
-from django.contrib.auth.models import User
+import pytest
+from datetime import date
+from freezegun import freeze_time
 
-from user.models import Profile
+from user.models import Profile 
+
+# Testing all models in "user" app
+
+# Testing ShippingAddress model and its methods
+@pytest.mark.django_db
+def test_str_rep_shippingaddress(test_profile):
+    expected_str = f"{test_profile.user.username}'s profile"
+    actual_str = str(test_profile)
+    assert actual_str == expected_str
+
+# Testing Profile model and its methods
+@pytest.mark.django_db
+def test_str_rep_profile(test_shipping_address):
+    expected_str = f"{test_shipping_address.street} {test_shipping_address.apartment}, {test_shipping_address.postal_code} {test_shipping_address.city}, {test_shipping_address.state} {test_shipping_address.country}"
+    actual_str = str(test_shipping_address)
+    assert actual_str == expected_str
 
 
-class ProfileModelTestCase(TestCase):
-    def setUp(self):
-        self.user = User.objects.create_user(
-            username="testuser", password="testpassword"
-        )
+@pytest.mark.django_db
+@freeze_time("2023-11-15")
+def test_calculate_age(test_profile):
+    age, months, days = test_profile.calculate_age()
+    
+    expected_age = 33
+    expected_months = 10
+    expected_days = 14
 
-        self.profile = Profile.objects.create(
-            user=self.user,
-            date_of_birth="1990-01-01",
-            photo="users/2023/10/14/test.jpg",
-            street="teststreet",
-            apartment="test123",
-            city="testcity",
-            postal_code="66-200",
-            state="teststate",
-            country="testcountry",
-        )
-
-    def test_str_rep(self):
-        expected_str = "testuser's profile"
-        actual_str = str(self.profile)
-        self.assertEqual(actual_str, expected_str)
-
-    def tearDown(self) -> None:
-        return super().tearDown()
+    assert age == expected_age
+    assert months == expected_months
+    assert days == expected_days
