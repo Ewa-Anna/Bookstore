@@ -5,10 +5,16 @@ from decimal import Decimal
 from datetime import date
 
 from django.contrib.auth.models import User
+from django.test import Client
 
 from book.models import Book, Category, Review, Vote
 from orders.models import Order, OrderItem
 from user.models import Profile, ShippingAddress
+
+
+@pytest.fixture
+def client():
+    return Client()
 
 
 # Creating models from "book" app
