@@ -6,10 +6,12 @@ from datetime import date
 
 from django.contrib.auth.models import User
 from django.test import Client
+from django.utils import timezone
 
 from book.models import Book, Category, Review, Vote
 from orders.models import Order, OrderItem
 from user.models import Profile, ShippingAddress
+from coupons.models import Coupon
 
 
 @pytest.fixture
@@ -17,13 +19,12 @@ def client():
     return Client()
 
 
-# Creating models from "book" app
-
 @pytest.fixture
 def test_user():
     user = User.objects.create(username="testuser", email="test@example.com")
     return user
 
+# Creating models from "book" app
 
 @pytest.fixture
 def test_category():
@@ -188,8 +189,31 @@ def test_order_with_books_discounted(test_user, test_shipping_address, test_cate
 
 # Creating models from "cart" app
 # Creating models from "coupons" app
+
+@pytest.fixture
+def test_valid_coupon():
+    coupon = Coupon.objects.create(
+        code="TEST",
+        valid_from=timezone.now() - timezone.timedelta(days=30),
+        valid_to=timezone.now() + timezone.timedelta(days=30),
+        discount=25,
+        active=True
+    )
+    return coupon
+
+
+@pytest.fixture
+def test_expired_coupon():
+    coupon = Coupon.objects.create(
+        code="EXPIRED",
+        valid_from=timezone.now() - timezone.timedelta(days=30),
+        valid_to=timezone.now() - timezone.timedelta(days=1),
+        discount=25,
+        active=False
+    )
+    return coupon
+
 # Creating models from "filter" app
-# Creating models from "payment" app
 
 # For Redis testing
 @pytest.fixture(autouse=True)
