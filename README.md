@@ -85,8 +85,6 @@ Run all tests
 Or run tests for given folder
 <br>
 `pytest tests/<folder_name>/`
-<br>
-![tests](bookstore/static/img/screenshots/tests_folder.PNG)
 
 ## docker-compose
 Building Docker Image

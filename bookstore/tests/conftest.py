@@ -188,6 +188,13 @@ def test_order_with_books_discounted(test_user, test_shipping_address, test_cate
     return order
 
 # Creating models from "cart" app
+
+@pytest.fixture
+def client_with_cart():
+    client = Client()
+    client.get("/")
+    return client
+
 # Creating models from "coupons" app
 
 @pytest.fixture
@@ -214,6 +221,7 @@ def test_expired_coupon():
     return coupon
 
 # Creating models from "filter" app
+# Creating models from "wishlist" app
 
 # For Redis testing
 @pytest.fixture(autouse=True)
