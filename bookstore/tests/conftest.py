@@ -5,13 +5,15 @@ from decimal import Decimal
 from datetime import date
 
 from django.contrib.auth.models import User
-from django.test import Client
+from django.contrib.sessions.middleware import SessionMiddleware
+from django.test import Client, RequestFactory
 from django.utils import timezone
 
 from book.models import Book, Category, Review, Vote
 from orders.models import Order, OrderItem
 from user.models import Profile, ShippingAddress
 from coupons.models import Coupon
+from cart.cart import Cart
 
 
 @pytest.fixture
@@ -19,10 +21,17 @@ def client():
     return Client()
 
 
+# Simulate HTTP requests
+@pytest.fixture
+def request_factory():
+    return RequestFactory()
+
+
 @pytest.fixture
 def test_user():
     user = User.objects.create(username="testuser", email="test@example.com")
     return user
+
 
 # Creating models from "book" app
 
@@ -187,13 +196,17 @@ def test_order_with_books_discounted(test_user, test_shipping_address, test_cate
 
     return order
 
+
 # Creating models from "cart" app
 
 @pytest.fixture
-def client_with_cart():
-    client = Client()
-    client.get("/")
-    return client
+def cart(request_factory):
+    request = request_factory.get("/")
+    middleware = SessionMiddleware(lambda x: None) # Placeholder for 'get_response'
+    middleware.process_request(request)
+    request.session.save()
+    return Cart(request)
+
 
 # Creating models from "coupons" app
 
