@@ -47,8 +47,13 @@ In order to have full experience, you need to rename your *.env.template* file t
 <br>
 ![env_example](bookstore/static/img/screenshots/env_example.PNG)
 <br>
-For PostgreSQL, you need to download PostgreSQL https://www.postgresql.org/download/.
 
+Please note that docker-compose.yml file has below actions setup as commands. Therefore, when running project in a [Docker](#docker-compose) container, there is no need to run those tasks manually.
+
+### PostgreSQL
+For PostgreSQL, you need to download PostgreSQL https://www.postgresql.org/download/. Follow the installation guide and setup a user.
+
+### Stripe
 For Stripe functionality, you need to create developers account on Stripe: https://dashboard.stripe.com/test/developers and download your API keys.
 
 ### GTK3 - WeasyPrint
@@ -58,7 +63,7 @@ https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releas
 For other machines, follow guidelines:
 https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#installation
 
-### Running asynchronous tasks
+### Running asynchronous tasks manually
 1. RabbitMQ
 
 `docker pull rabbitmq`
