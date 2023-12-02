@@ -14,9 +14,9 @@ r = redis.Redis(
 
 
 def add_to_wishlist(request):
-    if request.method == 'POST' and request.is_ajax():
+    if request.method == "POST" and request.is_ajax():
         try:
-            book_id = request.POST.get('bookid')
+            book_id = request.POST.get("bookid")
             user_wishlist_key = f"user_{request.user.id}_wishlist"
 
             if r.sismember(user_wishlist_key, book_id):
@@ -24,10 +24,10 @@ def add_to_wishlist(request):
             else:
                 r.sadd(user_wishlist_key, book_id)
 
-            return JsonResponse({'success': True})
+            return JsonResponse({"success": True})
         except Exception as e:
-            return JsonResponse({'success': False, 'error': str(e)})
-    return JsonResponse({'success': False, 'error': 'Invalid request'})
+            return JsonResponse({"success": False, "error": str(e)})
+    return JsonResponse({"success": False, "error": "Invalid request"})
 
 
 def wishlist_view(request):
@@ -53,15 +53,20 @@ def wishlist_share(request):
             body = f"The following books are on {cd['name']}'s wishlist:\n{', '.join(str(book) for book in books_data)}"
 
             try:
-                email = EmailMessage(subject, body, settings.EMAIL_HOST_USER, [cd['email_to']])
+                email = EmailMessage(
+                    subject, body, settings.EMAIL_HOST_USER, [cd["email_to"]]
+                )
                 email.send()
                 sent = True
             except Exception as e:
                 print(f"Error sending email: {e}")
 
             return redirect("wishlist:wishlist_share")
-        
+
     else:
         form = EmailWishlist()
-    return render(request, "wishlist/share.html", {"books": books_data, "form": form, "sent": sent})
-    
+    return render(
+        request,
+        "wishlist/share.html",
+        {"books": books_data, "form": form, "sent": sent},
+    )

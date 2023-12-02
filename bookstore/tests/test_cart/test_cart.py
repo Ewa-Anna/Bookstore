@@ -5,7 +5,7 @@ from django.conf import settings
 
 from cart.cart import Cart
 
- 
+
 @pytest.mark.django_db
 def test_cart_init(cart):
     cart = Cart(cart)

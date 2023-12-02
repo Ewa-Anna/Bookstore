@@ -38,7 +38,7 @@ def cart_detail(request):
             initial={"quantity": item["quantity"], "override": True}
         )
     coupon_apply_form = CouponApplyForm()
-    
+
     return render(
         request,
         "cart/detail.html",

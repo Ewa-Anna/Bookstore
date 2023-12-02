@@ -17,7 +17,7 @@ def test_search_form_valid(search_form_data):
 
 def test_search_form_invalid():
     # Checks if empty data is allowed
-    form = SearchForm(data={})  
+    form = SearchForm(data={})
     assert not form.is_valid()
     assert "query" in form.errors
 
@@ -25,6 +25,6 @@ def test_search_form_invalid():
 @pytest.mark.django_db
 def test_seach_form_view(client, search_form_data):
     with connection.cursor() as cursor:
-        cursor.execute('CREATE EXTENSION IF NOT EXISTS pg_trgm;')
+        cursor.execute("CREATE EXTENSION IF NOT EXISTS pg_trgm;")
     response = client.get("/search/", data=search_form_data)
     assert response.status_code == 200

@@ -4,6 +4,7 @@ from django.urls import reverse
 
 # Testing all models in "book" app
 
+
 # Testing Category model and its methods
 @pytest.mark.django_db
 def test_str_rep_category(test_category):
@@ -47,8 +48,6 @@ def test_str_rep_review(test_review):
 # Testing Vote model and its methods
 @pytest.mark.django_db
 def test_str_rep_vote(test_vote):
-    expected_str = (
-        f"Vote by {test_vote.user.username} on {test_vote.review}"
-    )
+    expected_str = f"Vote by {test_vote.user.username} on {test_vote.review}"
     actual_str = str(test_vote)
     assert actual_str == expected_str

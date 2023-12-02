@@ -174,11 +174,11 @@ def book_search(request):
 def category_display(request, catid=None):
     if catid is None:
         book_list = Book.objects.all()
-        category = 'All'
+        category = "All"
     else:
         category = get_object_or_404(Category, pk=catid)
         book_list = Book.objects.filter(catid=catid)
-    
+
     cart_book_form = CartAddBookForm()
 
     books_per_page = request.GET.get("books_per_page", 12)
@@ -209,6 +209,7 @@ def category_display(request, catid=None):
 
 def about(request):
     return render(request, "other/about.html")
+
 
 def contact(request):
     return render(request, "other/contact.html")

@@ -9,12 +9,12 @@ def test_form_submission(client, test_book):
         "rating": 5,
         "body": "Test review",
     }
-    
-    response = client.post(f'/post_review/{test_book.bookid}/', data=form_data)
+
+    response = client.post(f"/post_review/{test_book.bookid}/", data=form_data)
 
     assert response.status_code == 200
     assert test_book.review_set.count() == 1
-    
+
     saved_review = test_book.review_set.first()
     assert saved_review.user == "test_user"
     assert saved_review.rating == 5

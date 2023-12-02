@@ -41,11 +41,10 @@ def order_create(request):
                 shipping_address=shipping_address,
             )
 
-            
             if cart.coupon:
                 order.coupon = cart.coupon
                 order.discount = cart.coupon.discount
-            
+
             order.save()
 
             for item in cart:

@@ -35,6 +35,7 @@ def test_user():
 
 # Creating models from "book" app
 
+
 @pytest.fixture
 def test_category():
     category = Category.objects.create(
@@ -67,13 +68,12 @@ def test_review(test_book, test_user):
 
 @pytest.fixture
 def test_vote(test_user, test_review):
-    vote = Vote.objects.create(
-        user=test_user, score=-1, review=test_review
-    )
+    vote = Vote.objects.create(user=test_user, score=-1, review=test_review)
     return vote
 
 
 # Creating models from "user" app
+
 
 @pytest.fixture
 def test_shipping_address(test_user):
@@ -96,12 +96,13 @@ def test_profile(test_user, test_shipping_address):
         user=test_user,
         date_of_birth=date(1990, 1, 1),
         photo="users/2023/10/14/test.jpg",
-        shipping_address=test_shipping_address
+        shipping_address=test_shipping_address,
     )
     return profile
 
 
 # Creating models from "order" app
+
 
 @pytest.fixture
 def test_order(test_user, test_shipping_address):
@@ -110,7 +111,7 @@ def test_order(test_user, test_shipping_address):
         first_name="Test Name",
         last_name="Test Surname",
         email="test@test.com",
-        shipping_address=test_shipping_address
+        shipping_address=test_shipping_address,
     )
     return order
 
@@ -118,10 +119,7 @@ def test_order(test_user, test_shipping_address):
 @pytest.fixture
 def test_orderitem(test_order, test_book):
     orderitem = OrderItem.objects.create(
-        order=test_order,
-        book=test_book,
-        price=15.00,
-        quantity=2
+        order=test_order, book=test_book, price=15.00, quantity=2
     )
     return orderitem
 
@@ -169,7 +167,7 @@ def test_order_with_books_discounted(test_user, test_shipping_address, test_cate
         last_name="Test Surname",
         email="test@test.com",
         shipping_address=test_shipping_address,
-        discount=Decimal("10.00"), # 10%
+        discount=Decimal("10.00"),  # 10%
     )
 
     book1 = Book.objects.create(
@@ -199,16 +197,18 @@ def test_order_with_books_discounted(test_user, test_shipping_address, test_cate
 
 # Creating models from "cart" app
 
+
 @pytest.fixture
 def cart(request_factory):
     request = request_factory.get("/")
-    middleware = SessionMiddleware(lambda x: None) # Placeholder for 'get_response'
+    middleware = SessionMiddleware(lambda x: None)  # Placeholder for 'get_response'
     middleware.process_request(request)
     request.session.save()
     return Cart(request)
 
 
 # Creating models from "coupons" app
+
 
 @pytest.fixture
 def test_valid_coupon():
@@ -217,7 +217,7 @@ def test_valid_coupon():
         valid_from=timezone.now() - timezone.timedelta(days=30),
         valid_to=timezone.now() + timezone.timedelta(days=30),
         discount=25,
-        active=True
+        active=True,
     )
     return coupon
 
@@ -229,12 +229,14 @@ def test_expired_coupon():
         valid_from=timezone.now() - timezone.timedelta(days=30),
         valid_to=timezone.now() - timezone.timedelta(days=1),
         discount=25,
-        active=False
+        active=False,
     )
     return coupon
 
+
 # Creating models from "filter" app
 # Creating models from "wishlist" app
+
 
 # For Redis testing
 @pytest.fixture(autouse=True)
