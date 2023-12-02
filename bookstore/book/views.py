@@ -171,12 +171,22 @@ def book_search(request):
     )
 
 
-def category_display(request, catid):
-    category = get_object_or_404(Category, pk=catid)
-    book_list = Book.objects.filter(catid=catid)
+def category_display(request, catid=None):
+    if catid is None:
+        book_list = Book.objects.all()
+        category = 'All'
+    else:
+        category = get_object_or_404(Category, pk=catid)
+        book_list = Book.objects.filter(catid=catid)
+    
     cart_book_form = CartAddBookForm()
 
-    paginator = Paginator(book_list, 12)
+    books_per_page = request.GET.get("books_per_page", 12)
+    if int(books_per_page) <= 0:
+        return HttpResponseBadRequest("Invalid number of books per page")
+    books_per_page = int(books_per_page)
+
+    paginator = Paginator(book_list, books_per_page)
     page_number = request.GET.get("page", 1)
     try:
         books = paginator.page(page_number)
@@ -190,9 +200,9 @@ def category_display(request, catid):
         "category/detail.html",
         {
             "category": category,
-            "book_list": book_list,
             "books": books,
             "cart_book_form": cart_book_form,
+            "books_per_page": books_per_page,
         },
     )
 
