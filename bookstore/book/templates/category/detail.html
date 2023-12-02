@@ -5,8 +5,17 @@
 {% block content %}
 
 <h3>{{ category }}</h3>
+
+<form method="get" action="{% if category == 'All' %}{% url 'book:all_categories' %}{% else %}{% url 'book:category_display' category.catid %}{% endif %}" id="booksPerPageForm">
+    <label for="booksPerPage">Books per page:</label>
+    <select name="books_per_page" id="itemsPerPage" onchange="this.form.submit()">
+        <option value="6" {% if books_per_page == 6 %}selected{% endif %}>6</option> 
+        <option value="12" {% if books_per_page == 12 %}selected{% endif %}>12</option>
+        <option value="18" {% if books_per_page == 18 %}selected{% endif %}>18</option>
+    </select>
+</form>
 <div class="bookcontainer">
-    {% for book in book_list %}
+    {% for book in books %}
 
     <div class="book">
         <div class="bookdetails">
