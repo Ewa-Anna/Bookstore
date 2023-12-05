@@ -72,16 +72,13 @@ def edit(request):
         profile_form = ProfileEditForm(
             instance=request.user.profile, data=request.POST, files=request.FILES
         )
-        shipping_address_form = ShippingAddressEditForm(data=request.POST)
 
         if (
             user_form.is_valid()
             and profile_form.is_valid()
-            and shipping_address_form.is_valid()
         ):
             user_form.save()
             profile_form.save()
-            shipping_address_form.save()
             messages.success(request, "Successfully updated profile.")
             return redirect("user:dashboard")
         else:
@@ -89,15 +86,13 @@ def edit(request):
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
-        shipping_address_form = ShippingAddressEditForm()
-
+        
     return render(
         request,
         "user/edit.html",
         {
             "user_form": user_form,
             "profile_form": profile_form,
-            "shipping_address_form": shipping_address_form,
         },
     )
 
