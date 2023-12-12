@@ -37,8 +37,10 @@
                 <tr>
                     <th>Created</th>
                     <th>Order ID</th>
-                    <th>Status</th>
+                    <th>Payment Status</th>
+                    <th>Order Status</th>
                     <th>Total</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,7 +50,9 @@
                     <td>{{ order.created }}</td>
                     <td>{{ order.id }}</td>
                     <td>{% if order.paid %} paid {% else %} waiting for payment {% endif %}</td>
+                    <td>{{ order.order_status }}</td>
                     <td>${{ order.get_total_cost|floatformat:2 }}</td>
+                    <td><a href="{% url 'orders:order_detail' order.id %}"><i class="fa-solid fa-circle-info"></i></a></td>
                 </tr>
                 {% endfor %}
                
