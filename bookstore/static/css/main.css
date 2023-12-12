@@ -58,6 +58,9 @@ nav {
     background-color: #333;
     color: #fff;
     padding: 30px 0;
+    position: sticky;
+    top: 0px;
+    z-index: 1000;
 }
 
 .nav-bar {
@@ -136,7 +139,7 @@ p {
     border: none;
 }
 
-.tables tbody tr:nth-child(even) {
+.tables tbody tr:nth-child(odd) {
     background-color: #ddd9d9ee;
 }
 
@@ -165,4 +168,9 @@ p {
 #dropdown-item:hover {
     background-color: #888484;
     color: #fff; 
+}
+
+.order-list {
+    list-style: none;
+    text-align: center;
 }
