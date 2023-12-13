@@ -40,7 +40,13 @@
         </tr>
         <tr>
             <th>Payment Status</th>
-            <td>{% if order.paid %}paid{% else %}<a href="#">Pay</a>{% endif %}</td>
+            <td>{% if order.paid %}paid{% else %}
+                <form action="{% url 'payment:laterprocess' %}" method="post">
+                    <input type="hidden" name="order_id" value="{{ order.id }}">
+                    <button class="pay_now" type="submit"><i class="fa-regular fa-credit-card"> pay</i></button>
+                    {% csrf_token %}
+                </form>
+                {% endif %}</td>
         </tr>
         <tr>
             <th>Order Status</th>

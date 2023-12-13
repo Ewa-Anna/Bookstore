@@ -64,7 +64,6 @@ select {
 }
 
 
-
 #coupon-form {
     max-width: 200px;
     margin: 0 auto; 
@@ -75,4 +74,24 @@ select {
 #coupon-input {
     flex: 1; 
     margin-right: 10px;
+}
+
+
+.pay_now {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db; 
+    color: #ffffff; 
+    transition: background-color 0.3s ease;
+}
+
+.pay_now:hover {
+    background-color: #2980b9;
 }
