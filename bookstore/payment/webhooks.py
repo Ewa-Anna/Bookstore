@@ -20,6 +20,9 @@ def stripe_webhook(request):
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
         return HttpResponse(status=400)
+    
+    if event.type == "payment_intent.succeeded":
+        handle_payment_intent_succeeded(event)
 
     if event.type == "checkout.session.completed":
         session = event.data.object
@@ -31,4 +34,20 @@ def stripe_webhook(request):
             order.paid = True
             order.stripe_id = session.payment_intent
             order.save()
+    return HttpResponse(status=200)
+
+
+def handle_payment_intent_succeeded(event):
+    payment_intent_id = event.data.object.id
+    order_id = event.data.object.charges.data[0].metadata.get('order_id')
+    
+    if order_id:
+        try:
+            order = Order.objects.get(id=order_id)
+        except Order.DoesNotExist:
+            return HttpResponse(status=404)
+
+        order.paid = True
+        order.stripe_id = payment_intent_id
+        order.save()
     return HttpResponse(status=200)

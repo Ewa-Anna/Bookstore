@@ -198,5 +198,9 @@ STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 STRIPE_API_VERSION = "2023-10-16"
 STRIPE_WEBHOOK_SECRET = os.getenv("endpoint_secret")
 
+APPEND_SLASH=False
+
 # Celery
-CELERY_BROKER_URL = "pyamqp://guest:guest@rabbitmq:5672//"
+# CELERY_BROKER_URL = "pyamqp://guest:guest@rabbitmq:5672//"
+CELERY_BROKER_CONNECTION_MAX_RETRIES = 3 
+INVENIO_CELERY_BROKER_URL = "amqp://guest:guest@mq:5672//"
