@@ -20,7 +20,7 @@ def stripe_webhook(request):
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
         return HttpResponse(status=400)
-    
+
     if event.type == "payment_intent.succeeded":
         handle_payment_intent_succeeded(event)
 
@@ -39,8 +39,8 @@ def stripe_webhook(request):
 
 def handle_payment_intent_succeeded(event):
     payment_intent_id = event.data.object.id
-    order_id = event.data.object.charges.data[0].metadata.get('order_id')
-    
+    order_id = event.data.object.charges.data[0].metadata.get("order_id")
+
     if order_id:
         try:
             order = Order.objects.get(id=order_id)

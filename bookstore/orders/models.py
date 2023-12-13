@@ -11,11 +11,12 @@ from coupons.models import Coupon
 
 
 ORDER_STATUS_CHOICES = [
-    ('pending', 'Pending'),
-    ('processing', 'Processing'),
-    ('shipped', 'Shipped'),
-    ('canceled', 'Canceled'),
+    ("pending", "Pending"),
+    ("processing", "Processing"),
+    ("shipped", "Shipped"),
+    ("canceled", "Canceled"),
 ]
+
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
@@ -35,7 +36,7 @@ class Order(models.Model):
     discount = models.IntegerField(
         default=0, validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
-    order_status = models.CharField(choices=ORDER_STATUS_CHOICES, default='pending')
+    order_status = models.CharField(choices=ORDER_STATUS_CHOICES, default="pending")
 
     class Meta:
         ordering = ["-created"]

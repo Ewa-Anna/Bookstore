@@ -73,10 +73,7 @@ def edit(request):
             instance=request.user.profile, data=request.POST, files=request.FILES
         )
 
-        if (
-            user_form.is_valid()
-            and profile_form.is_valid()
-        ):
+        if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
             messages.success(request, "Successfully updated profile.")
@@ -86,7 +83,7 @@ def edit(request):
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
-        
+
     return render(
         request,
         "user/edit.html",
