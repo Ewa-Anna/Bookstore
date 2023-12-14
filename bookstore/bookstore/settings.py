@@ -100,8 +100,8 @@ DATABASES = {
         "NAME": "bookstore",
         "USER": USER_POSTGRES,
         "PASSWORD": PASSWORD_POSTGRES,
-        # "HOST": "postgres_db", # for docker-compose
-        "HOST": "localhost",  # for terminal run
+        "HOST": "postgres_db", # for docker-compose
+        # "HOST": "localhost",  # for terminal run
         "PORT": "5432",
     },
 }
@@ -197,8 +197,6 @@ STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 STRIPE_API_VERSION = "2023-10-16"
 STRIPE_WEBHOOK_SECRET = os.getenv("endpoint_secret")
-
-APPEND_SLASH = False
 
 # Celery
 # CELERY_BROKER_URL = "pyamqp://guest:guest@rabbitmq:5672//"

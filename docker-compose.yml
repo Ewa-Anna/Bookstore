@@ -52,13 +52,17 @@ services:
   stripe:
     build:
       context: .
-    command: /Stripe/stripe_1.18.0_windows_x86_64/stripe listen --forward-to localhost:8000/payment/webhook/
+    command: sh -c "stripe listen --forward-to web:8000/payment/webhook/"
     volumes:
       - ./stripe:/stripe 
     ports:
       - "8002:8002"
     depends_on:
-      - rabbitmq
+      - web
+    environment:
+      - STRIPE_WEBHOOK_SECRET=endpoint_secret
+    env_file:
+      - .env
 
 volumes:
   pgdata:
