@@ -82,16 +82,21 @@ def book_detail(request, slug):
     )
 
 
+@login_required
 @require_POST
 def post_review(request, bookid):
     book = get_object_or_404(Book, bookid=bookid)
-
+    
     if request.user.is_authenticated:
-        form = ReviewForm(data=request.POST, initial={"user": request.user})
+        form = ReviewForm(data=request.POST)
+        form.fields["user"].initial = request.user.username
+
         if form.is_valid():
             review = form.save(commit=False)
             review.book = book
+            review.user = request.user 
             review.save()
+            return redirect(review.book.get_absolute_url())
     else:
         form = ReviewForm(data=request.POST)
 

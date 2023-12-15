@@ -9,10 +9,9 @@ COPY requirements.txt .
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt --no-cache-dir
+RUN curl -sSL https://cli.stripe.com/install | sh
 
 COPY . .
-# COPY ./stripe/stripe_1.18.0_windows_x86_64/stripe /stripe/stripe
 
-ENV CELERY_BROKER_URL=pyamqp://guest:guest@rabbitmq:5672//
-
-CMD ["celery", "-A", "bookstore.celery", "worker", "-l", "info", "-P", "gevent"]
+# ENV CELERY_BROKER_URL=pyamqp://guest:guest@rabbitmq:5672//
+# ENV INVENIO_CELERY_BROKER_URL = "amqp://guest:guest@mq:5672//"

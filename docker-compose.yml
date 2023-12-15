@@ -35,24 +35,37 @@ services:
     image: redis
     ports:
       - "6379:6379"
-
-  celery:
-    build:
-      context: .
-    command: celery -A bookstore worker -l info -P gevent
-    depends_on:
-      - redis
+    environment:
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+      REDIS_DB: 0
+    volumes:
+      - redis_data:/data
 
   rabbitmq:
     image: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+  celery:
+    build:
+      context: .
+    command: bash -c "cd /code/bookstore/ && celery -A bookstore worker -l info -P gevent"
+    network_mode: host
+    environment:
+      - INVENIO_CELERY_BROKER_URL=amqp://guest:guest@mq:5672//
+      - rabbitmq_uri=amqp://127.0.0.1:5672
+    depends_on:
+      - rabbitmq
 
   stripe:
     build:
       context: .
-    command: sh -c "stripe listen --forward-to web:8000/payment/webhook/"
+    command: bash -c "cd /code/Stripe/stripe_1.18.0_windows_x86_64/ && stripe listen --forward-to localhost:8000/payment/webhook/"
     volumes:
       - ./stripe:/stripe 
     ports:
@@ -66,3 +79,4 @@ services:
 
 volumes:
   pgdata:
+  redis_data:

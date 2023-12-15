@@ -48,7 +48,7 @@ In order to have full experience, you need to rename your *.env.template* file t
 ![env_example](bookstore/static/img/screenshots/env_example.PNG)
 <br>
 
-Please note that docker-compose.yml file has below actions setup as commands. Therefore, when running project in a [Docker](#docker-compose) container, there is no need to run those tasks manually.
+<em>Please note that docker-compose.yml file has below actions setup as commands. Therefore, when running project in a [Docker](#docker-compose) container, there is no need to run those tasks manually.</em>
 
 ### PostgreSQL
 For PostgreSQL, you need to download PostgreSQL https://www.postgresql.org/download/. Follow the installation guide and setup a user.
@@ -100,6 +100,19 @@ Running Docker Container
 <br>
 ` docker-compose up -d `
 
+```# Postgres
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "bookstore",
+        "USER": USER_POSTGRES,
+        "PASSWORD": PASSWORD_POSTGRES,
+        "HOST": "postgres_db", # for docker-compose
+        # "HOST": "localhost",  # for terminal run
+        "PORT": "5432",
+    },
+}
+```
 
 ## Features and Future plans
 1. :heavy_check_mark: **Book Catalog**: Users can view a list of available books for purchase. Each book is presented with basic information. Users can click on individual books to access detailed information about them, such as the book's description, author, price, and reviews from other users. 
@@ -154,7 +167,9 @@ Running Docker Container
 
 
 ## Acknowledgments
+- [Stripe](https://github.com/stripe/stripe-cli/releases/tag/v1.18.0)
 - Django 4 By Example [*Antonio Melé*](https://antoniomele.es/) [Packt>](https://www.packtpub.com/)
+- [djangoproject](https://www.djangoproject.com/)
 
 ## License
 Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
