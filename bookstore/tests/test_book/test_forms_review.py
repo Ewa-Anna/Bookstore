@@ -6,10 +6,8 @@ from book.forms import ReviewForm
 
 
 class ReviewFormTestCase(TestCase):
-    @pytest.mark.xfail(reason="The form is not working, so the test is going to fail.")
     def test_valid_review_form(self):
         form_data = {
-            "user": "test_user",
             "rating": 5,
             "body": "Test review",
         }
@@ -20,8 +18,7 @@ class ReviewFormTestCase(TestCase):
 
     def test_invalid_review_form(self):
         form_data = {
-            "user": "test_user",
-            # Missing email
+            # Missing rating which is requires
             "body": "Test review",
         }
 

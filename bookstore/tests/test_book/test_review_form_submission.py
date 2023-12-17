@@ -1,21 +1,27 @@
 import pytest
 
+from django.urls import reverse
+from django.contrib.auth.models import User
 
-@pytest.mark.xfail(reason="The form is not working, so the test is going to fail.")
+
 @pytest.mark.django_db
 def test_form_submission(client, test_book):
+    user = User.objects.create_user(username="test_user", password="test_password")
+    client.force_login(user)
+
     form_data = {
-        "user": "test_user",
         "rating": 5,
         "body": "Test review",
     }
-
-    response = client.post(f"/post_review/{test_book.bookid}/", data=form_data)
-
+    
+    url = reverse("book:book_detail", kwargs={"slug": test_book.slug})
+    response = client.post(url, data=form_data)
     assert response.status_code == 200
-    assert test_book.review_set.count() == 1
+   
+    test_book.refresh_from_db()
+    assert test_book.review.all().count() == 1
 
-    saved_review = test_book.review_set.first()
-    assert saved_review.user == "test_user"
+    saved_review = test_book.review.first()
+    assert saved_review.user == user
     assert saved_review.rating == 5
     assert saved_review.body == "Test review"

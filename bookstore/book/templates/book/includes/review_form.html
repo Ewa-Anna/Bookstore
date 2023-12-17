@@ -1,4 +1,5 @@
 <h2 style="text-align: center;">Add new review</h2>
+<p>Posting review as {{ request.user.username }}</p>
 <div id="review-form" class="form--group">
     <form class="form--review" action="{% url 'book:post_review' book.bookid %}" method="post">
         {% csrf_token %}
