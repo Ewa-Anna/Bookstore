@@ -110,8 +110,10 @@ def add_shipping_address(request):
             shipping_address.save()
             return redirect("user:dashboard")
     else:
+        messages.error(request, "Postal code must be in the 00-000 format")
         form = ShippingAddressForm(initial={"user": request.user})
-    return render(request, "user/dashboard.html", {"form": form})
+        
+    return redirect("user:dashboard")
 
 
 @login_required
