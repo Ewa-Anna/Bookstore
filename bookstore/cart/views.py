@@ -51,7 +51,7 @@ def cart_toggle(request, book_id):
     cart = Cart(request)
     book = get_object_or_404(Book, bookid=book_id)
 
-    if cart.has_item(book):
+    if cart.has_book(book):
         cart.remove(book)
     else:
         form = CartAddBookForm(request.POST)
@@ -60,4 +60,6 @@ def cart_toggle(request, book_id):
             cart.add(
                 book=book, quantity=cd["quantity"], override_quantity=cd["override"]
             )
+        else:
+            print(form.errors)
     return HttpResponse(status=204)

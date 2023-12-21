@@ -7,8 +7,15 @@ function toggleCart(bookid) {
     csrfInput.type = "hidden";
     csrfInput.name = "csrfmiddlewaretoken";
     csrfInput.value = csrfToken; 
+    
+    const quantityInput = document.createElement("input");
+    quantityInput.type = "hidden";
+    quantityInput.name = "quantity";
+    quantityInput.value = 1; 
 
     form.appendChild(csrfInput);
+    form.appendChild(quantityInput);
+    
     document.body.appendChild(form);
     form.submit();
 }

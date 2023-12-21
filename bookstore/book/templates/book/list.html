@@ -27,11 +27,11 @@
         <div class="bookdetails">
 
             <div class="icon-container">
-                <a class="wishlist-icon" href="javascript:void(0)" data-bookid="{{ book.bookid }}">
+                <a id="wishlist-icon" class="wishlist-icon" data-bookid="{{ book.bookid }}" data-csrf="{{ csrf_token }}" href="javascript:void(0)" data-bookid="{{ book.bookid }}">
                     <i class="fa-regular fa-heart"></i>
                     <!-- <i class="fa-solid fa-heart"></i> For added -->
                 </a>
-                <a class="cart-icon" href="javascript:void(0)" data-bookid="{{ book.bookid }}">
+                <a id="cart-icon" class="cart-icon" href="javascript:void(0)" data-bookid="{{ book.bookid }}">
                     <i class="fa-solid {% if book_in_cart %}fa-check{% else %}fa-basket-shopping{% endif %}"></i>
                 </a>
             </div>
@@ -72,6 +72,8 @@
 <br>
 <p>We have {% total_books %} books in our store.</p>
 
-
+<script>
+    const csrfToken = "{{ csrf_token }}";
+</script>
 
 {% endblock %}
