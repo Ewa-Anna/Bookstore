@@ -90,6 +90,7 @@
     <footer>
         <div>
             <ul class="nav-bar">
+                <li><a href="{% url 'book:book_feed' %}"><i class="fa-solid fa-rss"></i>Subscribe to RSS feed</a></li>
                 <li><a {% if request.resolver_match.route == "other/about " %} class="selected" {% endif %}
                     href="{% url 'book:about' %}"><i class="fa-solid fa-address-card"></i>About</a></li>
                 <li><a {% if request.resolver_match.route == "other/about " %} class="selected" {% endif %}
