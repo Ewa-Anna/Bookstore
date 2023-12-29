@@ -1,5 +1,7 @@
 from django.urls import path
+
 from . import views
+from .feed import LatestArrivals
 
 app_name = "book"
 
@@ -15,4 +17,5 @@ urlpatterns = [
     path("edit_review/<int:review_id>/", views.edit_review, name="edit_review"),
     path("about/", views.about, name="about"),
     path("contact/", views.contact, name="contact"),
+    path("feed/", LatestArrivals(), name="book_feed"),
 ]
