@@ -13,11 +13,11 @@ def test_form_submission(client, test_book):
         "rating": 5,
         "body": "Test review",
     }
-    
+
     url = reverse("book:book_detail", kwargs={"slug": test_book.slug})
     response = client.post(url, data=form_data)
     assert response.status_code == 200
-   
+
     test_book.refresh_from_db()
     assert test_book.review.all().count() == 1
 

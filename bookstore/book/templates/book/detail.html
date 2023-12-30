@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}{{ book.title }} by {{ book.author }}{% endblock %}
 
 {% block content %}
@@ -97,10 +97,25 @@
     {% else %}
     {{ review.body|linebreaks }}
     {% endif %}
-    {{ review.upvotes }} <a href="javascript:void(0);" class="vote-up" data-review-id="{{ review.id }}" data-score="1">Agree</a> /
-    {{ review.downvotes }} <a href="javascript:void(0);" class="vote-down" data-review-id="{{ review.id }}" data-score="-1">Disagree</a>
-    <br>
-    <br>
+    {% with total_likes=review.user_liked.count user_liked=review.user_liked.all %}
+    <div class="count">
+        <div class="total-likes"><span>{{ total_likes }} Agree</span>
+        <a 
+            href="javascript:void(0);" 
+            class="agree button"
+            data-id="{{ review.id }}" 
+            data-action="{% if request.user in user_liked %}un{% endif %}like" 
+            data-url="{% url 'book:like' %}"
+        >
+            {% if request.user not in user_liked %}
+            [+1 Agree]
+            {% else %}
+            [-1 Disagree]
+            {% endif %}
+        </a>
+        </div>
+    </div>
+    {% endwith %}
 </div>
 {% empty %}
 <p>There are no reviews yet.</p>
@@ -116,5 +131,7 @@
 {% else %}
 <p><a href="/user/login">Login</a> or <a href="/user/register">Register</a> to rate a book or post a review.</p>
 {% endif %}
+
+<script src="{% static 'js/agreeButton.js' %}" defer></script>
 
 {% endblock %}

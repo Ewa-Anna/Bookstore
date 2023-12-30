@@ -1,6 +1,4 @@
 # Bookstore
-**Still in progress**
-
 This repository contains the source code for a dynamic e-commerce website built for a fictional bookstore. The project is build using Django, a Python web framework, for backend. HTML, CSS and a little bit of JavaScript for frontend.
 
 ## Table of Contents

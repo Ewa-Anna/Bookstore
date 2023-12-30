@@ -13,16 +13,16 @@ class LatestArrivals(Feed):
     description = "New book arrivals in our store."
 
     def items(self):
-        return Book.objects.all()[:5] 
-    
+        return Book.objects.all()[:5]
+
     def item_title(self, item):
         return item.title
-    
+
     def item_author(self, item):
         return item.author
-    
+
     def item_description(self, item):
         return truncatewords_html(markdown.markdown(item.description), 30)
-    
+
     def item_pubdate(self, item):
         return item.created
