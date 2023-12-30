@@ -9,7 +9,6 @@ urlpatterns = [
     path("", views.book_list, name="book_list"),
     path("book/<str:slug>/", views.book_detail, name="book_detail"),
     path("<int:bookid>/review/", views.post_review, name="post_review"),
-    path("vote/<int:review_id>/", views.vote_review, name="vote_review"),
     path("tag/<slug:tag_slug>/", views.book_list, name="book_list_by_tag"),
     path("search/", views.book_search, name="book_search"),
     path("category/<int:catid>/", views.category_display, name="category_display"),
@@ -18,4 +17,5 @@ urlpatterns = [
     path("about/", views.about, name="about"),
     path("contact/", views.contact, name="contact"),
     path("feed/", LatestArrivals(), name="book_feed"),
+    path("like/", views.review_like, name="like"),
 ]

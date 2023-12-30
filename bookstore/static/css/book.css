@@ -10,7 +10,7 @@
 
 @media (min-width: 1600px) {
     .bookcontainer {
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         margin: 0 auto;
     }
 }
@@ -125,6 +125,7 @@
 .book-description {
     margin-top: 30px;
     text-align: left;
+    max-width: 800px;
 }
 
 #description {

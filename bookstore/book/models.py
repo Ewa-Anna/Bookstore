@@ -62,6 +62,9 @@ class Review(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+    user_liked = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name="review_like", blank=True
+    )
 
     class Meta:
         ordering = ["-created"]
@@ -70,12 +73,3 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review added by {self.user.username} for book {self.book}"
-
-
-class Vote(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    score = models.IntegerField(choices=((-1, "Thumbs Down"), (+1, "Thumbs Up")))
-    review = models.ForeignKey(Review, related_name="votes", on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"Vote by {self.user.username} on {self.review}"

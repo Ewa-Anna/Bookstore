@@ -8,6 +8,7 @@
     margin: 0;
     padding: 0;
     text-decoration: none;
+    
 }
 
 * :hover,
@@ -24,6 +25,7 @@ a {
 body {
     font-family: 'Lato', sans-serif;
     text-decoration: none;
+    background-color: #f5f5f5;
 }
 
 
@@ -107,11 +109,12 @@ footer {
 }
 
 #content {
-    background-color: #f5f5f5;
     text-align: justify;
     padding: 20px;
     border-radius: 5px;
-   
+    max-width: 950px;
+    margin: auto;
+    justify-content: center;
 }
 
 p {
@@ -148,6 +151,20 @@ p {
     text-align: center;
 }
   
+
+@media screen and (max-width: 600px) {
+    .tables th, td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .tables {
+        max-width: 400px;
+    }
+}
+
+
 .tables td[colspan="3"] {
     text-align: center;
     background-color: #f2f2f2;

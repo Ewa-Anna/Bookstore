@@ -8,7 +8,7 @@ from django.http import JsonResponse, HttpResponseForbidden, HttpResponseBadRequ
 
 from taggit.models import Tag
 
-from .models import Book, Category, Review, Vote
+from .models import Book, Category, Review
 from .forms import ReviewForm, SearchForm
 from cart.forms import CartAddBookForm
 
@@ -86,7 +86,7 @@ def book_detail(request, slug):
 @require_POST
 def post_review(request, bookid):
     book = get_object_or_404(Book, bookid=bookid)
-    
+
     if request.user.is_authenticated:
         form = ReviewForm(data=request.POST)
 
@@ -129,28 +129,21 @@ def edit_review(request, review_id):
 
 
 @login_required
-def vote_review(request, review_id):
-    if request.method == "POST":
-        score = int(request.POST.get("score", 0))
-        if score in [-1, 1]:
-            review = Review.objects.get(pk=review_id)
-            user = request.user
-            vote, created = Vote.objects.get_or_create(user=user, review=review)
-            vote.score = score
-            vote.save()
-
-            upvotes = review.filter(score=1).count()
-            downvotes = review.filter(score=-1).count()
-
-            return JsonResponse(
-                {
-                    "status": "success",
-                    "score": score,
-                    "upvotes": upvotes,
-                    "downvotes": downvotes,
-                }
-            )
-    return JsonResponse({"status": "error", "message": "Invalid request"})
+@require_POST
+def review_like(request):
+    review_id = request.POST.get("id")
+    action = request.POST.get("action")
+    if review_id and action:
+        try:
+            review = Review.objects.get(id=review_id)
+            if action == "like":
+                review.user_liked.add(request.user)
+            else:
+                review.user_liked.remove(request.user)
+            return JsonResponse({"status": "ok"})
+        except Review.DoesNotExist:
+            pass
+    return JsonResponse({"status": "error"})
 
 
 def book_search(request):
