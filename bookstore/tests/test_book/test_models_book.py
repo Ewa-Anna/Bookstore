@@ -43,11 +43,3 @@ def test_str_rep_review(test_review):
     )
     actual_str = str(test_review)
     assert actual_str == expected_str
-
-
-# Testing Vote model and its methods
-@pytest.mark.django_db
-def test_str_rep_vote(test_vote):
-    expected_str = f"Vote by {test_vote.user.username} on {test_vote.review}"
-    actual_str = str(test_vote)
-    assert actual_str == expected_str

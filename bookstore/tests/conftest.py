@@ -9,7 +9,7 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from django.test import Client, RequestFactory
 from django.utils import timezone
 
-from book.models import Book, Category, Review, Vote
+from book.models import Book, Category, Review
 from orders.models import Order, OrderItem
 from user.models import Profile, ShippingAddress
 from coupons.models import Coupon
@@ -64,12 +64,6 @@ def test_review(test_book, test_user):
         book=test_book, user=test_user, rating=3, body="Test body"
     )
     return review
-
-
-@pytest.fixture
-def test_vote(test_user, test_review):
-    vote = Vote.objects.create(user=test_user, score=-1, review=test_review)
-    return vote
 
 
 # Creating models from "user" app
