@@ -68,6 +68,32 @@
 </div>
 
 
+{% if recommended_books %}
+<h4>Customers who purchased this item also bought:</h4>
+<div class="bookcontainer">
+{% for book in recommended_books %}
+<div class="book">
+    <div class="bookdetails">
+        <a href="{{ book.get_absolute_url }}">
+            <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
+            {{ book.title }}
+        </a>
+        <br>
+        {{ book.author }}
+        <br>
+        &#36;{{ book.price }}
+        <form id="addtocart" action="{% url 'cart:cart_add' book.bookid %}" method="post">
+            {{ cart_book_form }}
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Add to cart">
+        </form>
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endif %}
+
+
 {% with reviews.count as total_reviews %}
 <h2 style="text-align: center;">
     {% if total_reviews == 1 %}
