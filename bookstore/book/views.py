@@ -8,6 +8,7 @@ from django.http import JsonResponse, HttpResponseForbidden, HttpResponseBadRequ
 
 from taggit.models import Tag
 
+from .recommender import Recommender
 from .models import Book, Category, Review
 from .forms import ReviewForm, SearchForm
 from cart.forms import CartAddBookForm
@@ -51,8 +52,13 @@ def book_list(request, tag_slug=None):
 def book_detail(request, slug):
     book = get_object_or_404(Book, slug=slug)
     cart_book_form = CartAddBookForm()
+    
+    r = Recommender()
+    recommended_books = r.suggest_books_for([book], 4)
+
     reviews = book.review.filter(active=True)
     form = ReviewForm(initial={"user": request.user.username})
+    
     avg_rating = reviews.aggregate(avg_rating=Avg("rating"))["avg_rating"]
 
     book_tags_ids = book.tags.values_list("id", flat=True)
@@ -78,6 +84,7 @@ def book_detail(request, slug):
             "cart_book_form": cart_book_form,
             "avg_rating": avg_rating,
             "user_left_review": user_left_review,
+            "recommended_books": recommended_books,
         },
     )
 
