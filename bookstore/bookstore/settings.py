@@ -38,7 +38,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "book.apps.BookConfig",
     "user.apps.UserConfig",
     "cart.apps.CartConfig",
     "orders.apps.OrdersConfig",
@@ -46,6 +45,8 @@ INSTALLED_APPS = [
     "wishlist.apps.WishlistConfig",
     "payment.apps.PaymentConfig",
     "coupons.apps.CouponsConfig",
+    "book.apps.BookConfig",
+    "author.apps.AuthorConfig",
     "taggit",
     "django_filters",
     "django.contrib.postgres",
