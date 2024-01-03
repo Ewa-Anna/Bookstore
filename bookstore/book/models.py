@@ -4,6 +4,8 @@ from django.conf import settings
 
 from taggit.managers import TaggableManager
 
+from author.models import Author
+
 
 class Category(models.Model):
     catid = models.AutoField(primary_key=True)
@@ -26,7 +28,7 @@ class Category(models.Model):
 class Book(models.Model):
     bookid = models.AutoField(primary_key=True)
     title = models.CharField(max_length=250)
-    author = models.CharField(max_length=250)
+    author = models.CharField(max_length=250, blank=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     img_url = models.URLField()
@@ -34,6 +36,7 @@ class Book(models.Model):
     slug = models.SlugField(default="", null=False)
     created = models.DateTimeField(auto_now_add=True)
     catid = models.ForeignKey(Category, on_delete=models.CASCADE)
+    authorid = models.ForeignKey(Author, related_name="author", on_delete=models.SET_NULL, null=True, blank=True)
     tags = TaggableManager()
 
     class Meta:

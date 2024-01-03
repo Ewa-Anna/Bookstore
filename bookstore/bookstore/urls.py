@@ -29,6 +29,7 @@ urlpatterns = [
     path("wishlist/", include("wishlist.urls", namespace="wishlist")),
     path("payment/", include("payment.urls", namespace="payment")),
     path("coupons/", include("coupons.urls", namespace="coupons")),
+    path("author/", include("author.urls", namespace="author")),
     path("", include("book.urls", namespace="book")),
 ]
 
