@@ -42,7 +42,7 @@
                 {{ book.title|truncatechars:30 }}
             </a>
             <br>
-            {{ book.author|truncatechars:30 }}
+            <a href="{% url 'author:author_detail' book.authorid.slug %}">{{ book.author|truncatechars:30 }}</a>          
             <br>
             &#36;{{ book.price }}
             <p class="tags">Tags:

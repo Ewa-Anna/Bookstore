@@ -12,7 +12,7 @@
     <div class="book-info">
         <b>Title:</b> {{ book.title }}
         <br>
-        <b>Author:</b> {{ book.author }}
+        <b>Author:</b> <a href="{% url 'author:author_detail' book.authorid.slug %}">{{ book.author }}</a>
         <div class="book-rating">
             <b>Average rating:</b> 
             {% if not avg_rating %}
