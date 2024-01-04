@@ -1,5 +1,6 @@
 @import url("book.css");
 @import url("forms.css");
+@import url("author.css");
 
 *,
 *::before,
@@ -190,4 +191,30 @@ p {
 .order-list {
     list-style: none;
     text-align: center;
+}
+
+
+.messages {
+    padding: 10px;
+    margin: 0;
+}
+
+.messages.success {
+    color: green;
+    background: rgb(244, 255, 240);
+}
+
+.messages.info {
+    color: rgb(62, 179, 218);
+    background: rgb(240, 248, 255);
+}
+
+.messages.warning {
+    color: orange;
+    background: rgb(255, 248, 240);
+}
+
+.messages.error {
+    color: red;
+    background: rgb(255, 240, 240);
 }

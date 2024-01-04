@@ -36,7 +36,9 @@ class Book(models.Model):
     slug = models.SlugField(default="", null=False)
     created = models.DateTimeField(auto_now_add=True)
     catid = models.ForeignKey(Category, on_delete=models.CASCADE)
-    authorid = models.ForeignKey(Author, related_name="author", on_delete=models.SET_NULL, null=True, blank=True)
+    authorid = models.ForeignKey(
+        Author, related_name="author", on_delete=models.SET_NULL, null=True, blank=True
+    )
     tags = TaggableManager()
 
     class Meta:

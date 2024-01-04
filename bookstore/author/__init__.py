@@ -1,1 +1,1 @@
-default_app_config = 'author.apps.AuthorConfig'
+default_app_config = "author.apps.AuthorConfig"

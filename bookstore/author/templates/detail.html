@@ -15,11 +15,10 @@
         <a href="https://www.flaticon.com/free-icons/no-photo" title="no photo icons">No photo icons created by Those Icons - Flaticon</a>
     </small>
     </p>
-    <p>No photo available</p>
 {% endif %}
+<p>Author's page: <a href="{{ author.own_url_page }}" target="_blank">{{ author.own_url_page }}</a></p>
 <p>Date of birth: {{ author.birthdate }}</p>
 <p>{{ author.bio }}</p>
-
 <br>
 <br>
 <h3>Books by this author</h3>
@@ -28,17 +27,6 @@
     
     <div class="book">
         <div class="bookdetails">
-
-            <div class="icon-container">
-                <a id="wishlist-icon" class="wishlist-icon" data-bookid="{{ book.bookid }}" data-csrf="{{ csrf_token }}" href="javascript:void(0)" data-bookid="{{ book.bookid }}">
-                    <i class="fa-regular fa-heart"></i>
-                    <!-- <i class="fa-solid fa-heart"></i> For added -->
-                </a>
-                <a id="cart-icon" class="cart-icon" href="javascript:void(0)" data-bookid="{{ book.bookid }}">
-                    <i class="fa-solid {% if book_in_cart %}fa-check{% else %}fa-basket-shopping{% endif %}"></i>
-                </a>
-            </div>
-
             <a class="booklink" href="{% url 'book:book_detail' book.slug %}">
                 <img class="bookimage" src="{{ book.img_url }}" alt="Book image">
 
@@ -48,16 +36,12 @@
             {{ book.author|truncatechars:30 }}
             <br>
             &#36;{{ book.price }}
-            <form id="addtocart" action="{% url 'cart:cart_add' book.bookid %}" method="post">
-                {{ cart_book_form }}
-                {% csrf_token %}
-                <input type="submit" class="btn btn-primary" value="Add to cart">
-            </form>
+        
         </div>
     </div>
 
     {% empty %}
-    <p> Currently there are no books by this author in our store. </p>
+    <p class="author-books-info"> Currently there are no books by this author in our store. </p>
     {% endfor %}
 </div>
 {% endblock %}

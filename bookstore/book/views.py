@@ -52,13 +52,13 @@ def book_list(request, tag_slug=None):
 def book_detail(request, slug):
     book = get_object_or_404(Book, slug=slug)
     cart_book_form = CartAddBookForm()
-    
+
     r = Recommender()
     recommended_books = r.suggest_books_for([book], 4)
 
     reviews = book.review.filter(active=True)
     form = ReviewForm(initial={"user": request.user.username})
-    
+
     avg_rating = reviews.aggregate(avg_rating=Avg("rating"))["avg_rating"]
 
     book_tags_ids = book.tags.values_list("id", flat=True)
