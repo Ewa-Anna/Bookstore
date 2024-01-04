@@ -50,6 +50,8 @@
             </li>
             <li><a {% if request.resolver_match.route == "search/" %} class="selected" {% endif %} href="/search"><i
                         class="fa-solid fa-magnifying-glass"></i>Search</a></li>
+            
+            <li><a {% if request.resolver_match.route == "author/" %} class="selected" {% endif %} href="/author"><i class="fa-solid fa-at"></i>Authors</a></li>
 
             {% if user.is_authenticated %}
             <li><a {% if request.resolver_match.route == "wishlist/wishlist_view/" %} class="selected" {% endif %}
