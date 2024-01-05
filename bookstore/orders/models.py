@@ -24,7 +24,7 @@ class Order(models.Model):
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
     shipping_address = models.ForeignKey(
-        ShippingAddress, on_delete=models.CASCADE, null=True, blank=True
+        ShippingAddress, on_delete=models.CASCADE, null=False, blank=False
     )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

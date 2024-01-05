@@ -49,7 +49,15 @@
                 <tr>
                     <td>{{ order.created }}</td>
                     <td>{{ order.id }}</td>
-                    <td>{% if order.paid %} paid {% else %} waiting for payment {% endif %}</td>
+                    <td> {% if order.order_status == 'canceled' and order.paid %}
+                        refund initiated
+                        {% endif %}
+                        {% if order.order_status != 'canceled' and order.paid %} paid {% endif %}
+                        {% if order.order_status == 'canceled' and order.paid == False %}
+                        canceled
+                        {% endif %}  
+                        {% if order.order_status != 'canceled' and order.paid == False %}                     
+                        waiting for payment {% endif %}</td>
                     <td>{{ order.order_status }}</td>
                     <td>${{ order.get_total_cost|floatformat:2 }}</td>
                     <td><a href="{% url 'orders:order_detail' order.id %}"><i class="fa-solid fa-circle-info"></i></a></td>

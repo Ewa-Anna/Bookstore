@@ -95,3 +95,9 @@ select {
 .pay_now:hover {
     background-color: #3d444a;
 }
+
+.cancel-order-form {
+    align-items: center;
+    margin: auto;
+    text-align: center;
+}
