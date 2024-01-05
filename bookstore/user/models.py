@@ -85,9 +85,9 @@ class ShippingAddress(models.Model):
         related_name="shipping_addresses",
     )
     main = models.BooleanField(default=False, verbose_name="Main Shipping Address")
-    street = models.CharField(max_length=255, verbose_name="Street Address")
-    apartment = models.CharField(max_length=30, verbose_name="Apartment Number")
-    city = models.CharField(max_length=100, verbose_name="City")
+    street = models.CharField(max_length=255, verbose_name="Street Address", blank=False)
+    apartment = models.CharField(max_length=30, verbose_name="Apartment Number", blank=False)
+    city = models.CharField(max_length=100, verbose_name="City", blank=False)
     postal_code = models.CharField(
         max_length=10,
         verbose_name="Postal Code",
@@ -97,9 +97,10 @@ class ShippingAddress(models.Model):
                 message="Postal code must be in the 00-000 format",
             )
         ],
+        blank=False
     )
-    state = models.CharField(max_length=100, blank=True, verbose_name="State")
-    country = models.CharField(max_length=100, blank=True, verbose_name="Country")
+    state = models.CharField(max_length=100, blank=False, verbose_name="State")
+    country = models.CharField(max_length=100, blank=False, verbose_name="Country")
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

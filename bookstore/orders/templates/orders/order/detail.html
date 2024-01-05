@@ -40,13 +40,21 @@
         </tr>
         <tr>
             <th>Payment Status</th>
-            <td>{% if order.paid %}paid{% else %}
+            <td> {% if order.order_status == 'canceled' and order.paid %}
+                refund initiated
+                {% endif %}
+                {% if order.order_status != 'canceled' and order.paid %} paid {% endif %}
+                {% if order.order_status == 'canceled' and order.paid == False %}
+                canceled
+                {% endif %}  
+                {% if order.order_status != 'canceled' and order.paid == False %}    
                 <form action="{% url 'payment:laterprocess' %}" method="post">
                     <input type="hidden" name="order_id" value="{{ order.id }}">
                     <button class="pay_now" type="submit"><i class="fa-regular fa-credit-card"> pay</i></button>
                     {% csrf_token %}
                 </form>
-                {% endif %}</td>
+                {% endif %}
+                </td>
         </tr>
         <tr>
             <th>Order Status</th>
@@ -54,6 +62,20 @@
         </tr>
     </table>
 </div>
+<br>
+
+{% if order.order_status == 'canceled' %}
+<p>Order has been canceled.</p>
+{% else %}
+<div class="cancel-order-form">
+    <form action="{% url 'orders:order_cancel' order.id  %}" method="post">
+        <input type="hidden" name="order_id" value="{{ order.id }}">
+        <button class="btn btn-danger" type="submit">Cancel order</button>
+        {% csrf_token %}
+    </form>
+</div>
+{% endif %}
+
 <br>
 <div>
     <h3>Ordered books</h3>
