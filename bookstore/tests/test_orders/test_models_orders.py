@@ -1,5 +1,6 @@
-import pytest
 from decimal import Decimal
+
+import pytest
 
 
 # Testing Order model and its methods

@@ -1,4 +1,5 @@
 import redis
+from redis.exceptions import RedisError
 
 from django.shortcuts import render, redirect
 from django.core.mail import EmailMessage
@@ -25,7 +26,7 @@ def add_to_wishlist(request):
                 r.sadd(user_wishlist_key, book_id)
 
             return JsonResponse({"success": True})
-        except Exception as e:
+        except RedisError as e:
             return JsonResponse({"success": False, "error": str(e)})
     return JsonResponse({"success": False, "error": "Invalid request"})
 
@@ -50,8 +51,10 @@ def wishlist_share(request):
         if form.is_valid():
             cd = form.cleaned_data
             subject = f"{cd['name']} shares wishlist with you"
-            body = (f"The following books are on "
-                    f"{cd['name']}'s wishlist:\n{', '.join(str(book) for book in books_data)}")
+            body = (
+                f"The following books are on "
+                f"{cd['name']}'s wishlist:\n{', '.join(str(book) for book in books_data)}"
+            )
 
             try:
                 email = EmailMessage(
@@ -59,7 +62,7 @@ def wishlist_share(request):
                 )
                 email.send()
                 sent = True
-            except Exception as e:
+            except RedisError as e:
                 print(f"Error sending email: {e}")
 
             return redirect("wishlist:wishlist_share")

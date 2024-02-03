@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 
-from .models import Author
 from book.models import Book
+from .models import Author
 
 
 def author_list(request):

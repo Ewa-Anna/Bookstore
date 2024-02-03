@@ -8,13 +8,12 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 
+from user.models import ShippingAddress
+from cart.cart import Cart
+
 from .models import Order, OrderItem
 from .forms import OrderCreateForm
 from .tasks import order_created
-
-from user.models import ShippingAddress
-
-from cart.cart import Cart
 
 
 def order_create(request):
@@ -26,7 +25,7 @@ def order_create(request):
         if form.is_valid():
             order = Order()
 
-            shipping_address, created = ShippingAddress.objects.get_or_create(
+            shipping_address, _ = ShippingAddress.objects.get_or_create(
                 street=form.cleaned_data["street"],
                 apartment=form.cleaned_data["apartment"],
                 city=form.cleaned_data["city"],

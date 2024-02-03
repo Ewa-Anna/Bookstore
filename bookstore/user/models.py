@@ -117,8 +117,9 @@ class ShippingAddress(models.Model):
         ]
 
     def __str__(self):
-        return (f"{self.street} "
-                f"{self.apartment}, "
-                f"{self.postal_code} {self.city}, "
-                f"{self.state} {self.country}"
-                )
+        return (
+            f"{self.street} "
+            f"{self.apartment}, "
+            f"{self.postal_code} {self.city}, "
+            f"{self.state} {self.country}"
+        )

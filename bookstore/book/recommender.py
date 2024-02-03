@@ -11,8 +11,8 @@ r = redis.Redis(
 
 
 class Recommender:
-    def get_book_key(self, id):
-        return f"book:{id}:purchased_with"
+    def get_book_key(self, book_id):
+        return f"book:{book_id}:purchased_with"
 
     def books_bought(self, books):
         book_ids = [b.bookid for b in books]
@@ -41,5 +41,5 @@ class Recommender:
         return suggested_books
 
     def clear_purchases(self):
-        for id in Book.objects.values_list("id", flat=True):
-            r.delete(self.get_book_key(id))
+        for book_id in Book.objects.values_list("id", flat=True):
+            r.delete(self.get_book_key(book_id))

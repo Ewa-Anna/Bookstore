@@ -13,4 +13,4 @@ class Coupon(models.Model):
     active = models.BooleanField()
 
     def __str__(self):
-        return self.code
+        return f"{self.code}"

@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-import pytest
 from decimal import Decimal
 from datetime import date
+
+import pytest
 
 from django.contrib.auth.models import User
 from django.contrib.sessions.middleware import SessionMiddleware
@@ -53,7 +54,8 @@ def test_book(test_category):
         price=Decimal("25.00"),
         img_url=(
             "https://posterilla.pl/environment/cache/images/"
-            "500_500_productGfx_19663/Plakat-So-many-books.jpg"),
+            "500_500_productGfx_19663/Plakat-So-many-books.jpg"
+        ),
         slug="sample-book",
         catid=test_category,
     )
@@ -137,7 +139,8 @@ def test_order_with_books(test_user, test_shipping_address, test_category):
         price=Decimal("10.00"),
         img_url=(
             "https://posterilla.pl/environment/cache/images/"
-            "500_500_productGfx_19663/Plakat-So-many-books.jpg"),
+            "500_500_productGfx_19663/Plakat-So-many-books.jpg"
+        ),
         slug="sample-book1",
         catid=test_category,
     )
@@ -148,7 +151,8 @@ def test_order_with_books(test_user, test_shipping_address, test_category):
         price=Decimal("20.00"),
         img_url=(
             "https://posterilla.pl/environment/cache/images/"
-            "500_500_productGfx_19663/Plakat-So-many-books.jpg"),
+            "500_500_productGfx_19663/Plakat-So-many-books.jpg"
+        ),
         slug="sample-book2",
         catid=test_category,
     )
@@ -177,7 +181,8 @@ def test_order_with_books_discounted(test_user, test_shipping_address, test_cate
         price=Decimal("10.00"),
         img_url=(
             "https://posterilla.pl/environment/cache/images/"
-            "500_500_productGfx_19663/Plakat-So-many-books.jpg"),
+            "500_500_productGfx_19663/Plakat-So-many-books.jpg"
+        ),
         slug="sample-book1",
         catid=test_category,
     )
@@ -188,7 +193,8 @@ def test_order_with_books_discounted(test_user, test_shipping_address, test_cate
         price=Decimal("20.00"),
         img_url=(
             "https://posterilla.pl/environment/cache/images/"
-            "500_500_productGfx_19663/Plakat-So-many-books.jpg"),
+            "500_500_productGfx_19663/Plakat-So-many-books.jpg"
+        ),
         slug="sample-book2",
         catid=test_category,
     )

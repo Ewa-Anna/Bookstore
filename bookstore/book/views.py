@@ -8,10 +8,10 @@ from django.http import JsonResponse, HttpResponseForbidden, HttpResponseBadRequ
 
 from taggit.models import Tag
 
+from cart.forms import CartAddBookForm
 from .recommender import Recommender
 from .models import Book, Category, Review
 from .forms import ReviewForm, SearchForm
-from cart.forms import CartAddBookForm
 
 
 def book_list(request, tag_slug=None):

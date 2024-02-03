@@ -1,5 +1,6 @@
-import pytest
 from decimal import Decimal
+
+import pytest
 
 from django.conf import settings
 

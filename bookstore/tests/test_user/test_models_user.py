@@ -22,7 +22,8 @@ def test_str_rep_profile(test_shipping_address):
         f"{test_shipping_address.postal_code} "
         f"{test_shipping_address.city}, "
         f"{test_shipping_address.state} "
-        f"{test_shipping_address.country}")
+        f"{test_shipping_address.country}"
+    )
     actual_str = str(test_shipping_address)
     assert actual_str == expected_str
 

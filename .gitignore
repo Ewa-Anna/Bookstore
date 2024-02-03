@@ -19,3 +19,6 @@ static/admin/
 
 # Stripe .exe
 Stripe/
+
+# Output for pylint
+output.txt

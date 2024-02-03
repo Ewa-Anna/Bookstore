@@ -5,8 +5,8 @@ from django.contrib import messages
 from django.views.decorators.http import require_POST
 from django.http import HttpResponseForbidden
 
-from .models import Profile, ShippingAddress
 from orders.models import Order
+from .models import Profile, ShippingAddress
 from .forms import (
     UserRegistrationForm,
     UserEditForm,
@@ -60,8 +60,8 @@ def register(request):
             new_user.save()
             Profile.objects.create(user=new_user)
             return render(request, "user/register_done.html", {"new_user": new_user})
-    else:
-        user_form = UserRegistrationForm()
+
+    user_form = UserRegistrationForm()
     return render(request, "user/register.html", {"user_form": user_form})
 
 
@@ -78,11 +78,11 @@ def edit(request):
             profile_form.save()
             messages.success(request, "Successfully updated profile.")
             return redirect("user:dashboard")
-        else:
-            messages.error(request, "Profile was not updated. Error occured.")
-    else:
-        user_form = UserEditForm(instance=request.user)
-        profile_form = ProfileEditForm(instance=request.user.profile)
+
+        messages.error(request, "Profile was not updated. Error occured.")
+
+    user_form = UserEditForm(instance=request.user)
+    profile_form = ProfileEditForm(instance=request.user.profile)
 
     return render(
         request,
@@ -106,12 +106,12 @@ def add_shipping_address(request):
         if form.is_duplicate():
             messages.error(request, "This shipping address already exists.")
             return render(request, "user/address.html", {"form": form})
-        else:
-            shipping_address.save()
-            return redirect("user:dashboard")
-    else:
-        messages.error(request, "Postal code must be in the 00-000 format")
-        form = ShippingAddressForm(initial={"user": request.user})
+
+        shipping_address.save()
+        return redirect("user:dashboard")
+
+    messages.error(request, "Postal code must be in the 00-000 format")
+    form = ShippingAddressForm(initial={"user": request.user})
 
     return redirect("user:dashboard")
 
