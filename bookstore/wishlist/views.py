@@ -50,7 +50,8 @@ def wishlist_share(request):
         if form.is_valid():
             cd = form.cleaned_data
             subject = f"{cd['name']} shares wishlist with you"
-            body = f"The following books are on {cd['name']}'s wishlist:\n{', '.join(str(book) for book in books_data)}"
+            body = (f"The following books are on "
+                    f"{cd['name']}'s wishlist:\n{', '.join(str(book) for book in books_data)}")
 
             try:
                 email = EmailMessage(

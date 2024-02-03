@@ -1,8 +1,6 @@
 import pytest
-from datetime import date
 from freezegun import freeze_time
 
-from user.models import Profile
 
 # Testing all models in "user" app
 
@@ -18,7 +16,13 @@ def test_str_rep_shippingaddress(test_profile):
 # Testing Profile model and its methods
 @pytest.mark.django_db
 def test_str_rep_profile(test_shipping_address):
-    expected_str = f"{test_shipping_address.street} {test_shipping_address.apartment}, {test_shipping_address.postal_code} {test_shipping_address.city}, {test_shipping_address.state} {test_shipping_address.country}"
+    expected_str = (
+        f"{test_shipping_address.street} "
+        f"{test_shipping_address.apartment}, "
+        f"{test_shipping_address.postal_code} "
+        f"{test_shipping_address.city}, "
+        f"{test_shipping_address.state} "
+        f"{test_shipping_address.country}")
     actual_str = str(test_shipping_address)
     assert actual_str == expected_str
 

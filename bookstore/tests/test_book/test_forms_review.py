@@ -1,5 +1,3 @@
-import pytest
-
 from django.test import TestCase
 
 from book.forms import ReviewForm

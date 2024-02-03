@@ -1,9 +1,5 @@
 from django import forms
 
-from user.models import ShippingAddress
-
-from .models import Order
-
 
 class OrderCreateForm(forms.Form):
     first_name = forms.CharField(max_length=50)

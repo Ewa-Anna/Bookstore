@@ -51,7 +51,9 @@ def test_book(test_category):
         author="Test Author",
         description="Test Desc",
         price=Decimal("25.00"),
-        img_url="https://posterilla.pl/environment/cache/images/500_500_productGfx_19663/Plakat-So-many-books.jpg",
+        img_url=(
+            "https://posterilla.pl/environment/cache/images/"
+            "500_500_productGfx_19663/Plakat-So-many-books.jpg"),
         slug="sample-book",
         catid=test_category,
     )
@@ -133,7 +135,9 @@ def test_order_with_books(test_user, test_shipping_address, test_category):
         author="Test Author",
         description="Test Desc",
         price=Decimal("10.00"),
-        img_url="https://posterilla.pl/environment/cache/images/500_500_productGfx_19663/Plakat-So-many-books.jpg",
+        img_url=(
+            "https://posterilla.pl/environment/cache/images/"
+            "500_500_productGfx_19663/Plakat-So-many-books.jpg"),
         slug="sample-book1",
         catid=test_category,
     )
@@ -142,7 +146,9 @@ def test_order_with_books(test_user, test_shipping_address, test_category):
         author="Test Author",
         description="Test Desc",
         price=Decimal("20.00"),
-        img_url="https://posterilla.pl/environment/cache/images/500_500_productGfx_19663/Plakat-So-many-books.jpg",
+        img_url=(
+            "https://posterilla.pl/environment/cache/images/"
+            "500_500_productGfx_19663/Plakat-So-many-books.jpg"),
         slug="sample-book2",
         catid=test_category,
     )
@@ -169,7 +175,9 @@ def test_order_with_books_discounted(test_user, test_shipping_address, test_cate
         author="Test Author",
         description="Test Desc",
         price=Decimal("10.00"),
-        img_url="https://posterilla.pl/environment/cache/images/500_500_productGfx_19663/Plakat-So-many-books.jpg",
+        img_url=(
+            "https://posterilla.pl/environment/cache/images/"
+            "500_500_productGfx_19663/Plakat-So-many-books.jpg"),
         slug="sample-book1",
         catid=test_category,
     )
@@ -178,7 +186,9 @@ def test_order_with_books_discounted(test_user, test_shipping_address, test_cate
         author="Test Author",
         description="Test Desc",
         price=Decimal("20.00"),
-        img_url="https://posterilla.pl/environment/cache/images/500_500_productGfx_19663/Plakat-So-many-books.jpg",
+        img_url=(
+            "https://posterilla.pl/environment/cache/images/"
+            "500_500_productGfx_19663/Plakat-So-many-books.jpg"),
         slug="sample-book2",
         catid=test_category,
     )

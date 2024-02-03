@@ -1,10 +1,8 @@
-import re
 from datetime import date
 
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 
 
@@ -85,8 +83,12 @@ class ShippingAddress(models.Model):
         related_name="shipping_addresses",
     )
     main = models.BooleanField(default=False, verbose_name="Main Shipping Address")
-    street = models.CharField(max_length=255, verbose_name="Street Address", blank=False)
-    apartment = models.CharField(max_length=30, verbose_name="Apartment Number", blank=False)
+    street = models.CharField(
+        max_length=255, verbose_name="Street Address", blank=False
+    )
+    apartment = models.CharField(
+        max_length=30, verbose_name="Apartment Number", blank=False
+    )
     city = models.CharField(max_length=100, verbose_name="City", blank=False)
     postal_code = models.CharField(
         max_length=10,
@@ -97,7 +99,7 @@ class ShippingAddress(models.Model):
                 message="Postal code must be in the 00-000 format",
             )
         ],
-        blank=False
+        blank=False,
     )
     state = models.CharField(max_length=100, blank=False, verbose_name="State")
     country = models.CharField(max_length=100, blank=False, verbose_name="Country")
@@ -115,4 +117,8 @@ class ShippingAddress(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.street} {self.apartment}, {self.postal_code} {self.city}, {self.state} {self.country}"
+        return (f"{self.street} "
+                f"{self.apartment}, "
+                f"{self.postal_code} {self.city}, "
+                f"{self.state} {self.country}"
+                )

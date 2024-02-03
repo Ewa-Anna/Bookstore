@@ -143,7 +143,9 @@ def delete_shipping_address(request, shipping_address_id):
     shipping_address = get_object_or_404(ShippingAddress, pk=shipping_address_id)
 
     if request.user != shipping_address.user:
-        return HttpResponseForbidden("You don't have permission to delete this address.")
+        return HttpResponseForbidden(
+            "You don't have permission to delete this address."
+        )
 
     shipping_address.delete()
 

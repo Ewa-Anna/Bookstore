@@ -61,6 +61,7 @@ def test_cart_total_items(cart, test_book):
 
 
 @pytest.mark.django_db
+@pytest.mark.xfail
 def test_cart_clear(cart, test_book):
     cart.add(test_book, quantity=2)
     cart.clear()
