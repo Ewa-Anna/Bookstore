@@ -75,14 +75,24 @@ def edit(request):
         )
 
         if user_form.is_valid() and profile_form.is_valid():
-
-            date_of_birth = profile_form.cleaned_data.get('date_of_birth')
+            date_of_birth = profile_form.cleaned_data.get("date_of_birth")
             if date_of_birth:
                 today = now().date()
-                age = today.year - date_of_birth.year - ((today.month, today.day) < (date_of_birth.month, date_of_birth.day))
+                age = (
+                    today.year
+                    - date_of_birth.year
+                    - (
+                        (today.month, today.day)
+                        < (date_of_birth.month, date_of_birth.day)
+                    )
+                )
                 if age < 13:
                     user_form.add_error(None, "Users must be at least 13 years old.")
-                    return render(request, "user/edit.html", {"user_form": user_form, "profile_form": profile_form})
+                    return render(
+                        request,
+                        "user/edit.html",
+                        {"user_form": user_form, "profile_form": profile_form},
+                    )
             user_form.save()
             profile_form.save()
             messages.success(request, "Successfully updated profile.")
