@@ -59,10 +59,10 @@
             <li><a {% if request.resolver_match.route == "user/dashboard/" %} class="selected" {% endif %}
                     href="{% url 'user:dashboard' %}"><i class="fa-solid fa-user"></i>Profile</a></li>
             <li><a {% if request.resolver_match.route == "user/logout/" %} class="selected" {% endif %}
-                    href="{% url 'user:logout' %}"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                    href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
             {% else %}
             <li><a {% if request.resolver_match.route == "user/login/" %} class="selected" {% endif %}
-                    href="{% url 'user:login' %}"><i class="fa-solid fa-right-to-bracket"></i>Login</a></li>
+                    href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i>Login</a></li>
             <li><a {% if request.resolver_match.route == "user/register/" %} class="selected" {% endif %}
                     href="{% url 'user:register' %}"><i class="fa-solid fa-registered"></i>Register</a></li>
             {% endif %}
@@ -101,7 +101,7 @@
             </ul>
         </div>
         <br>
-        <p>Copyright &copy; 2023 Bookstore. All rights reserved.</p>
+        <p>Copyright &copy; 2024 Bookstore. All rights reserved.</p>
 
         <div class="social-media">
             <a href="https://github.com/Ewa-Anna/" class="icon-link">

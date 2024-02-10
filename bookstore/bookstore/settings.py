@@ -168,9 +168,9 @@ os.environ["PATH"] = GTK_FOLDER + os.pathsep + os.environ.get("PATH", "")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "user:dashboard"
-LOGIN_URL = "user:login"
-LOGOUT_REDIRECT_URL = "user:logout"
-LOGOUT_URL = "user:logout"
+LOGIN_URL = "login"
+LOGOUT_REDIRECT_URL = "logout"
+LOGOUT_URL = "logout"
 
 
 # E-mails

@@ -31,6 +31,7 @@ urlpatterns = [
     path("coupons/", include("coupons.urls", namespace="coupons")),
     path("author/", include("author.urls", namespace="author")),
     path("", include("book.urls", namespace="book")),
+    path("", include("django.contrib.auth.urls")),
 ]
 
 if settings.DEBUG:
