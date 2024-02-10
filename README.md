@@ -17,8 +17,21 @@ The Bookstore is a web-based application developed using Python (Django) for bac
 <br>
 PostgreSQL is used as the primary database to store core data, such as books, user profiles, and orders and manages critical data. Additionally, Redis is utilized for enhancing user experience through personalized book recommendations tailored to individual interests.
 <br>
+<br>
 Its primary purpose is to serve as an online bookstore, offering a range of core functionalities. Inter alia: book catalog with pagination system, book details with possibility to post a review and rate a book. Tagging system and categories. Latest arrivals and recommended similar books. Search, filtering and sorting functionality. Adding to cart and to wishlist. Making order and paying (with Stripe). User profile with basic info, list of orders and shipping addresses (main and additional).
 </div>
+<br>
+Admin panel:
+
+
+https://github.com/Ewa-Anna/Bookstore/assets/99288124/15a1ceb3-9d5b-4278-b935-174fa5bf8102
+
+
+<br>
+Register, login and edit profile:
+
+https://github.com/Ewa-Anna/Bookstore/assets/99288124/89f2178a-b9a3-4a26-830e-b6da81e95aa8
+
 
 ## How to install and run the project?
 ### Running the project locally
