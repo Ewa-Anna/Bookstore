@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 from django.http import HttpResponseForbidden
+from django.utils.timezone import now
 
 from orders.models import Order
 from .models import Profile, ShippingAddress
@@ -74,6 +75,14 @@ def edit(request):
         )
 
         if user_form.is_valid() and profile_form.is_valid():
+
+            date_of_birth = profile_form.cleaned_data.get('date_of_birth')
+            if date_of_birth:
+                today = now().date()
+                age = today.year - date_of_birth.year - ((today.month, today.day) < (date_of_birth.month, date_of_birth.day))
+                if age < 13:
+                    user_form.add_error(None, "Users must be at least 13 years old.")
+                    return render(request, "user/edit.html", {"user_form": user_form, "profile_form": profile_form})
             user_form.save()
             profile_form.save()
             messages.success(request, "Successfully updated profile.")

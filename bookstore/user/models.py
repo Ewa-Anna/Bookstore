@@ -1,4 +1,5 @@
 from datetime import date
+from dateutil.relativedelta import relativedelta
 
 from django.db import models
 from django.conf import settings
@@ -32,42 +33,15 @@ class Profile(models.Model):
     def calculate_age(self):
         if self.date_of_birth:
             today = date.today()
-            age = (
-                today.year
-                - self.date_of_birth.year
-                - (
-                    (today.month, today.day)
-                    < (self.date_of_birth.month, self.date_of_birth.day)
-                )
-            )
-
-            if today.month < self.date_of_birth.month or (
-                today.month == self.date_of_birth.month
-                and today.day < self.date_of_birth.day
-            ):
+            age = today.year - self.date_of_birth.year - ((today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day))
+            birth_date = self.date_of_birth.replace(year=today.year)
+            if birth_date > today:
                 age -= 1
+                birth_date -= relativedelta(years=1)
 
-            birth_month = self.date_of_birth.month
-            birth_day = self.date_of_birth.day
-
-            if today.month < birth_month or (
-                today.month == birth_month and today.day < birth_day
-            ):
-                birth_month -= 1
-
-            if today.month < birth_month:
-                months = (12 - birth_month) + today.month
-            else:
-                months = today.month - birth_month
-
-            if today.day < birth_day:
-                days_in_previous_month = (
-                    today
-                    - date(today.year, (today.month - 1 if today.month > 1 else 12), 1)
-                ).days
-                days = days_in_previous_month - birth_day + today.day
-            else:
-                days = today.day - birth_day
+            delta = relativedelta(today, birth_date)
+            months = delta.months
+            days = delta.days
 
             return age, months, days
 
