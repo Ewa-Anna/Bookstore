@@ -3,6 +3,7 @@ This repository contains the source code for a dynamic e-commerce website built 
 
 ## Table of Contents
 - [Overview](#project-overview)
+- [Project Walkthrough](#project-walkthrough)
 - [Installation](#how-to-install-and-run-the-project)
 - [Tests](#tests)
 - [Docker](#docker-compose)
@@ -20,17 +21,47 @@ PostgreSQL is used as the primary database to store core data, such as books, us
 <br>
 Its primary purpose is to serve as an online bookstore, offering a range of core functionalities. Inter alia: book catalog with pagination system, book details with possibility to post a review and rate a book. Tagging system and categories. Latest arrivals and recommended similar books. Search, filtering and sorting functionality. Adding to cart and to wishlist. Making order and paying (with Stripe). User profile with basic info, list of orders and shipping addresses (main and additional).
 </div>
-<br>
-Admin panel:
 
+## Project Walkthrough
+1. Demonstration of Django's admin panel features, including database interaction with sample data:
 
 https://github.com/Ewa-Anna/Bookstore/assets/99288124/15a1ceb3-9d5b-4278-b935-174fa5bf8102
 
-
 <br>
-Register, login and edit profile:
+2. Demonstration of user registration, login, and profile management:
 
 https://github.com/Ewa-Anna/Bookstore/assets/99288124/89f2178a-b9a3-4a26-830e-b6da81e95aa8
+
+<br>
+3. Overview of pagination and endpoints such as category listings, about page details, contact, and author profiles:
+
+https://github.com/Ewa-Anna/Bookstore/assets/99288124/c738e2f2-2915-4b0c-a546-ffa095a6b7a1
+
+<br>
+4. Showcasing search functionality - tag-based and title-based book retrieval methods:
+
+https://github.com/Ewa-Anna/Bookstore/assets/99288124/e08b1db9-57af-4ae4-9504-36ca0b3d98a2
+
+<br>
+5. Showcasing adding review:
+
+https://github.com/Ewa-Anna/Bookstore/assets/99288124/2ba20e89-b35a-4ab6-a6b1-20bc3656cf6e
+
+<br>
+<br>
+<em>Below videos show Stripe payment methods implemented into Bookstore. The card info is taken from official [Stripe documentation](https://stripe.com/docs/testing) .</em>
+<br>
+I am using successful VISA.
+<br>
+<br> 
+6. Showing order management processes, including payment and cancellation:
+
+https://github.com/Ewa-Anna/Bookstore/assets/99288124/a17b6676-dfdd-4721-921a-cbc1970eab02
+
+<br>
+7. Handling outstanding orders, retrying failed payments and resolving pending transactions:
+
+https://github.com/Ewa-Anna/Bookstore/assets/99288124/0ee1265c-bd73-4f9f-944a-c2e7e9ba6c08
 
 
 ## How to install and run the project?
