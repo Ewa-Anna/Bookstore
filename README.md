@@ -2,15 +2,40 @@
 This repository contains the source code for a dynamic e-commerce website built for a fictional bookstore. The project is build using Django, a Python web framework, for backend. HTML, CSS and a little bit of JavaScript for frontend.
 
 ## Table of Contents
+- [Tools](#technologies-and-frameworks)
 - [Overview](#project-overview)
-- [Project Walkthrough](#project-walkthrough)
+- [Project Demo](#project-demo)
 - [Installation](#how-to-install-and-run-the-project)
 - [Tests](#tests)
 - [Docker](#docker-compose)
-- [Features and Future plans](#features-and-future-plans)
-- [Tools](#technologies-and-frameworks)
+- [Features and future plans](#features-and-future-plans)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
+
+
+## Technologies and frameworks
+- Backend
+    
+    [![Python](https://skillicons.dev/icons?i=python)](https://skillicons.dev) 
+    [![Django](https://skillicons.dev/icons?i=django)](https://skillicons.dev)
+
+- Frontend
+    
+    [![HTML](https://skillicons.dev/icons?i=html)](https://skillicons.dev)
+    [![CSS](https://skillicons.dev/icons?i=css)](https://skillicons.dev) 
+    [![JS](https://skillicons.dev/icons?i=javascript)](https://skillicons.dev)
+
+- Databases
+
+    [![PostgreSQL](https://skillicons.dev/icons?i=postgres)](https://skillicons.dev)
+    [![Redis](https://skillicons.dev/icons?i=redis)](https://skillicons.dev)
+
+- Other
+
+    [![GitHub](https://skillicons.dev/icons?i=github)](https://skillicons.dev)
+    [![VisualStudio](https://skillicons.dev/icons?i=vscode)](https://skillicons.dev)
+    [![Docker](https://skillicons.dev/icons?i=docker)](https://skillicons.dev)
+
 
 ## Project overview
 <div style="text-align: justify;">
@@ -22,7 +47,7 @@ PostgreSQL is used as the primary database to store core data, such as books, us
 Its primary purpose is to serve as an online bookstore, offering a range of core functionalities. Inter alia: book catalog with pagination system, book details with possibility to post a review and rate a book. Tagging system and categories. Latest arrivals and recommended similar books. Search, filtering and sorting functionality. Adding to cart and to wishlist. Making order and paying (with Stripe). User profile with basic info, list of orders and shipping addresses (main and additional).
 </div>
 
-## Project Walkthrough
+## Project Demo
 1. Demonstration of Django's admin panel features, including database interaction with sample data:
 
 https://github.com/Ewa-Anna/Bookstore/assets/99288124/15a1ceb3-9d5b-4278-b935-174fa5bf8102
@@ -43,7 +68,7 @@ https://github.com/Ewa-Anna/Bookstore/assets/99288124/c738e2f2-2915-4b0c-a546-ff
 https://github.com/Ewa-Anna/Bookstore/assets/99288124/e08b1db9-57af-4ae4-9504-36ca0b3d98a2
 
 <br>
-5. Showcasing adding review:
+5 Showcasing adding review:
 
 https://github.com/Ewa-Anna/Bookstore/assets/99288124/2ba20e89-b35a-4ab6-a6b1-20bc3656cf6e
 
@@ -156,7 +181,7 @@ DATABASES = {
 }
 ```
 
-## Features and Future plans
+## Features and future plans
 1. :heavy_check_mark: **Book Catalog**: Users can view a list of available books for purchase. Each book is presented with basic information. Users can click on individual books to access detailed information about them, such as the book's description, author, price, and reviews from other users. 
 2. :heavy_check_mark: **User Reviews**: Registered users can post reviews and ratings for books they have read. These reviews help other users make informed decisions about their purchases. 
 3. :heavy_check_mark: **Search**: User can perform simple search. 
@@ -182,31 +207,6 @@ DATABASES = {
 21. **Tests**: Unit, functional, performance, integration, authentication and authorization.
 22. **Order Split**: Calculate the weight of books in order, in case it is more than 20kg, split it into smaller ones.
 23. **Small Bot**: Small bot chat, that would allow users to ask simple questions about the website and get answers.
-
-
-## Technologies and frameworks
-- Backend
-    
-    [![Python](https://skillicons.dev/icons?i=python)](https://skillicons.dev) 
-    [![Django](https://skillicons.dev/icons?i=django)](https://skillicons.dev)
-
-- Frontend
-    
-    [![HTML](https://skillicons.dev/icons?i=html)](https://skillicons.dev)
-    [![CSS](https://skillicons.dev/icons?i=css)](https://skillicons.dev) 
-    [![JS](https://skillicons.dev/icons?i=javascript)](https://skillicons.dev)
-
-- Databases
-
-    [![PostgreSQL](https://skillicons.dev/icons?i=postgres)](https://skillicons.dev)
-    [![Redis](https://skillicons.dev/icons?i=redis)](https://skillicons.dev)
-
-- Other
-
-    [![GitHub](https://skillicons.dev/icons?i=github)](https://skillicons.dev)
-    [![VisualStudio](https://skillicons.dev/icons?i=vscode)](https://skillicons.dev)
-    [![Docker](https://skillicons.dev/icons?i=docker)](https://skillicons.dev)
-
 
 ## Acknowledgments
 - [Stripe](https://github.com/stripe/stripe-cli/releases/tag/v1.18.0)
