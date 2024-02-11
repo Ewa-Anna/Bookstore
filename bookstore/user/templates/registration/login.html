@@ -13,7 +13,7 @@
 </p>
 {% endif %}
 <div id="review-form" class="form--group">
-<form class="form--review" action="{% url 'user:login' %}" method="post">
+<form class="form--review" action="{% url 'login' %}" method="post">
     <div class="form--control">
     {{ form.as_p }}
     {% csrf_token %}
@@ -22,7 +22,7 @@
     <p><input type="submit" class="btn btn-primary" value="Login"></p>
 </form>
 </div>
-<p><a href="{% url 'user:password_reset' %}">Forgot your password?</a></p>
+<p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
 <p><a href="{% url 'user:register' %}">Don't have an account yet?</a></p>
 
 {% endblock %}
