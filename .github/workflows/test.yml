@@ -20,8 +20,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt  
 
-      - name: Run pytest
-        env:
-          DJANGO_SETTINGS_MODULE: bookstore.settings.local
+      - name: Build Docker image
+        run: docker-compose -f docker-compose.yml build
+
+      - name: Run tests on Docker
         run: |
-          pytest --import-mode=importlib bookstore/tests/
+          docker-compose -f docker-compose.yml run --rm -v ${PWD}:/srv -w /srv web pytest --import-mode=importlib bookstore/tests/
