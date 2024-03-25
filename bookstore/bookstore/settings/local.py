@@ -9,4 +9,4 @@ DATABASES = {
     }
 }
 
-DATABASE_ENGINE = 'sqlite3'
+DATABASE_ENGINE = "sqlite3"
