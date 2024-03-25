@@ -101,8 +101,8 @@ DATABASES = {
         "NAME": "bookstore",
         "USER": USER_POSTGRES,
         "PASSWORD": PASSWORD_POSTGRES,
-        # "HOST": "postgres_db", # for docker-compose
-        "HOST": "localhost",  # for terminal run & tests
+        "HOST": "postgres_db",  # for docker-compose
+        # "HOST": "localhost",  # for terminal run & tests
         "PORT": "5432",
     },
 }
