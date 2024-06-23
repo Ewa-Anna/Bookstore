@@ -68,7 +68,7 @@ tomlkit==0.12.3
 tornado==6.4.1
 typing_extensions==4.7.1
 tzdata==2023.3
-urllib3==2.0.7
+urllib3==2.2.2
 vine==5.0.0
 wcwidth==0.2.9
 weasyprint==60.2
