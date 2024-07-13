@@ -9,7 +9,7 @@ COPY requirements.txt .
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt --no-cache-dir
-RUN curl -sSL https://cli.stripe.com/install | sh
+# RUN curl -sSL https://cli.stripe.com/install | sh
 
 COPY . .
 
