@@ -1,5 +1,5 @@
 ﻿amqp==5.1.1
-asgiref==3.7.2
+asgiref==3.8.1
 astroid==3.0.2
 async-timeout==4.0.3
 black==24.4.2
