@@ -58,7 +58,7 @@ pytz==2023.3.post1
 redis==5.0.1
 requests==2.32.3
 six==1.16.0
-sqlparse==0.5.0
+sqlparse==0.5.1
 stripe==10.5.0
 tinycss2==1.2.1
 tomli==2.0.1
