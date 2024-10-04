@@ -68,7 +68,7 @@ typing_extensions==4.7.1
 tzdata==2024.1
 urllib3==2.2.2
 wcwidth==0.2.9
-weasyprint==60.2
+weasyprint==62.3
 webencodings==0.5.1
 zope.event==5.0
 zope.interface==6.1
