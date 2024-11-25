@@ -66,7 +66,7 @@ tomlkit==0.12.3
 tornado==6.4.1
 typing_extensions==4.7.1
 tzdata==2024.1
-urllib3==2.2.2
+urllib3==2.2.3
 wcwidth==0.2.9
 weasyprint==62.3
 webencodings==0.5.1
