@@ -71,5 +71,5 @@ wcwidth==0.2.13
 weasyprint==62.3
 webencodings==0.5.1
 zope.event==5.0
-zope.interface==6.1
+zope.interface==7.2
 zopfli==0.2.3
