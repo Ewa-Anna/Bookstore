@@ -31,7 +31,7 @@ humanize==4.8.0
 idna==3.7
 iniconfig==2.0.0
 isort==5.13.2
-Markdown==3.5.1
+Markdown==3.8.1
 mccabe==0.7.0
 mypy-extensions==1.0.0
 packaging==24.1
