@@ -47,7 +47,7 @@ pycodestyle==2.14.0
 pycparser==2.21
 pydyf==0.10.0
 pyflakes==3.2.0
-pylint==3.3.1
+pylint==4.0.9
 pyphen==0.14.0
 pytest==9.0.3
 pytest-django==4.6.0
